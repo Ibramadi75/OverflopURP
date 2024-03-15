@@ -31,7 +31,7 @@ public class Jauge : MonoBehaviour
         Vector3 localScale = transform.localScale;
         Vector3 localPosition = transform.localPosition;
 
-        float xLocalScale = remainingTime / _totalTime + _xDefaultLocalScale;
+        float xLocalScale = (remainingTime / _totalTime) + _xDefaultLocalScale;
         float xLocalPosition = (remainingTime / _totalTime) / 2 + _xDefaultLocalPosition;
 
         if (xLocalScale >= 0)
