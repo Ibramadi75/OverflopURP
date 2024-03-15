@@ -523,7 +523,7 @@ MonoBehaviour:
   m_CurrentColorSpace: 0
   m_LastWindowPixelSize: {x: 1942, y: 842}
   m_ClearInEditMode: 1
-  m_NoCameraWarning: 1
+  m_Nocamera1Warning: 1
   m_LowResolutionForAspectRatios: 01000000000100000100
 --- !u!114 &16
 MonoBehaviour:
