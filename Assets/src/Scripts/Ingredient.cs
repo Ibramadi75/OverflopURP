@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Ingredients", menuName = "OverflopURP/Ingredient")]
 public class Ingredient : ScriptableObject
 {
-    public string name;
+    public string title;
     public List<Recipe> recipes;
     public bool isBase;
 }
