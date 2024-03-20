@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour
         rightDirection.y = 0;
         
         Vector3 movement = (forwardDirection * vertical / 100 + rightDirection * horizontal).normalized;
-    
         transform.position += movement * speed * Time.deltaTime;
     }
 }
