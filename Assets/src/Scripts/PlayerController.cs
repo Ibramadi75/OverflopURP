@@ -37,7 +37,13 @@ public class PlayerController : MonoBehaviour
         Quaternion camRotation = cam.transform.rotation;
         Vector3 forwardDirection = camRotation * Vector3.forward;
         Vector3 rightDirection = camRotation * Vector3.right;
-        Vector3 movement = (forwardDirection * vertical + rightDirection * horizontal).normalized;
+    
+        // Ignore Y-axis movement
+        forwardDirection.y = 0;
+        rightDirection.y = 0;
+        
+        Vector3 movement = (forwardDirection * vertical / 100 + rightDirection * horizontal).normalized;
+
     
         transform.position += movement * speed * Time.deltaTime;
     }
