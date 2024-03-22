@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Countdown : MonoBehaviour
 {
     public float time = 10f;
     private float _timeLeft;
+    private Coroutine countdownCoroutine;
 
     public float TimeLeft
     {
@@ -15,7 +15,25 @@ public class Countdown : MonoBehaviour
     void Start()
     {
         _timeLeft = time;
-        StartCoroutine(StartCountdown());
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (countdownCoroutine == null)
+            {
+                countdownCoroutine = StartCoroutine(StartCountdown());
+            }
+        }
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
+            if (countdownCoroutine != null)
+            {
+                StopCoroutine(countdownCoroutine);
+                countdownCoroutine = null;
+            }
+        }
     }
 
     IEnumerator StartCountdown()
@@ -25,9 +43,5 @@ public class Countdown : MonoBehaviour
             yield return null;
             _timeLeft -= Time.deltaTime;
         }
-    }
-
-    void Update()
-    {
     }
 }
