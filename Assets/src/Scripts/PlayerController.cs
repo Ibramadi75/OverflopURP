@@ -44,5 +44,16 @@ public class PlayerController : MonoBehaviour
         
         Vector3 movement = (forwardDirection * vertical / 100 + rightDirection * horizontal).normalized;
         transform.position += movement * speed * Time.deltaTime;
+        
+        Interact();
+    }
+
+    void Interact()
+    {
+        if (Physics.Raycast(transform.position, playerCam.transform.forward, out RaycastHit hit,
+                1, 1))
+        {
+            Debug.Log(hit.transform.tag);
+        }
     }
 }
