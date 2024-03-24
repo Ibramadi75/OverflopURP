@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Ingredient
+  - Box
+  - Cooker
+  - Worktable
+  - Baketable
   layers:
   - Default
   - TransparentFX
