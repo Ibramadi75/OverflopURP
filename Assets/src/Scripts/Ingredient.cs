@@ -9,7 +9,7 @@ public class Ingredient : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(_ingredientData.title);
+        
     }
 
     // Update is called once per frame
