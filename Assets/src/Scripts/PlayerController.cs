@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private Camera playerCam;
     private float rotationX = 0.0f;
     private float rotationY = 0.0f;
+    private GameObject[] interactionObjects;
     
     // Start is called before the first frame update
     void Start()
@@ -53,7 +54,11 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(transform.position, playerCam.transform.forward, out RaycastHit hit,
                 1, 1))
         {
-            Debug.Log(hit.transform.tag);
+            AbstractInteraction abstractInteraction = hit.transform.GetComponent<AbstractInteraction>();
+            if (abstractInteraction && Input.GetKeyDown(KeyCode.E))
+            {
+                abstractInteraction.execute(gameObject);
+            }
         }
     }
 }

@@ -1,12 +1,20 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Ingredients", menuName = "OverflopURP/Ingredient")]
-public class Ingredient : ScriptableObject
+public class Ingredient : MonoBehaviour
 {
-    public string title;
-    public List<Recipe> recipes;
-    public bool isBase;
+    [SerializeField] private IngredientData _ingredientData;
+    
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Log(_ingredientData.title);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }
