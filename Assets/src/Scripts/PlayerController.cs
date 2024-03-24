@@ -1,37 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 10.0f;
-    [SerializeField] private float sensivity = 10.0f;
-    
+    [SerializeField] private float sensitivity = 10.0f;
+
     private Camera playerCam;
     private float rotationX = 0.0f;
     private float rotationY = 0.0f;
     private GameObject[] interactionObjects;
     
-    // Start is called before the first frame update
     void Start()
     {
         playerCam = GetComponentInChildren<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
 
-        rotationX -= mouseY * sensivity;
-        rotationY += mouseX * sensivity;
+        rotationX -= mouseY;
         rotationX = Mathf.Clamp(rotationX, -90f, 90f);
-        
-        playerCam.transform.localRotation = Quaternion.Euler(rotationX, rotationY, 0f);
-        
+
+        playerCam.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+        transform.Rotate(Vector3.up * mouseX);
+
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         
@@ -45,7 +40,15 @@ public class PlayerController : MonoBehaviour
         
         Vector3 movement = (forwardDirection * vertical / 100 + rightDirection * horizontal).normalized;
         transform.position += movement * speed * Time.deltaTime;
-        
+
+        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+        if (direction.magnitude >= 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCam.transform.eulerAngles.y;
+            Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            transform.position += moveDirection.normalized * speed * Time.deltaTime;
+        }
+
         Interact();
     }
 
@@ -59,6 +62,9 @@ public class PlayerController : MonoBehaviour
             {
                 abstractInteraction.execute(gameObject);
             }
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, 1))
+        {
+            Debug.Log(hit.transform.tag);
         }
     }
 }
