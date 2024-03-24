@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
 
     private Camera playerCam;
     private float rotationX = 0.0f;
-
+    private float rotationY = 0.0f;
+    private GameObject[] interactionObjects;
+    
     void Start()
     {
         playerCam = GetComponentInChildren<Camera>();
@@ -27,6 +29,17 @@ public class PlayerController : MonoBehaviour
 
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
+        
+        Quaternion camRotation = playerCam.transform.rotation;
+        Vector3 forwardDirection = camRotation * Vector3.forward;
+        Vector3 rightDirection = camRotation * Vector3.right;
+        
+        // Ignore Y-axis movement
+        forwardDirection.y = 0;
+        rightDirection.y = 0;
+        
+        Vector3 movement = (forwardDirection * vertical / 100 + rightDirection * horizontal).normalized;
+        transform.position += movement * speed * Time.deltaTime;
 
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
         if (direction.magnitude >= 0.1f)
@@ -41,6 +54,14 @@ public class PlayerController : MonoBehaviour
 
     void Interact()
     {
+        if (Physics.Raycast(transform.position, playerCam.transform.forward, out RaycastHit hit,
+                1, 1))
+        {
+            AbstractInteraction abstractInteraction = hit.transform.GetComponent<AbstractInteraction>();
+            if (abstractInteraction && Input.GetKeyDown(KeyCode.E))
+            {
+                abstractInteraction.execute(gameObject);
+            }
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, 1))
         {
             Debug.Log(hit.transform.tag);
