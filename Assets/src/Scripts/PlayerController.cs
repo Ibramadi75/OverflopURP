@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
 
     private Camera playerCam;
     private float rotationX = 0.0f;
-    
     private GameObject[] interactionObjects;
 
     void Start()
@@ -54,7 +53,6 @@ public class PlayerController : MonoBehaviour
 
         Interact();
     }
-
 
     void Interact()
     {
