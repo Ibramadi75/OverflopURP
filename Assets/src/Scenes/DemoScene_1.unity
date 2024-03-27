@@ -136,6 +136,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrdersScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 5200020290825674746, guid: 5910b9f2b1d9f46b1bde6f839d18887d,
+        type: 3}
+      propertyPath: byInteraction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6371882055012285852, guid: 5910b9f2b1d9f46b1bde6f839d18887d,
         type: 3}
       propertyPath: m_RootOrder
