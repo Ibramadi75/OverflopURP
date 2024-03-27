@@ -47,6 +47,9 @@ public class Countdown : MonoBehaviour
             }
         }
 
+        if (_timeLeft <= 0)
+            gameObject.SetActive(false);
+
         _launchCoroutine = false;
         _primaryInteraction = false;
     }
