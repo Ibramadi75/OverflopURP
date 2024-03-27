@@ -59,12 +59,10 @@ public class PlayerController : MonoBehaviour
                 1, 1))
         {
             AbstractInteraction abstractInteraction = hit.transform.GetComponent<AbstractInteraction>();
-            if (abstractInteraction && Input.GetKeyDown(KeyCode.E) && GetComponentInChildren<Ingredient>() == null)
+            if (abstractInteraction && Input.GetKeyDown(KeyCode.E))
             {
                 abstractInteraction.execute(gameObject);
             }
         }
-        
-        Debug.DrawRay(transform.position, playerCam.transform.forward, Color.green);
     }
 }

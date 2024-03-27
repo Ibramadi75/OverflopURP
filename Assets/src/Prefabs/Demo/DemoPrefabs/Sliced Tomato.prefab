@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7183792989207873874}
   - component: {fileID: 8973385815003256088}
   m_Layer: 0
-  m_Name: Tomato
+  m_Name: Sliced Tomato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 399d495ec32e74c1eb92cefe7fe334bf, type: 2}
+  - {fileID: 2100000, guid: 9ef909d7b6e9546d99573ec006d19dc0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

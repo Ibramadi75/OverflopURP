@@ -10,5 +10,12 @@ public abstract class AbstractInteraction : MonoBehaviour
         slots = GetComponent<Slots>();
     }
 
+    protected void Give(GameObject author, GameObject receiver)
+    {
+        GameObject spawnedObject = Instantiate(author.GetComponent<Slots>().Retrieve(), receiver.transform.position, Quaternion.identity);
+        spawnedObject.transform.parent = receiver.transform;
+        receiver.GetComponent<Slots>().Store(spawnedObject);
+    }
+
     public abstract void execute(GameObject author);
 }
