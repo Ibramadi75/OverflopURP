@@ -5,9 +5,12 @@ public class Countdown : MonoBehaviour
 {
     public float time = 10f;
     private float _timeLeft;
-    private Coroutine countdownCoroutine;
+    private Coroutine _countdownCoroutine;
     [SerializeField] bool byInteraction = false;
-    [SerializeField] bool launchCoroutine = false;
+    [SerializeField] bool _launchCoroutine = false;
+    bool _primaryInteraction = false;
+
+    public void interactOn() => _primaryInteraction = true;
 
     public float TimeLeft
     {
@@ -24,27 +27,28 @@ public class Countdown : MonoBehaviour
 
     void Update()
     {
-        launchCoroutine = false;
-        if (Input.GetKey(KeyCode.Space))
-            launchCoroutine = true;
+        _launchCoroutine = _primaryInteraction;
 
         if (byInteraction)
         {
-            if (launchCoroutine)
+            if (_launchCoroutine)
             {
-                if (countdownCoroutine == null)
-                    countdownCoroutine = StartCoroutine(StartCountdown());
+                if (_countdownCoroutine == null)
+                    _countdownCoroutine = StartCoroutine(StartCountdown());
             }
             else
             {
-                if (countdownCoroutine != null)
+                if (_countdownCoroutine != null)
                 {
-                    StopCoroutine(countdownCoroutine);
-                    countdownCoroutine = null;
-                    launchCoroutine = false;
+                    StopCoroutine(_countdownCoroutine);
+                    _countdownCoroutine = null;
+                    _launchCoroutine = false;
                 }
             }
         }
+
+        _launchCoroutine = false;
+        _primaryInteraction = false;
     }
 
     IEnumerator StartCountdown()
