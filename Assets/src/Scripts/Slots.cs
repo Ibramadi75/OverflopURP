@@ -48,7 +48,6 @@ public class Slots : MonoBehaviour
 
     public GameObject Retrieve()
     {
-        Debug.Log("Slot Retrieve");
         for (int i = 0; i < maxCapacity; i++)
         {
             if (slots[i] != null)
