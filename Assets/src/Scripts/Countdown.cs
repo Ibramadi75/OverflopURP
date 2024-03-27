@@ -24,19 +24,16 @@ public class Countdown : MonoBehaviour
 
     void Update()
     {
+        launchCoroutine = false;
         if (Input.GetKey(KeyCode.Space))
-            Debug.Log("AAA -> Countdown time: " + _timeLeft);
-        else
-            Debug.Log("FFF -> Countdown time: " + _timeLeft);
+            launchCoroutine = true;
 
         if (byInteraction)
         {
             if (launchCoroutine)
             {
                 if (countdownCoroutine == null)
-                {
                     countdownCoroutine = StartCoroutine(StartCountdown());
-                }
             }
             else
             {
