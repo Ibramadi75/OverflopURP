@@ -60,9 +60,6 @@ public class PlayerController : MonoBehaviour
             {
                 abstractInteraction.execute(gameObject);
             }
-        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, 1))
-        {
-            Debug.Log(hit.transform.tag);
         }
     }
 }
