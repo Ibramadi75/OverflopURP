@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ingredient : MonoBehaviour
 {
-    [SerializeField] private IngredientData _ingredientData;
+    [SerializeField] private IngredientData ingredientData;
     
     // Start is called before the first frame update
     void Start()
