@@ -6,7 +6,10 @@ public class BoxInteraction : AbstractInteraction
 {
     public override void execute(GameObject author)
     {
-        GameObject spawnedObject = Instantiate(slots.Retrieve(), author.transform.position, Quaternion.identity);
-        spawnedObject.transform.parent = author.transform;
+        if (author.GetComponent<Slots>().IsEmpty())
+        {
+            GameObject objectToSpawn = transform.GetComponent<Slots>().Retrieve();
+            Give(author, objectToSpawn, author.transform.position);
+        }
     }
 }

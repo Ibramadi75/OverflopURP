@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Slots : MonoBehaviour
@@ -6,7 +6,9 @@ public class Slots : MonoBehaviour
     [SerializeField] private GameObject[] slots;
     [SerializeField] private uint maxCapacity;
     [SerializeField] bool isInfinite = false; // Defines if the slots are infinite or not.
+    
     public uint GetCapacity() => maxCapacity;
+    public bool IsInfinite() => isInfinite;
 
     void Start()
     {
@@ -64,5 +66,10 @@ public class Slots : MonoBehaviour
         }
 
         return null;
+    }
+
+    public bool IsEmpty()
+    {
+        return !slots.Any(slot => slot is not null);
     }
 }
