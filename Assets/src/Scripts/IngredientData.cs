@@ -9,4 +9,6 @@ public class IngredientData : ScriptableObject
     public string title;
     public List<RecipeData> recipes;
     public bool isBase;
+    public bool isCuttable;
+    public GameObject cutPrefab;
 }
