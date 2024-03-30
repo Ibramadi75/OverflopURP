@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Countdown : MonoBehaviour
 {
-    public float time = 10f;
+    private float _time;
     private float _timeLeft;
 
     public float TimeLeft
@@ -12,9 +12,12 @@ public class Countdown : MonoBehaviour
         get { return _timeLeft; }
     }
 
+    public void SetTime(float time) => _time = time;
+    public float GetTime() => _time;
+
     void Start()
     {
-        _timeLeft = time;
+        _timeLeft = _time;
         StartCoroutine(StartCountdown());
     }
 

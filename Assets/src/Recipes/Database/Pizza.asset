@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1394f0d5fcf547af8d623d092f8caa01, type: 3}
   m_Name: Pizza
   m_EditorClassIdentifier: 
-  title: 
+  title: Pizza
   ingredients:
   - {fileID: 11400000, guid: c4a548ed1a8694a96a98c027a351ab66, type: 2}
-  baseExpiration: 15
+  baseExpiration: 10

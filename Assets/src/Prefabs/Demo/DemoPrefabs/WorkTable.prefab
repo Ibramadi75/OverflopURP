@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 5261269058132066528}
   - component: {fileID: 3697265146900840492}
   - component: {fileID: 3939081187087357564}
+  - component: {fileID: 8310877350071488996}
+  - component: {fileID: 2065567515004287180}
   m_Layer: 0
   m_Name: WorkTable
-  m_TagString: Untagged
+  m_TagString: Worktable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,3 +107,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8310877350071488996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972914567486602692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5dc541b8ac8f4a2e98eea0c90f0c61b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots: []
+  maxCapacity: 1
+  isInfinite: 0
+--- !u!114 &2065567515004287180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972914567486602692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40115351200cf4526911def2e7e648c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
