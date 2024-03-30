@@ -8,10 +8,7 @@ public class Ingredient : MonoBehaviour
     
     void Start()
     {
-        if (GetComponent<Countdown>() is null)
-        {
-            Debug.Log("A countdown script must be attached.");
-        }
+
     }
 
     void Update()

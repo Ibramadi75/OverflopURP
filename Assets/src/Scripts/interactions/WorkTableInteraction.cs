@@ -4,8 +4,15 @@ public class WorkTableInteraction : AbstractInteraction
 {
     public override void MainInteraction(GameObject author)
     {
-        if (slots.IsEmpty() && !author.GetComponent<Slots>().IsEmpty())
+        Slots authorSlot = author.GetComponent<Slots>();
+        Slots slots = GetComponent<Slots>();
+        if (slots.IsEmpty() && !authorSlot.IsEmpty())
+        {
             Place(author, gameObject);
+        }else if (!slots.IsEmpty() && authorSlot.IsEmpty())
+        {
+            Place(gameObject, author);
+        }
     }
 
     public override void SecondaryInteraction(GameObject author)
@@ -25,12 +32,10 @@ public class WorkTableInteraction : AbstractInteraction
                 else
                 {
                     GameObject cutObject = ingredient.ingredientData.cutPrefab;
+                    slots.ClearSlots();
                     Replace(objectToCut, cutObject);
-                    slots.Store(cutObject);
                 }
             }
-            
-
         }
     }
 

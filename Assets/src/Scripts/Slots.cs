@@ -68,6 +68,14 @@ public class Slots : MonoBehaviour
         return null;
     }
 
+    public void ClearSlots()
+    {
+        for (int i = 0; i < maxCapacity; i++)
+        {
+            slots[i] = null;
+        }
+    }
+
     public bool IsEmpty()
     {
         return !slots.Any(slot => slot is not null);

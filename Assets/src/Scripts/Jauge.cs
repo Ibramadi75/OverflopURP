@@ -13,7 +13,6 @@ public class Jauge : MonoBehaviour
 
         if (_countdownScript == null)
         {
-            Debug.LogError("A countdown script must be attached to the parent.");
             return;
         }
 
