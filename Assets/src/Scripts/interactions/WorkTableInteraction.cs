@@ -2,27 +2,10 @@ using UnityEngine;
 
 public class WorkTableInteraction : AbstractInteraction
 {
-    public Countdown countdownScript;
     public override void MainInteraction(GameObject author)
     {
         if (slots.IsEmpty() && !author.GetComponent<Slots>().IsEmpty())
             Place(author, gameObject);
-        
-        else if (!slots.IsEmpty() && author.GetComponent<Slots>().IsEmpty())
-        {
-            GameObject objectToCut = slots.Retrieve();
-            Ingredient ingredient = objectToCut.GetComponent<Ingredient>();
-            
-            if (!ingredient.ingredientData.isCuttable)
-            {
-                Give(author, objectToCut, author.transform.position);
-                Destroy(GetComponentInChildren<Ingredient>().gameObject);
-                return;
-            }
-
-            GameObject cutObject = ingredient.ingredientData.cutPrefab;
-            Replace(objectToCut, cutObject);
-        }
     }
 
     public override void SecondaryInteraction(GameObject author)
@@ -30,10 +13,24 @@ public class WorkTableInteraction : AbstractInteraction
         if (slots.GetCapacity() == 1 && !slots.IsEmpty())
         {
             GameObject objectToCut = slots.slots[0];
-            if (objectToCut.CompareTag("Ingredient"))
+            Ingredient ingredient = objectToCut.GetComponent<Ingredient>();
+            Countdown countdown = objectToCut.GetComponentInChildren<Countdown>();
+
+            if (objectToCut.CompareTag("Ingredient") 
+            && ingredient is not null 
+            && ingredient.ingredientData.isCuttable)
             {
-                objectToCut.GetComponentInChildren<Countdown>().InteractOn();
+                if (countdown is not null)
+                    countdown.InteractOn();
+                else
+                {
+                    GameObject cutObject = ingredient.ingredientData.cutPrefab;
+                    Replace(objectToCut, cutObject);
+                    slots.Store(cutObject);
+                }
             }
+            
+
         }
     }
 

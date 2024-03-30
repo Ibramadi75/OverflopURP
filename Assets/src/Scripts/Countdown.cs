@@ -19,8 +19,8 @@ public class Countdown : MonoBehaviour
 
     void Start()
     {
-        // if (GetComponent<Ingredient>() is not null)
-        //     time = GetComponent<Ingredient>().ingredientData.time;
+        if (GetComponent<Ingredient>() is not null)
+            time = GetComponent<Ingredient>().ingredientData.time;
 
         _timeLeft = time;
 
@@ -51,7 +51,9 @@ public class Countdown : MonoBehaviour
         }
 
         if (_timeLeft <= 0)
+        {
             gameObject.SetActive(false);
+        }
 
         _launchCoroutine = false;
         _primaryInteraction = false;
