@@ -6,13 +6,14 @@ public class Ingredient : MonoBehaviour
 {
     public IngredientData ingredientData;
     
-    // Start is called before the first frame update
     void Start()
     {
-        
+        if (GetComponent<Countdown>() is null)
+        {
+            Debug.Log("A countdown script must be attached.");
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         

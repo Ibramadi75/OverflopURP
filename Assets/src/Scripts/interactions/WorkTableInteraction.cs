@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class WorkTableInteraction : AbstractInteraction
 {
-    public override void execute(GameObject author)
+    public Countdown countdownScript;
+    public override void MainInteraction(GameObject author)
     {
         if (slots.IsEmpty() && !author.GetComponent<Slots>().IsEmpty())
             Place(author, gameObject);
@@ -21,6 +22,18 @@ public class WorkTableInteraction : AbstractInteraction
 
             GameObject cutObject = ingredient.ingredientData.cutPrefab;
             Replace(objectToCut, cutObject);
+        }
+    }
+
+    public override void SecondaryInteraction(GameObject author)
+    {
+        if (slots.GetCapacity() == 1 && !slots.IsEmpty())
+        {
+            GameObject objectToCut = slots.slots[0];
+            if (objectToCut.CompareTag("Ingredient"))
+            {
+                objectToCut.GetComponentInChildren<Countdown>().InteractOn();
+            }
         }
     }
 
