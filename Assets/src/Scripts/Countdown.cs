@@ -1,24 +1,39 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Countdown : MonoBehaviour
 {
-    private float _time;
+    public float time = 10f;
     private float _timeLeft;
+    private Coroutine countdownCoroutine;
 
     public float TimeLeft
     {
         get { return _timeLeft; }
     }
 
-    public void SetTime(float time) => _time = time;
-    public float GetTime() => _time;
-
     void Start()
     {
-        _timeLeft = _time;
-        StartCoroutine(StartCountdown());
+        _timeLeft = time;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (countdownCoroutine == null)
+            {
+                countdownCoroutine = StartCoroutine(StartCountdown());
+            }
+        }
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
+            if (countdownCoroutine != null)
+            {
+                StopCoroutine(countdownCoroutine);
+                countdownCoroutine = null;
+            }
+        }
     }
 
     IEnumerator StartCountdown()
@@ -28,9 +43,5 @@ public class Countdown : MonoBehaviour
             yield return null;
             _timeLeft -= Time.deltaTime;
         }
-    }
-
-    void Update()
-    {
     }
 }
