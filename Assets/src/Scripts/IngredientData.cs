@@ -12,4 +12,6 @@ public class IngredientData : ScriptableObject
     public bool isBase;
     public bool isCuttable;
     public GameObject cutPrefab;
+    public bool isMeltable;
+    public GameObject meltedPrefab;
 }
