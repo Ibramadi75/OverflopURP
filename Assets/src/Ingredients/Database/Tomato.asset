@@ -17,5 +17,5 @@ MonoBehaviour:
   time: 0
   isBase: 0
   isCuttable: 1
-  cutPrefab: {fileID: 919132149155446097, guid: a847370a416a77b4798acf9af2d3fc5b,
+  cutPrefab: {fileID: 678602287220236222, guid: 35bb100cf917b4896aac82564ae8ff5e,
     type: 3}
