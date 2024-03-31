@@ -10,7 +10,7 @@ public class Countdown : MonoBehaviour
     [SerializeField] bool _launchCoroutine = false;
     bool _primaryInteraction = false;
 
-    public void interactOn() => _primaryInteraction = true;
+    public void InteractOn() => _primaryInteraction = true;
 
     public float TimeLeft
     {
@@ -19,6 +19,9 @@ public class Countdown : MonoBehaviour
 
     void Start()
     {
+        // if (GetComponent<Ingredient>() is not null)
+        //     time = GetComponent<Ingredient>().ingredientData.time;
+
         _timeLeft = time;
 
         if (!byInteraction)

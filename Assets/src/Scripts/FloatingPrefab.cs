@@ -18,9 +18,9 @@ public class FloatingPrefab : MonoBehaviour
 
     void Start()
     {
-        Vector3 spawnPosition = transform.position + GetPositionVector(position);
-        Instantiate(prefabToInstantiate, spawnPosition, Quaternion.identity);
+
     }
+
 
     private Vector3 GetPositionVector(FloatingPosition pos)
     {

@@ -65,8 +65,17 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, 2, 1))
         {
             AbstractInteraction abstractInteraction = hit.transform.GetComponent<AbstractInteraction>();
-            if (abstractInteraction && Input.GetKeyDown(KeyCode.E))
-                abstractInteraction.execute(gameObject);
+
+            if (abstractInteraction)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                    abstractInteraction.MainInteraction(gameObject);
+                    
+                if (Input.GetKey(KeyCode.F))
+                {
+                    abstractInteraction.SecondaryInteraction(gameObject);
+                }
+            }
 
             if (lastHitObject != hit.transform.gameObject)
             {

@@ -30,5 +30,6 @@ public abstract class AbstractInteraction : MonoBehaviour
         return receiver.transform.position + Vector3.up * (receiverHeight / 2 + objectHeight / 2);
     }
 
-    public abstract void execute(GameObject author);
+    public abstract void MainInteraction(GameObject author);
+    public abstract void SecondaryInteraction(GameObject author);
 }
