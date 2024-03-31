@@ -64,30 +64,35 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, 2, 1))
         {
-            AbstractInteraction abstractInteraction = hit.transform.GetComponentInParent<AbstractInteraction>();
-
+            AbstractInteraction abstractInteraction = hit.transform.GetComponent<AbstractInteraction>();
+            
+            if (abstractInteraction is null)
+                abstractInteraction = hit.transform.GetComponentInChildren<AbstractInteraction>();
+                
             if (abstractInteraction)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                     abstractInteraction.MainInteraction(gameObject);
                     
                 if (Input.GetKey(KeyCode.F))
-                {
                     abstractInteraction.SecondaryInteraction(gameObject);
-                }
             }
 
             if (lastHitObject != hit.transform.gameObject)
             {
-                if (lastHitObject != null)
-                    RestoreOriginalColor(lastHitObject);
+                bool canInteractWith = hit.transform.gameObject.GetComponent<CanInteractWith>() != null;
+                if (canInteractWith)
+                {
+                    if (lastHitObject != null)
+                        RestoreOriginalColor(lastHitObject);
 
-                lastHitObject = hit.transform.gameObject;
+                    lastHitObject = hit.transform.gameObject;
 
-                if (originalColor != hit.transform.GetComponent<Renderer>().material.color)
-                    originalColor = hit.transform.GetComponent<Renderer>().material.color;
+                    if (originalColor != hit.transform.GetComponent<Renderer>().material.color)
+                        originalColor = hit.transform.GetComponent<Renderer>().material.color;
 
-                ChangeColorToBlack(hit.transform.gameObject);
+                    ChangeColorToBlack(hit.transform.gameObject);
+                }
             }
         }
         else
@@ -103,6 +108,10 @@ public class PlayerController : MonoBehaviour
     void ChangeColorToBlack(GameObject obj)
     {
         Renderer renderer = obj.GetComponent<Renderer>();
+
+        if (renderer is null)
+            renderer = obj.GetComponentInChildren<Renderer>();
+
         if (renderer != null)
         {
             Material[] materials = renderer.materials;
@@ -116,6 +125,10 @@ public class PlayerController : MonoBehaviour
     void RestoreOriginalColor(GameObject obj)
     {
         Renderer renderer = obj.GetComponent<Renderer>();
+
+        if (renderer is null)
+            renderer = obj.GetComponentInChildren<Renderer>();
+
         if (renderer != null)
         {
             Material[] materials = renderer.materials;
