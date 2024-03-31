@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -283,21 +283,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1221049593}
     m_Modifications:
-    - target: {fileID: 135320371701183060, guid: 5910b9f2b1d9f46b1bde6f839d18887d,
-        type: 3}
-      propertyPath: anOrderPrefab
-      value: 
-      objectReference: {fileID: 1055210376593303921, guid: 14b99ef788eae4d248a95e403fa4e04c,
-        type: 3}
     - target: {fileID: 4617504788797121290, guid: 5910b9f2b1d9f46b1bde6f839d18887d,
         type: 3}
       propertyPath: m_Name
       value: OrdersScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 5200020290825674746, guid: 5910b9f2b1d9f46b1bde6f839d18887d,
-        type: 3}
-      propertyPath: byInteraction
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6371882055012285852, guid: 5910b9f2b1d9f46b1bde6f839d18887d,
         type: 3}
