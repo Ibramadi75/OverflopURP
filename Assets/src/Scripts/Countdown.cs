@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Countdown : MonoBehaviour
 {
-    public float time = 10f;
+    public float _time = 10f;
     private float _timeLeft;
     private Coroutine _countdownCoroutine;
     [SerializeField] bool byInteraction = false;
@@ -11,6 +11,8 @@ public class Countdown : MonoBehaviour
     bool _primaryInteraction = false;
 
     public void InteractOn() => _primaryInteraction = true;
+    public void SetTime(float time) => _time = time;
+    public float GetTime() => _time;
 
     public float TimeLeft
     {
@@ -20,9 +22,9 @@ public class Countdown : MonoBehaviour
     void Start()
     {
         if (GetComponent<Ingredient>() is not null)
-            time = GetComponent<Ingredient>().ingredientData.time;
+            _time = GetComponent<Ingredient>().ingredientData.time;
 
-        _timeLeft = time;
+        _timeLeft = _time;
 
         if (!byInteraction)
             StartCoroutine(StartCountdown());

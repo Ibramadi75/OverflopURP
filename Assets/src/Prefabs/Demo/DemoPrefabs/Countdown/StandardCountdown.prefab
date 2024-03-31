@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5777490647441270615}
   - component: {fileID: 2532460138204705491}
   m_Layer: 0
-  m_Name: anOrder 1
+  m_Name: StandardCountdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f07412eb7af4da880d13d13c8d03c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 3
-  byInteraction: 1
+  _time: 5
+  byInteraction: 0
   _launchCoroutine: 0
 --- !u!1 &2419524910037257293
 GameObject:

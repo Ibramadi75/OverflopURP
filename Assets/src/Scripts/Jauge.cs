@@ -16,7 +16,7 @@ public class Jauge : MonoBehaviour
             return;
         }
 
-        _totalTime = _countdownScript.time;
+        _totalTime = _countdownScript.GetTime();
         _xDefaultLocalScale = transform.localScale.x;
         _xDefaultLocalPosition = transform.localPosition.x;
     }
