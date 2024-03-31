@@ -878,6 +878,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WorkTable
       objectReference: {fileID: 0}
+    - target: {fileID: 972914567486602692, guid: a0128a1335ce54249a2bc4221a0952db,
+        type: 3}
+      propertyPath: m_TagString
+      value: Worktable
+      objectReference: {fileID: 0}
     - target: {fileID: 1748873509693111533, guid: a0128a1335ce54249a2bc4221a0952db,
         type: 3}
       propertyPath: m_RootOrder
@@ -936,7 +941,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 972914567486602692, guid: a0128a1335ce54249a2bc4221a0952db,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5361902569710774180}
   m_SourcePrefab: {fileID: 100100000, guid: a0128a1335ce54249a2bc4221a0952db, type: 3}
 --- !u!4 &5361902569710774178 stripped
 Transform:
@@ -944,6 +953,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5361902569710774177}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5361902569710774179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 972914567486602692, guid: a0128a1335ce54249a2bc4221a0952db,
+    type: 3}
+  m_PrefabInstance: {fileID: 5361902569710774177}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5361902569710774180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5361902569710774179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5dc541b8ac8f4a2e98eea0c90f0c61b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots: []
+  maxCapacity: 1
+  isInfinite: 0
 --- !u!1001 &7061980151896828487
 PrefabInstance:
   m_ObjectHideFlags: 0
