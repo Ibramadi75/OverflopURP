@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1195548551454763674}
   m_Layer: 0
   m_Name: WorkTable
-  m_TagString: Untagged
+  m_TagString: Worktable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

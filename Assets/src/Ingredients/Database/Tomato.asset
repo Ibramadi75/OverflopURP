@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: 
   recipes: []
+  time: 0
   isBase: 0
   isCuttable: 1
-  cutPrefab: {fileID: 7631155381806156348, guid: 2f0d5d7cf9e0d45fb984dd7e88ed9e87,
+  cutPrefab: {fileID: 919132149155446097, guid: a847370a416a77b4798acf9af2d3fc5b,
     type: 3}

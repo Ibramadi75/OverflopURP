@@ -65,7 +65,10 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, 2, 1))
         {
             AbstractInteraction abstractInteraction = hit.transform.GetComponent<AbstractInteraction>();
-
+            
+            if (abstractInteraction is null)
+                abstractInteraction = hit.transform.GetComponentInChildren<AbstractInteraction>();
+                
             if (abstractInteraction)
             {
                 if (Input.GetKeyDown(KeyCode.E))
@@ -108,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
         if (renderer is null)
             renderer = obj.GetComponentInChildren<Renderer>();
-            
+
         if (renderer != null)
         {
             Material[] materials = renderer.materials;
