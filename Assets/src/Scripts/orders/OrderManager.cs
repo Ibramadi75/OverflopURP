@@ -35,18 +35,20 @@ public class OrderManager : MonoBehaviour
         if (AnyOrderExpired())
         {
             List<int> expiredOrderKeys = new List<int>();
+            List<Order> expiredOrderObjects = new List<Order>();
             
             foreach (var activeOrder in _activeOrders)
             {
                 if (activeOrder.Value.HasExpired())
                 {
-                    Destroy(activeOrder.Value.gameObject);
+                    expiredOrderObjects.Add(activeOrder.Value);
                     expiredOrderKeys.Add(activeOrder.Key);
                 }
             }
             
             expiredOrderKeys.ForEach(key => _activeOrders[key] = null);
-            RearrangeOrders();
+            expiredOrderObjects.ForEach(order => Destroy(order.gameObject));
+            //RearrangeOrders();
         }
     }
 
@@ -66,6 +68,7 @@ public class OrderManager : MonoBehaviour
         GameObject order = Instantiate(anOrderPrefab, _screenUi);
         order.transform.localPosition -= Vector3.down * yOffset * positionIndex;
         _activeOrders[positionIndex] = order.GetComponent<Order>();
+        Debug.Log(order.GetComponent<Order>().HasExpired());
     }
 
     void RearrangeOrders()

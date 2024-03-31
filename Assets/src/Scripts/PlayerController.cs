@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private bool debug = false;
     [SerializeField] private float speed = 10.0f;
     [SerializeField] private float sensitivity = 10.0f;
+    private Color originalColor;
+    private GameObject lastHitObject;
 
     private Camera playerCam;
     private float rotationX = 0.0f;
-    private float rotationY = 0.0f;
+    
     private GameObject[] interactionObjects;
 
     void Start()
@@ -53,15 +56,72 @@ public class PlayerController : MonoBehaviour
         Interact();
     }
 
+
     void Interact()
     {
-        if (Physics.Raycast(transform.position, playerCam.transform.forward, out RaycastHit hit,
-                1, 1))
+        if (debug)
+            Debug.DrawRay(playerCam.transform.position, playerCam.transform.forward * 3, Color.green);
+
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, 2, 1))
         {
             AbstractInteraction abstractInteraction = hit.transform.GetComponent<AbstractInteraction>();
-            if (abstractInteraction && Input.GetKeyDown(KeyCode.E))
+
+            if (abstractInteraction)
             {
-                abstractInteraction.execute(gameObject);
+                if (Input.GetKeyDown(KeyCode.E))
+                    abstractInteraction.MainInteraction(gameObject);
+                    
+                if (Input.GetKey(KeyCode.F))
+                {
+                    abstractInteraction.SecondaryInteraction(gameObject);
+                }
+            }
+
+            if (lastHitObject != hit.transform.gameObject)
+            {
+                if (lastHitObject != null)
+                    RestoreOriginalColor(lastHitObject);
+
+                lastHitObject = hit.transform.gameObject;
+
+                if (originalColor != hit.transform.GetComponent<Renderer>().material.color)
+                    originalColor = hit.transform.GetComponent<Renderer>().material.color;
+
+                ChangeColorToBlack(hit.transform.gameObject);
+            }
+        }
+        else
+        {
+            if (lastHitObject != null)
+            {
+                RestoreOriginalColor(lastHitObject);
+                lastHitObject = null;
+            }
+        }
+    }
+
+    void ChangeColorToBlack(GameObject obj)
+    {
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            Material[] materials = renderer.materials;
+            foreach (Material material in materials)
+            {
+                material.color = new Color (0f, 0f, 1f, .4f);
+            }
+        }
+    }
+
+    void RestoreOriginalColor(GameObject obj)
+    {
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            Material[] materials = renderer.materials;
+            foreach (Material material in materials)
+            {
+                material.color = originalColor;
             }
         }
     }

@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6303467181936920250
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 256801943471739584, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cf467f7163d9eb14ca56735e8000eccb, type: 2}
+    - target: {fileID: 3808525705135735572, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5f469581b50505747a410deecdf8f11d, type: 2}
+    - target: {fileID: 4489565119728085894, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -8955122113573362361, guid: 2a83511a782a6aa4dafed1f5a2bd3803,
+        type: 3}
+    - target: {fileID: 4862218636606305074, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_Name
+      value: Cabinet_Base_DD_01 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583754328810795838, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5f469581b50505747a410deecdf8f11d, type: 2}
+    - target: {fileID: 7319814156543257001, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319814156543257001, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319814156543257001, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319814156543257001, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319814156543257001, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319814156543257001, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319814156543257001, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319814156543257001, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319814156543257001, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319814156543257001, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319814156543257001, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9102382194555075316, guid: 45a8474156e1046e9ba1d67aa3edf2df,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5f469581b50505747a410deecdf8f11d, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 45a8474156e1046e9ba1d67aa3edf2df, type: 3}

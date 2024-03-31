@@ -9,11 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5777490647441270615}
-  - component: {fileID: 8338961962585123748}
-  - component: {fileID: -2952961435150005203}
-  - component: {fileID: -6463037650627935959}
+  - component: {fileID: 2532460138204705491}
   m_Layer: 0
-  m_Name: anOrder
+  m_Name: StandardCountdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,9 +24,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055210376593303921}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.25000095}
-  m_LocalScale: {x: 0.33333334, y: 0.5, z: 10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.7891245, y: 1.289, z: 2.2252166}
+  m_LocalScale: {x: 0.3333333, y: 0.5, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5281761778699031760}
@@ -36,19 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8338961962585123748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1055210376593303921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08886104ae3a82e4a8ca0261245bd54f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-2952961435150005203
+--- !u!114 &2532460138204705491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,20 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f07412eb7af4da880d13d13c8d03c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 10
---- !u!114 &-6463037650627935959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1055210376593303921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe75b11b1d74fec952bfa681f4395bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recipeData: {fileID: 11400000, guid: 455e0084012244584a879b0a9e6266eb, type: 2}
+  _time: 5
+  byInteraction: 0
+  _launchCoroutine: 0
 --- !u!1 &2419524910037257293
 GameObject:
   m_ObjectHideFlags: 0

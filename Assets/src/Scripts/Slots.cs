@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Slots : MonoBehaviour
 {
-    [SerializeField] private GameObject[] slots;
+    public GameObject[] slots;
     [SerializeField] private uint maxCapacity;
     [SerializeField] bool isInfinite = false; // Defines if the slots are infinite or not.
     
@@ -66,6 +66,14 @@ public class Slots : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void ClearSlots()
+    {
+        for (int i = 0; i < maxCapacity; i++)
+        {
+            slots[i] = null;
+        }
     }
 
     public bool IsEmpty()

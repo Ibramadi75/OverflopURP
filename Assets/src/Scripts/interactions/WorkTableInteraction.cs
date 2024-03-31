@@ -2,25 +2,40 @@ using UnityEngine;
 
 public class WorkTableInteraction : AbstractInteraction
 {
-    public override void execute(GameObject author)
+    public override void MainInteraction(GameObject author)
     {
-        if (slots.IsEmpty() && !author.GetComponent<Slots>().IsEmpty())
-            Place(author, gameObject);
-        
-        else if (!slots.IsEmpty() && author.GetComponent<Slots>().IsEmpty())
+        Slots authorSlot = author.GetComponent<Slots>();
+        Slots slots = GetComponent<Slots>();
+        if (slots.IsEmpty() && !authorSlot.IsEmpty())
         {
-            GameObject objectToCut = slots.Retrieve();
-            Ingredient ingredient = objectToCut.GetComponent<Ingredient>();
-            
-            if (!ingredient.ingredientData.isCuttable)
-            {
-                Give(author, objectToCut, author.transform.position);
-                Destroy(GetComponentInChildren<Ingredient>().gameObject);
-                return;
-            }
+            Place(author, gameObject);
+        }else if (!slots.IsEmpty() && authorSlot.IsEmpty())
+        {
+            Place(gameObject, author);
+        }
+    }
 
-            GameObject cutObject = ingredient.ingredientData.cutPrefab;
-            Replace(objectToCut, cutObject);
+    public override void SecondaryInteraction(GameObject author)
+    {
+        if (slots.GetCapacity() == 1 && !slots.IsEmpty())
+        {
+            GameObject objectToCut = slots.slots[0];
+            Ingredient ingredient = objectToCut.GetComponent<Ingredient>();
+            Countdown countdown = objectToCut.GetComponentInChildren<Countdown>();
+
+            if (objectToCut.CompareTag("Ingredient") 
+            && ingredient is not null 
+            && ingredient.ingredientData.isCuttable)
+            {
+                if (countdown is not null)
+                    countdown.InteractOn();
+                else
+                {
+                    GameObject cutObject = ingredient.ingredientData.cutPrefab;
+                    slots.ClearSlots();
+                    Replace(objectToCut, cutObject);
+                }
+            }
         }
     }
 
