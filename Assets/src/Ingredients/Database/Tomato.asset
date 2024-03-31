@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d055a5f8780d43499a276120aa38bf1, type: 3}
   m_Name: Tomato
   m_EditorClassIdentifier: 
-  title: 
+  title: Tomato
   recipes: []
+  time: 0
   isBase: 0
   isCuttable: 1
   cutPrefab: {fileID: 7631155381806156348, guid: 2f0d5d7cf9e0d45fb984dd7e88ed9e87,

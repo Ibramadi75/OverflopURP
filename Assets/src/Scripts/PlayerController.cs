@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, 2, 1))
         {
-            AbstractInteraction abstractInteraction = hit.transform.GetComponent<AbstractInteraction>();
+            AbstractInteraction abstractInteraction = hit.transform.GetComponentInParent<AbstractInteraction>();
 
             if (abstractInteraction)
             {
