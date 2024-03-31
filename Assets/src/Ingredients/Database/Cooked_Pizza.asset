@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d055a5f8780d43499a276120aa38bf1, type: 3}
-  m_Name: Pizza
+  m_Name: Cooked_Pizza
   m_EditorClassIdentifier: 
-  title: Pizza
+  title: 
   recipes: []
-  time: 5
+  time: 0
   isBase: 0
   isCuttable: 0
   cutPrefab: {fileID: 0}
-  isMeltable: 1
-  meltedPrefab: {fileID: 4335490469792550997, guid: 22df5f412ab086f4ab511a4cdbf933e3,
-    type: 3}
+  isMeltable: 0
+  meltedPrefab: {fileID: 0}

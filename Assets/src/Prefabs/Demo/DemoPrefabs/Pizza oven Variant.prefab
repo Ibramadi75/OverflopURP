@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5348787626817675946, guid: 0df15043362544c16a1100b6cce3c6a4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0df15043362544c16a1100b6cce3c6a4,
         type: 3}
       propertyPath: m_Name
@@ -76,6 +81,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8491224355075185536}
+    - targetCorrespondingSourceObject: {fileID: 4402036008675778903, guid: 0df15043362544c16a1100b6cce3c6a4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2723597068443196691}
+    - targetCorrespondingSourceObject: {fileID: 4402036008675778903, guid: 0df15043362544c16a1100b6cce3c6a4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3697222154422652128}
     - targetCorrespondingSourceObject: {fileID: -5348787626817675946, guid: 0df15043362544c16a1100b6cce3c6a4,
         type: 3}
       insertIndex: -1
@@ -137,3 +150,30 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 881835539179085652, guid: 0df15043362544c16a1100b6cce3c6a4, type: 3}
+--- !u!114 &2723597068443196691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2258869924673693301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5dc541b8ac8f4a2e98eea0c90f0c61b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots: []
+  maxCapacity: 1
+  isInfinite: 0
+--- !u!114 &3697222154422652128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2258869924673693301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222b6735559940fdbc0db42b5c7fe2a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

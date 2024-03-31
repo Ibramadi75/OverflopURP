@@ -10,15 +10,32 @@ public class MeltInteraction : AbstractInteraction
         if (slots.IsEmpty() && !authorSlot.IsEmpty())
         {
             Place(author, gameObject);
+            GameObject placed = slots.Retrieve();
+            Ingredient ingredient = placed.GetComponent<Ingredient>();
+            
+            if (ingredient is not null && ingredient.ingredientData.isMeltable)
+                StartCoroutine(Cook(ingredient));
             
         }else if (!slots.IsEmpty() && authorSlot.IsEmpty())
         {
-            Place(gameObject, author);
-            
+            Give(author, slots.Retrieve(), author.transform.position);
+            Destroy(gameObject.GetComponentInChildren<Ingredient>().gameObject);
         }
     }
 
     public override void SecondaryInteraction(GameObject author) {}
+
+    IEnumerator Cook(Ingredient ingredient)
+    {
+        float time = ingredient.ingredientData.time;
+        while (time > 0)
+        {
+            yield return null;
+            time -= Time.deltaTime;
+            Debug.Log(time);
+        }
+        Replace(ingredient.gameObject, ingredient.ingredientData.meltedPrefab);
+    }
     
     void Replace(GameObject objectToMelt, GameObject newObject)
     {
