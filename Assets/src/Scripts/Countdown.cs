@@ -14,10 +14,7 @@ public class Countdown : MonoBehaviour
     public void SetTime(float time) => _time = time;
     public float GetTime() => _time;
 
-    public float TimeLeft
-    {
-        get { return _timeLeft; }
-    }
+    public float TimeLeft => _timeLeft;
 
     void Start()
     {
