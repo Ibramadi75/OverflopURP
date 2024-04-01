@@ -11,12 +11,15 @@ public class WorkTableInteraction : AbstractInteraction
     {
         Slots authorSlot = author.GetComponent<Slots>();
         Slots slots = GetComponent<Slots>();
+
         if (slots.IsEmpty() && !authorSlot.IsEmpty())
         {
-            Place(author, gameObject);
+            // Place(author, gameObject);
+            slots.Store(authorSlot.Retrieve());
         }else if (!slots.IsEmpty() && authorSlot.IsEmpty())
         {
-            Place(gameObject, author);
+            // Place(gameObject, author);
+            authorSlot.Store(slots.Retrieve());
         }
     }
 
@@ -26,7 +29,9 @@ public class WorkTableInteraction : AbstractInteraction
         {
             GameObject objectToCut = slots.slots[0];
             Ingredient ingredient = objectToCut.GetComponent<Ingredient>();
+            
             Countdown countdown = objectToCut.GetComponentInChildren<Countdown>();
+            Slots authorSlot = author.GetComponent<Slots>();
 
             if (objectToCut.CompareTag("Ingredient") 
             && ingredient is not null 
@@ -37,12 +42,11 @@ public class WorkTableInteraction : AbstractInteraction
                     countdown.InteractOn();
                     _audioSource.enabled = true;
                 }
-                
                 else
                 {
                     GameObject cutObject = ingredient.ingredientData.cutPrefab;
                     slots.ClearSlots();
-                    Replace(objectToCut, cutObject);
+                    slots.Store(cutObject);
                     _audioSource.enabled = false;
                 }
             }
@@ -55,5 +59,9 @@ public class WorkTableInteraction : AbstractInteraction
         GameObject instantiatedObject = Instantiate(newObject, GetTopPosition(newObject, gameObject), Quaternion.identity);
         instantiatedObject.transform.parent = transform;
         Destroy(objectToCut.gameObject);
+    }
+
+    void Update()
+    {
     }
 }

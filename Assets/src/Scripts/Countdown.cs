@@ -13,7 +13,6 @@ public class Countdown : MonoBehaviour
     public void InteractOn() => _primaryInteraction = true;
     public void SetTime(float time) => _time = time;
     public float GetTime() => _time;
-
     public float TimeLeft => _timeLeft;
 
     void Start()
@@ -40,7 +39,9 @@ public class Countdown : MonoBehaviour
             if (_launchCoroutine)
             {
                 if (_countdownCoroutine == null)
+                {
                     _countdownCoroutine = StartCoroutine(StartCountdown());
+                }
             }
             else
             {
@@ -49,13 +50,15 @@ public class Countdown : MonoBehaviour
                     StopCoroutine(_countdownCoroutine);
                     _countdownCoroutine = null;
                     _launchCoroutine = false;
+                    // _timeLeft = _time;
                 }
             }
         }
 
         if (_timeLeft <= 0)
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
+            return; // Exit the Update method early to avoid further processing
         }
 
         _launchCoroutine = false;

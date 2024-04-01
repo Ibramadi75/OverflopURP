@@ -15,8 +15,6 @@ public class DeliveryInteraction : AbstractInteraction
         if (slots.IsEmpty() && !authorSlot.IsEmpty())
         {
             Debug.Log("empty slot and not empty author");
-            
-            Debug.Log(authorSlot.slots[0]);
 
             if (authorSlot.slots[0].GetComponent<Ingredient>().ingredientData.isDeliverable) {}
                 Deliver(authorSlot.Retrieve());

@@ -9,18 +9,18 @@ public class Slots : MonoBehaviour
     
     public uint GetCapacity() => maxCapacity;
     public bool IsInfinite() => isInfinite;
+    public bool showUp = false;
+    public Transform showUpPosition;
 
     void Start()
     {
         if (maxCapacity <= 0 || isInfinite)
             maxCapacity = 1;
 
-        // Check if the slots array is not initialized from the inspector
         if (slots == null || slots.Length != maxCapacity)
         {
             GameObject[] newSlots = new GameObject[maxCapacity];
             
-            // Preserve values from the old array if it's initialized
             if (slots != null)
             {
                 int copyLength = Mathf.Min(slots.Length, (int)maxCapacity);
@@ -41,11 +41,25 @@ public class Slots : MonoBehaviour
             if (slots[i] == null)
             {
                 slots[i] = obj;
+                ShowUp();
                 return true;
             }
         }
 
         return false;
+    }
+
+    public void ShowUp()
+    {
+        if (showUp)
+        {
+            if (showUpPosition is null)
+                showUpPosition = transform;
+            GameObject newObject = slots[0];
+            GameObject instantiateObject = Instantiate(newObject, showUpPosition.position, Quaternion.identity);
+            instantiateObject.transform.SetParent(transform);
+            slots[0] = instantiateObject;
+        }
     }
 
     public GameObject Retrieve()
@@ -74,6 +88,8 @@ public class Slots : MonoBehaviour
         {
             slots[i] = null;
         }
+
+        Destroy(GetComponentInChildren<Ingredient>().gameObject);
     }
 
     public bool IsEmpty()
