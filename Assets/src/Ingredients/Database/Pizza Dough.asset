@@ -16,6 +16,13 @@ MonoBehaviour:
   recipes:
   - {fileID: 11400000, guid: 455e0084012244584a879b0a9e6266eb, type: 2}
   time: 0
+  isDeliverable: 0
   isBase: 1
   isCuttable: 0
   cutPrefab: {fileID: 0}
+  isAssemblable: 1
+  canAssembleWith: {fileID: 11400000, guid: 5a871cbe082894fd7b4a7fa405b42dde, type: 2}
+  assembledPrefab: {fileID: 1287776881573593110, guid: 1938dbcde481d450bbc5ac4fdc06799b,
+    type: 3}
+  isMeltable: 0
+  meltedPrefab: {fileID: 0}

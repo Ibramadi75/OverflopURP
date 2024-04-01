@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d055a5f8780d43499a276120aa38bf1, type: 3}
-  m_Name: Pizza
+  m_Name: Tomato Sauce
   m_EditorClassIdentifier: 
-  title: Pizza
+  title: Tomato Sauce
   recipes: []
-  time: 5
+  time: 0
   isBase: 0
   isCuttable: 0
   cutPrefab: {fileID: 0}
-  isMeltable: 1
-  meltedPrefab: {fileID: 4335490469792550997, guid: 22df5f412ab086f4ab511a4cdbf933e3,
+  isAssemblable: 1
+  canAssembleWith: {fileID: 11400000, guid: c4a548ed1a8694a96a98c027a351ab66, type: 2}
+  assembledPrefab: {fileID: 1287776881573593110, guid: 1938dbcde481d450bbc5ac4fdc06799b,
     type: 3}
+  isMeltable: 0
+  meltedPrefab: {fileID: 0}
