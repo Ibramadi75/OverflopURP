@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,7 +34,10 @@ public class GameManager : MonoBehaviour
     IEnumerator PopTimeLost()
     {
         _timeLostText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        _timeLostText.transform.DOScale(1.5f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        _timeLostText.transform.DOScale(1f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
         _timeLostText.gameObject.SetActive(false);
     }
 }
