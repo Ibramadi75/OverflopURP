@@ -5,7 +5,6 @@ public class AssembleInteraction : AbstractInteraction
     public override void MainInteraction(GameObject author)
     {
         Slots authorSlot = author.GetComponent<Slots>();
-        Debug.Log(authorSlot.IsEmpty());
 
         Slots slots = GetComponent<Slots>();
         if (slots.IsEmpty() && !authorSlot.IsEmpty())
