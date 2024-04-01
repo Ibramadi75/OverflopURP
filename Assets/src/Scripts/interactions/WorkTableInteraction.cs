@@ -1,7 +1,12 @@
+using System;
 using UnityEngine;
 
 public class WorkTableInteraction : AbstractInteraction
 {
+    private AudioSource _audioSource;
+
+    void Awake() => _audioSource = GetComponent<AudioSource>();
+    
     public override void MainInteraction(GameObject author)
     {
         Slots authorSlot = author.GetComponent<Slots>();
@@ -28,12 +33,17 @@ public class WorkTableInteraction : AbstractInteraction
             && ingredient.ingredientData.isCuttable)
             {
                 if (countdown is not null)
+                {
                     countdown.InteractOn();
+                    _audioSource.enabled = true;
+                }
+                
                 else
                 {
                     GameObject cutObject = ingredient.ingredientData.cutPrefab;
                     slots.ClearSlots();
                     Replace(objectToCut, cutObject);
+                    _audioSource.enabled = false;
                 }
             }
         }
