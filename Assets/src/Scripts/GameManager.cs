@@ -1,18 +1,20 @@
-﻿using System;
+﻿using System.Collections;
 using TMPro;
-using Unity.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private float _timer;
     [SerializeField] private TMP_Text _timerText;
-    [ReadOnly] [SerializeField] private string _description = "Expired Time is the amount of time you lose in seconds";
-    [SerializeField] private float _expiredTime;
+    [SerializeField] private TMP_Text _timeLostText;
+    [SerializeField] private float _expiredTime; // time you lose in seconds if an order is lost
 
+    void UpdateTimerText() => _timerText.text = $"Temps restant: {_timer:F2}";
+    
     void Update()
     {
-        UpdateTimer();
+        _timer -= Time.deltaTime;
+        UpdateTimerText();
         if (_timer <= 0)
         {
             Debug.Log("Loser tu es nul");
@@ -24,12 +26,14 @@ public class GameManager : MonoBehaviour
     public void RemoveTime()
     {
         _timer -= _expiredTime;
-        _timerText.text = $"Temps restant: {_timer:F2}";
+        UpdateTimerText();
+        StartCoroutine(PopTimeLost());
     }
 
-    void UpdateTimer()
+    IEnumerator PopTimeLost()
     {
-        _timer -= Time.deltaTime;
-        _timerText.text = $"Temps restant: {_timer:F2}";
+        _timeLostText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        _timeLostText.gameObject.SetActive(false);
     }
 }
