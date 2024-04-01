@@ -9,6 +9,7 @@ public class OrderManager : MonoBehaviour
 {
     [SerializeField] private float yOffset = -0.18f;
     [SerializeField] private GameObject anOrderPrefab;
+    [SerializeField] private GameManager gameManager;
 
     private Dictionary<int, Order> _activeOrders;
     private Transform _screenUi;
@@ -45,9 +46,8 @@ public class OrderManager : MonoBehaviour
                     expiredOrderKeys.Add(activeOrder.Key);
                 }
             }
-            
-            expiredOrderKeys.ForEach(key => _activeOrders[key] = null);
-            expiredOrderObjects.ForEach(order => Destroy(order.gameObject));
+
+            LoseOrders(expiredOrderKeys, expiredOrderObjects);
             RearrangeOrders();
         }
     }
@@ -68,7 +68,13 @@ public class OrderManager : MonoBehaviour
         GameObject order = Instantiate(anOrderPrefab, _screenUi);
         order.transform.localPosition -= Vector3.down * yOffset * positionIndex;
         _activeOrders[positionIndex] = order.GetComponent<Order>();
-        Debug.Log(_activeOrders[positionIndex].name);
+    } 
+
+    void LoseOrders(List<int> keys, List<Order> values)
+    {
+        keys.ForEach(key => _activeOrders[key] = null);
+        values.ForEach(order => Destroy(order.gameObject));
+        gameManager.RemoveTime();
     }
 
     void RearrangeOrders()

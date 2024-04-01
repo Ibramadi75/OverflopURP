@@ -283,6 +283,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1221049593}
     m_Modifications:
+    - target: {fileID: 135320371701183060, guid: 5910b9f2b1d9f46b1bde6f839d18887d,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1775673472}
     - target: {fileID: 4617504788797121290, guid: 5910b9f2b1d9f46b1bde6f839d18887d,
         type: 3}
       propertyPath: m_Name
@@ -982,7 +987,7 @@ GameObject:
   - component: {fileID: 1775673468}
   - component: {fileID: 1775673472}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas (Game Manager)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1084,8 +1089,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b687c2630c4841f7b7670118a40bb69f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timer: 10
+  _timer: 90
   _timerText: {fileID: 1272810824}
+  _description: Expired Time is the amount of time you lose in seconds
+  _expiredTime: 5
 --- !u!1 &1790210561
 GameObject:
   m_ObjectHideFlags: 0
