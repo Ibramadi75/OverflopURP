@@ -18,8 +18,8 @@ public class MeltInteraction : AbstractInteraction
             
         }else if (!slots.IsEmpty() && authorSlot.IsEmpty())
         {
-            Give(author, slots.Retrieve(), author.transform.position);
-            Destroy(gameObject.GetComponentInChildren<Ingredient>().gameObject);
+            // Give(author, slots.Retrieve(), author.transform.position);
+            Place(gameObject, author);
         }
     }
 
