@@ -32,7 +32,7 @@ public class MeltInteraction : AbstractInteraction
             {
                 if (_countdown is null)
                     Cook(ingredient);
-                // StartCoroutine(Cook(ingredient));
+                StartCoroutine(Cook(ingredient));
             }
                 
             
@@ -49,15 +49,15 @@ public class MeltInteraction : AbstractInteraction
 
     public override void SecondaryInteraction(GameObject author) {}
 
-    void Cook(Ingredient ingredient)
+    IEnumerator Cook(Ingredient ingredient)
     {
-        // float time = ingredient.ingredientData.time;
-        // while (time > 0)
-        // {
-        //     yield return null;
-        //     time -= Time.deltaTime;
-        //     Debug.Log(time);
-        // }
+        float time = ingredient.ingredientData.time;
+        while (time > 0)
+        {
+            yield return null;
+            time -= Time.deltaTime;
+            Debug.Log(time);
+        }
         Replace(ingredient.gameObject, ingredient.ingredientData.meltedPrefab);
     }
 
