@@ -14,6 +14,24 @@ public class OrderManager : MonoBehaviour
     private Dictionary<int, Order> _activeOrders;
     private Transform _screenUi;
     private int _counter;
+
+    public bool LoseOrderOfRecipe(string recipeTitle)
+    {
+        if (AnyOrderOfRecipe(recipeTitle))
+        {
+            int active = IndexOfOrderRecipe(recipeTitle);
+            if (active != -1)
+            {
+                Order activeOrder = _activeOrders[active];
+                Destroy(activeOrder.gameObject);
+                _activeOrders[active] = null;
+                RearrangeOrders();
+                return true;
+            }
+        }
+
+        return false;
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -102,4 +120,23 @@ public class OrderManager : MonoBehaviour
             if (activeOrder.Value is null) return activeOrder.Key;
         return -1;
     }
+
+    int IndexOfOrderRecipe(string recipeTitle)
+    {
+        foreach (var activeOrder in _activeOrders)
+        {
+            if (activeOrder.Value is not null)
+            {
+                if (activeOrder.Value.IsRecipeTitleIs(recipeTitle))
+                {
+                    return activeOrder.Key;
+                }
+            }
+        }
+
+        return -1;
+    }
+    
+    bool AnyOrderOfRecipe(string recipeTitle) => _activeOrders.Any(activeOrder =>
+        activeOrder.Value is not null && activeOrder.Value.IsRecipeTitleIs(recipeTitle));
 }

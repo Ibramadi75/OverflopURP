@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Pizza Cooked
   m_EditorClassIdentifier: 
   title: Pizza
-  recipes: []
+  recipes:
+  - {fileID: 11400000, guid: 455e0084012244584a879b0a9e6266eb, type: 2}
   time: 0
   isDeliverable: 1
   isBase: 0

@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: Cooked_Pizza
   m_EditorClassIdentifier: 
   title: 
-  recipes: []
+  recipes:
+  - {fileID: 11400000, guid: 455e0084012244584a879b0a9e6266eb, type: 2}
   time: 0
+  isDeliverable: 1
   isBase: 0
   isCuttable: 0
   cutPrefab: {fileID: 0}
+  isAssemblable: 0
+  canAssembleWith: {fileID: 0}
+  assembledPrefab: {fileID: 0}
   isMeltable: 0
   meltedPrefab: {fileID: 0}

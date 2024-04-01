@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Pizza Dough
   m_EditorClassIdentifier: 
   title: Pizza Dough
-  recipes:
-  - {fileID: 11400000, guid: 455e0084012244584a879b0a9e6266eb, type: 2}
+  recipes: []
   time: 0
   isDeliverable: 0
   isBase: 1

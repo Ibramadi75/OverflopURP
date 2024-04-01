@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DeliveryInteraction : AbstractInteraction
 {
+    [SerializeField] private GameManager _gameManager;
+    [SerializeField] private OrderManager _orderManager;
+    
     public override void MainInteraction(GameObject author)
     {
         Slots authorSlot = author.GetComponent<Slots>();
@@ -15,8 +18,8 @@ public class DeliveryInteraction : AbstractInteraction
             
             Debug.Log(authorSlot.slots[0]);
 
-            if (authorSlot.slots[0].GetComponent<Ingredient>().ingredientData.isDeliverable)
-                Place(author, gameObject);
+            if (authorSlot.slots[0].GetComponent<Ingredient>().ingredientData.isDeliverable) {}
+                Deliver(authorSlot.Retrieve());
         }
     }
  
@@ -26,11 +29,18 @@ public class DeliveryInteraction : AbstractInteraction
         MainInteraction(author);
     }
 
-    void Replace(GameObject objectToCut, GameObject newObject)
+    void Deliver(GameObject objectToDeliver)
     {
-        slots.Store(newObject);
-        GameObject instantiatedObject = Instantiate(newObject, GetTopPosition(newObject, gameObject), Quaternion.identity);
-        instantiatedObject.transform.parent = transform;
-        Destroy(objectToCut.gameObject);
+        Ingredient ingredient = objectToDeliver.GetComponent<Ingredient>();
+        RecipeData recipe = ingredient.ingredientData.recipes[0];
+        if (recipe is not null)
+        {
+            if (_orderManager.LoseOrderOfRecipe(recipe.title))
+            {
+                Destroy(ingredient.gameObject);
+                _gameManager.AddTime();
+            }
+        }
+        
     }
 }

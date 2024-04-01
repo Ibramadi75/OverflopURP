@@ -17,4 +17,6 @@ public class Order : MonoBehaviour
     }
 
     public bool HasExpired() => _countdown.TimeLeft <= 0;
+
+    public bool IsRecipeTitleIs(string title) => _recipe.recipeData.title.Equals(title);
 }

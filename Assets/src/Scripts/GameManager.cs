@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _timer;
     [SerializeField] private TMP_Text _timerText;
     [SerializeField] private TMP_Text _timeLostText;
+    [SerializeField] private TMP_Text _timeWinText;
     [SerializeField] private float _expiredTime; // time you lose in seconds if an order is lost
 
     private bool _isBlinking;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             _timerText.gameObject.SetActive(false);
             _timeLostText.gameObject.SetActive(false);
+            _timeWinText.gameObject.SetActive(false);
         }
         
         else if (!_isBlinking && _timer <= 20)
@@ -39,14 +41,33 @@ public class GameManager : MonoBehaviour
         StartCoroutine(PopTimeLost());
     }
 
+    public void AddTime()
+    {
+        _timer += _expiredTime;
+        UpdateTimerText();
+        StartCoroutine(PopTimeWin());
+    }
+
     IEnumerator PopTimeLost()
     {
+        _timeLostText.text = $"- {_expiredTime}";
         _timeLostText.gameObject.SetActive(true);
         _timeLostText.transform.DOScale(1.5f, 0.5f);
         yield return new WaitForSeconds(0.5f);
         _timeLostText.transform.DOScale(1f, 0.5f);
         yield return new WaitForSeconds(0.5f);
         _timeLostText.gameObject.SetActive(false);
+    }
+    
+    IEnumerator PopTimeWin()
+    {
+        _timeWinText.text = $"+ {_expiredTime}";
+        _timeWinText.gameObject.SetActive(true);
+        _timeWinText.transform.DOScale(1.5f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        _timeWinText.transform.DOScale(1f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        _timeWinText.gameObject.SetActive(false);
     }
     
     IEnumerator BlinkTimerText()
