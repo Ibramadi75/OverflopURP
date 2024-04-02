@@ -9,18 +9,20 @@ public class Slots : MonoBehaviour
     
     public uint GetCapacity() => maxCapacity;
     public bool IsInfinite() => isInfinite;
+    public bool showUp = false;
+    public Transform showUpPosition;
+    public GameObject showUpObject;
+    public bool noGravity = false;
 
     void Start()
     {
         if (maxCapacity <= 0 || isInfinite)
             maxCapacity = 1;
 
-        // Check if the slots array is not initialized from the inspector
         if (slots == null || slots.Length != maxCapacity)
         {
             GameObject[] newSlots = new GameObject[maxCapacity];
             
-            // Preserve values from the old array if it's initialized
             if (slots != null)
             {
                 int copyLength = Mathf.Min(slots.Length, (int)maxCapacity);
@@ -41,6 +43,7 @@ public class Slots : MonoBehaviour
             if (slots[i] == null)
             {
                 slots[i] = obj;
+                ShowUp();
                 return true;
             }
         }
@@ -58,8 +61,13 @@ public class Slots : MonoBehaviour
                     return slots[i];
                 else
                 {
+                    
                     var obj = slots[i];
                     slots[i] = null;
+                    if (showUp)
+                    {
+                        showUpObject.SetActive(false);
+                    }
                     return obj;
                 }
             }
@@ -68,12 +76,47 @@ public class Slots : MonoBehaviour
         return null;
     }
 
+    public void ShowUp()
+    {
+        if (showUp)
+        {
+            if (showUpPosition == null)
+                showUpPosition = transform;
+
+            GameObject newObject = slots[0];
+            GameObject instantiateObject = Instantiate(newObject, showUpPosition.position, Quaternion.identity);
+
+            instantiateObject.transform.localScale = Vector3.one;
+            
+            if (noGravity)
+            {
+                instantiateObject.GetComponent<Rigidbody>().useGravity = false;
+                instantiateObject.GetComponentInChildren<Collider>().isTrigger = true;
+            }else{
+                instantiateObject.GetComponent<Rigidbody>().useGravity = true;
+                instantiateObject.GetComponentInChildren<Collider>().isTrigger = false;
+            }
+                
+
+            showUpObject = instantiateObject;
+            showUpObject.SetActive(true);
+            instantiateObject.transform.SetParent(transform);
+            slots[0] = instantiateObject;
+        }
+    }
+
+    private void NoGravity(){
+
+    }
+
     public void ClearSlots()
     {
         for (int i = 0; i < maxCapacity; i++)
         {
             slots[i] = null;
         }
+
+        Destroy(GetComponentInChildren<Ingredient>().gameObject);
     }
 
     public bool IsEmpty()

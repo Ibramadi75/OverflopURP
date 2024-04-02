@@ -14,22 +14,25 @@ public class DeliveryInteraction : AbstractInteraction
         
         if (slots.IsEmpty() && !authorSlot.IsEmpty())
         {
-            Debug.Log("empty slot and not empty author");
-            
-            Debug.Log(authorSlot.slots[0]);
-
-            if (authorSlot.slots[0].GetComponent<Ingredient>().ingredientData.isDeliverable) {}
-                Deliver(authorSlot.Retrieve());
+            if (authorSlot.slots[0].GetComponent<Ingredient>().ingredientData.isDeliverable)
+            {
+                GameObject objectToDeliver = authorSlot.Retrieve();
+                slots.Store(objectToDeliver);
+                Deliver(objectToDeliver);
+                if (Deliver(objectToDeliver))
+                {
+                    slots.ClearSlots();
+                }
+            }
         }
     }
  
     public override void SecondaryInteraction(GameObject author)
     {
-        Debug.Log("tried");
         MainInteraction(author);
     }
 
-    void Deliver(GameObject objectToDeliver)
+    bool Deliver(GameObject objectToDeliver)
     {
         Ingredient ingredient = objectToDeliver.GetComponent<Ingredient>();
         RecipeData recipe = ingredient.ingredientData.recipes[0];
@@ -39,8 +42,9 @@ public class DeliveryInteraction : AbstractInteraction
             {
                 Destroy(ingredient.gameObject);
                 _gameManager.AddTime();
+                return true;
             }
         }
-        
+        return false;
     }
 }

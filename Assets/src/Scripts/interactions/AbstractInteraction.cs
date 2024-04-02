@@ -17,9 +17,9 @@ public abstract class AbstractInteraction : MonoBehaviour
     /// <param name="position"></param>
     protected void Give(GameObject receiver, GameObject objectToSpawn, Vector3 position)
     {
-        GameObject spawnedObject = Instantiate(objectToSpawn, position, Quaternion.identity); // crée un nouvel objet à partir du prefab
-        spawnedObject.transform.parent = receiver.transform; // associe le parent de l'objet à l'auteur
-        receiver.GetComponent<Slots>().Store(spawnedObject);
+        // GameObject spawnedObject = Instantiate(objectToSpawn, position, Quaternion.identity); // crée un nouvel objet à partir du prefab
+        // spawnedObject.transform.parent = receiver.transform; // associe le parent de l'objet à l'auteur
+        // receiver.GetComponent<Slots>().Store(spawnedObject);
     }
 
     /// <summary>

@@ -6,10 +6,12 @@ public class BoxInteraction : AbstractInteraction
 {
     public override void MainInteraction(GameObject author)
     {
-        if (author.GetComponent<Slots>().IsEmpty())
+        Slots authorSlot = author.GetComponent<Slots>();
+        Slots slots = GetComponent<Slots>();
+
+        if (!slots.IsEmpty() && authorSlot.IsEmpty())
         {
-            GameObject objectToSpawn = transform.GetComponent<Slots>().Retrieve();
-            Give(author, objectToSpawn, author.transform.position);
+            authorSlot.Store(slots.Retrieve());
         }
     }
 
