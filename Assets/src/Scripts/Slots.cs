@@ -12,6 +12,7 @@ public class Slots : MonoBehaviour
     public bool showUp = false;
     public Transform showUpPosition;
     public GameObject showUpObject;
+    public bool noGravity = false;
 
     void Start()
     {
@@ -85,14 +86,27 @@ public class Slots : MonoBehaviour
             GameObject newObject = slots[0];
             GameObject instantiateObject = Instantiate(newObject, showUpPosition.position, Quaternion.identity);
 
-            // Set the scale of the instantiated object explicitly
             instantiateObject.transform.localScale = Vector3.one;
+            
+            if (noGravity)
+            {
+                instantiateObject.GetComponent<Rigidbody>().useGravity = false;
+                instantiateObject.GetComponentInChildren<Collider>().isTrigger = true;
+            }else{
+                instantiateObject.GetComponent<Rigidbody>().useGravity = true;
+                instantiateObject.GetComponentInChildren<Collider>().isTrigger = false;
+            }
+                
 
             showUpObject = instantiateObject;
             showUpObject.SetActive(true);
             instantiateObject.transform.SetParent(transform);
             slots[0] = instantiateObject;
         }
+    }
+
+    private void NoGravity(){
+
     }
 
     public void ClearSlots()

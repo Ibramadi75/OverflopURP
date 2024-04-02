@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 126244580318741046}
   - component: {fileID: 807970594422220514}
   - component: {fileID: 4991407843020780955}
+  - component: {fileID: 8952744212357409002}
   m_Layer: 0
   m_Name: PizzaDough
   m_TagString: Ingredient
@@ -89,6 +90,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &8952744212357409002
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678602287220236222}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1855613152006797656
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +128,6 @@ GameObject:
   - component: {fileID: 2267962568254941320}
   - component: {fileID: 919036396533012483}
   - component: {fileID: 6007451992279919083}
-  - component: {fileID: 1283433912852819437}
   - component: {fileID: 204770232715819718}
   m_Layer: 0
   m_Name: PizzaDough
@@ -174,33 +201,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1855613152006797656}
   m_Mesh: {fileID: -5632245777784721523, guid: ff99deabb4c3c7f458c95f70ab368d16, type: 3}
---- !u!54 &1283433912852819437
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855613152006797656}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &204770232715819718
 BoxCollider:
   m_ObjectHideFlags: 0
