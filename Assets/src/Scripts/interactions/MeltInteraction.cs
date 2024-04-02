@@ -28,8 +28,8 @@ public class MeltInteraction : AbstractInteraction
             if (ingredient is not null && ingredient.ingredientData.isMeltable)
             {
                 if (_countdown is null)
-                    Cook(ingredient);
-                StartCoroutine(Cook(ingredient));
+                    StartCoroutine(Cook(ingredient));
+                // StartCoroutine(Cook(ingredient));
             }
                 
             
