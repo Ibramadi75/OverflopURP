@@ -29,7 +29,6 @@ public class MeltInteraction : AbstractInteraction
             {
                 if (_countdown is null)
                     StartCoroutine(Cook(ingredient));
-                // StartCoroutine(Cook(ingredient));
             }
                 
             
