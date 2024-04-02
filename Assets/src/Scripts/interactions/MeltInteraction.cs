@@ -23,11 +23,9 @@ public class MeltInteraction : AbstractInteraction
 
         if (slots.IsEmpty() && !authorSlot.IsEmpty())
         {
-            Debug.Log("pose");
-            Place(author, gameObject);
-            GameObject placed = slots.Retrieve();
-            Ingredient ingredient = placed.GetComponentInChildren<Ingredient>();
-            
+            slots.Store(authorSlot.Retrieve());
+            Ingredient ingredient = slots.slots[0].GetComponentInChildren<Ingredient>();
+            Debug.Log(ingredient);
             if (ingredient is not null && ingredient.ingredientData.isMeltable)
             {
                 if (_countdown is null)
@@ -38,12 +36,7 @@ public class MeltInteraction : AbstractInteraction
             
         }else if (!slots.IsEmpty() && authorSlot.IsEmpty() && _countdown is null)
         {
-            GameObject taken = slots.Retrieve();
-            Give(author, taken, author.transform.position);
-            foreach (Transform child in transform)
-            {
-                Destroy(child.gameObject);
-            }
+            authorSlot.Store(slots.Retrieve());
         }
     }
 
@@ -65,8 +58,8 @@ public class MeltInteraction : AbstractInteraction
     {
         GetComponent<Slots>().ClearSlots();
         GetComponent<Slots>().Store(newObject);
-        GameObject instantiatedObject = Instantiate(newObject, GetTopPosition(newObject, gameObject), Quaternion.identity);
-        instantiatedObject.transform.parent = transform;
+        // GameObject instantiatedObject = Instantiate(newObject, GetTopPosition(newObject, gameObject), Quaternion.identity);
+        // instantiatedObject.transform.parent = transform;
         Destroy(objectToMelt.gameObject);
     }
 }
