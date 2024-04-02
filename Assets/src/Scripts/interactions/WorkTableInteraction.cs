@@ -14,11 +14,9 @@ public class WorkTableInteraction : AbstractInteraction
 
         if (slots.IsEmpty() && !authorSlot.IsEmpty())
         {
-            // Place(author, gameObject);
             slots.Store(authorSlot.Retrieve());
         }else if (!slots.IsEmpty() && authorSlot.IsEmpty())
         {
-            // Place(gameObject, author);
             authorSlot.Store(slots.Retrieve());
         }
     }
@@ -39,6 +37,7 @@ public class WorkTableInteraction : AbstractInteraction
             {
                 if (countdown is not null)
                 {
+                    Debug.Log("Countdown interaction");
                     countdown.InteractOn();
                     _audioSource.enabled = true;
                 }
@@ -53,15 +52,4 @@ public class WorkTableInteraction : AbstractInteraction
         }
     }
 
-    void Replace(GameObject objectToCut, GameObject newObject)
-    {
-        slots.Store(newObject);
-        GameObject instantiatedObject = Instantiate(newObject, GetTopPosition(newObject, gameObject), Quaternion.identity);
-        instantiatedObject.transform.parent = transform;
-        Destroy(objectToCut.gameObject);
-    }
-
-    void Update()
-    {
-    }
 }

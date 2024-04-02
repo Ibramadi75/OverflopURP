@@ -11,6 +11,7 @@ public class Slots : MonoBehaviour
     public bool IsInfinite() => isInfinite;
     public bool showUp = false;
     public Transform showUpPosition;
+    public GameObject showUpObject;
 
     void Start()
     {
@@ -49,19 +50,6 @@ public class Slots : MonoBehaviour
         return false;
     }
 
-    public void ShowUp()
-    {
-        if (showUp)
-        {
-            if (showUpPosition is null)
-                showUpPosition = transform;
-            GameObject newObject = slots[0];
-            GameObject instantiateObject = Instantiate(newObject, showUpPosition.position, Quaternion.identity);
-            instantiateObject.transform.SetParent(transform);
-            slots[0] = instantiateObject;
-        }
-    }
-
     public GameObject Retrieve()
     {
         for (int i = 0; i < maxCapacity; i++)
@@ -72,14 +60,39 @@ public class Slots : MonoBehaviour
                     return slots[i];
                 else
                 {
+                    
                     var obj = slots[i];
                     slots[i] = null;
+                    if (showUp)
+                    {
+                        showUpObject.SetActive(false);
+                    }
                     return obj;
                 }
             }
         }
 
         return null;
+    }
+
+    public void ShowUp()
+    {
+        if (showUp)
+        {
+            if (showUpPosition == null)
+                showUpPosition = transform;
+
+            GameObject newObject = slots[0];
+            GameObject instantiateObject = Instantiate(newObject, showUpPosition.position, Quaternion.identity);
+
+            // Set the scale of the instantiated object explicitly
+            instantiateObject.transform.localScale = Vector3.one;
+
+            showUpObject = instantiateObject;
+            showUpObject.SetActive(true);
+            instantiateObject.transform.SetParent(transform);
+            slots[0] = instantiateObject;
+        }
     }
 
     public void ClearSlots()

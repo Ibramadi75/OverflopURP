@@ -11,7 +11,6 @@ public class BoxInteraction : AbstractInteraction
 
         if (!slots.IsEmpty() && authorSlot.IsEmpty())
         {
-            // Place(gameObject, author);
             authorSlot.Store(slots.Retrieve());
         }
     }
