@@ -37,7 +37,6 @@ public class WorkTableInteraction : AbstractInteraction
             {
                 if (countdown is not null)
                 {
-                    Debug.Log("Countdown interaction");
                     countdown.InteractOn();
                     _audioSource.enabled = true;
                 }

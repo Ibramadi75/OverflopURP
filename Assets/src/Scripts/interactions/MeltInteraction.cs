@@ -25,7 +25,6 @@ public class MeltInteraction : AbstractInteraction
         {
             slots.Store(authorSlot.Retrieve());
             Ingredient ingredient = slots.slots[0].GetComponentInChildren<Ingredient>();
-            Debug.Log(ingredient);
             if (ingredient is not null && ingredient.ingredientData.isMeltable)
             {
                 if (_countdown is null)
