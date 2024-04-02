@@ -18,7 +18,6 @@ public class DeliveryInteraction : AbstractInteraction
             {
                 GameObject objectToDeliver = authorSlot.Retrieve();
                 slots.Store(objectToDeliver);
-                //Deliver(objectToDeliver);
                 if (Deliver(objectToDeliver))
                 {
                     slots.ClearSlots();
