@@ -38,7 +38,7 @@ Transform:
   m_Children:
   - {fileID: 4066310270705928032}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &4844468447419201229
 CapsuleCollider:
@@ -143,6 +143,10 @@ MonoBehaviour:
   slots: []
   maxCapacity: 1
   isInfinite: 0
+  showUp: 0
+  showUpPosition: {fileID: 0}
+  showUpObject: {fileID: 0}
+  noGravity: 0
 --- !u!54 &2859517016323301698
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -343,7 +347,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -394,7 +398,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
