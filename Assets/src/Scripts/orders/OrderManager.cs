@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class OrderManager : MonoBehaviour
 {
@@ -77,7 +78,7 @@ public class OrderManager : MonoBehaviour
             int position = FindFirstAvailablePosition();
             if (position != -1)
                 CreateOrder(FindFirstAvailablePosition());
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(Random.Range(7f, 14f));
         }
     }
     
