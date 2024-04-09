@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5773882686294553759}
   - component: {fileID: 2849641970487670236}
   - component: {fileID: 5119104978790917399}
+  - component: {fileID: 6001182221744684036}
+  - component: {fileID: 7891936906493270810}
   m_Layer: 0
   m_Name: openZone
   m_TagString: Untagged
@@ -32,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5773882686294553759
 MeshFilter:
@@ -105,3 +107,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 0.9999999}
   m_Center: {x: 0, y: 0, z: 0.0000019073485}
+--- !u!114 &6001182221744684036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521780696974078258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4aa3a87200a9a047b6d2ce18c1b45ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  openAnimationToPlay: 
+  closeAnimationToPlay: 
+--- !u!114 &7891936906493270810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521780696974078258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 514e281cdd76749b9bcefaef7b1291d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
