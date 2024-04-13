@@ -4,46 +4,45 @@ public class AssembleInteraction : AbstractInteraction
 {
     public override void MainInteraction(GameObject author)
     {
-        Slots authorSlot = author.GetComponent<Slots>();
-        Slots slots = GetComponent<Slots>();
-
-        if (slots.IsEmpty() && !authorSlot.IsEmpty())
+        Slot authorSlot = author.GetComponent<Slot>();
+        if (slot.IsEmpty() && !authorSlot.IsEmpty())
         {
-            if (authorSlot.slots[0].GetComponent<Ingredient>().ingredientData.isBase)
-                slots.Store(authorSlot.Retrieve());
-        }else if (!slots.IsEmpty() && authorSlot.IsEmpty())
+            if (authorSlot.GetObjectInSlot().GetComponent<Ingredient>().ingredientData.isBase)
+                slot.Put(authorSlot.Get());
+            
+        } else if (!slot.IsEmpty())
         {
-            authorSlot.Store(slots.Retrieve());
+            if (authorSlot.IsEmpty())
+                authorSlot.Put(slot.Get());
+            else
+                Assemble(authorSlot);
         }
     }
- 
-    public override void SecondaryInteraction(GameObject author)
+
+    private void Assemble(Slot authorSlot)
     {
-        if (slots.GetCapacity() == 1 && !slots.IsEmpty())
+        if (slot.GetMaxCapacity() == 1 && !slot.IsEmpty())
         {
-            GameObject storedObject = slots.slots[0];
+            GameObject storedObject = slot.GetObjectInSlot();
+            GameObject playerObject = authorSlot.Get();
+        
             Ingredient storedIngredient = storedObject.GetComponent<Ingredient>();
-            Ingredient toAssembleIngredient = author.GetComponent<Slots>().Retrieve().GetComponent<Ingredient>();
-            Countdown countdown = storedObject.GetComponentInChildren<Countdown>();
-            
-            if (storedObject.CompareTag("Ingredient") 
-                && storedIngredient is not null 
-                && storedIngredient.ingredientData is not null
-                && storedIngredient.ingredientData.isAssemblable
-            )
+            Ingredient toAssembleIngredient = playerObject.GetComponent<Ingredient>();
+
+            if (storedObject.CompareTag("Ingredient") && storedIngredient is not null && storedIngredient.ingredientData.isAssemblable)
             {
-                if (countdown is not null)
-                    countdown.InteractOn();
-                else
+                GameObject assembleResult =
+                    storedIngredient.ingredientData.GetAssembledIngredient(toAssembleIngredient.ingredientData);
+            
+                if (assembleResult is not null)
                 {
-                    GameObject assembleageResult = storedIngredient.ingredientData.GetAssembledIngredient(toAssembleIngredient.ingredientData);
-                    if (assembleageResult is not null)
-                    {
-                        slots.ClearSlots();
-                        slots.Store(assembleageResult);
-                    }
+                    slot.Clear();
+                    slot.Put(assembleResult);
                 }
             }
+            else authorSlot.Put(playerObject);
         }
     }
+
+    public override void SecondaryInteraction(GameObject author) { }
 }

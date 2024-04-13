@@ -151,6 +151,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StandardCountdown
       objectReference: {fileID: 0}
+    - target: {fileID: 1055210376593303921, guid: 545713efe807d45d78f6cdf4cd133395,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1347557466201375791, guid: 545713efe807d45d78f6cdf4cd133395,
         type: 3}
       propertyPath: m_LocalScale.x
