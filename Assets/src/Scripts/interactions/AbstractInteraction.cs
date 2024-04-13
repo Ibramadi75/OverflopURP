@@ -2,10 +2,12 @@ using UnityEngine;
 
 public abstract class AbstractInteraction : MonoBehaviour
 {
+    protected Slot slot;
     protected Slots slots;
 
     void Start()
     {
+        slot = GetComponent<Slot>();
         slots = GetComponent<Slots>();
     }
 
