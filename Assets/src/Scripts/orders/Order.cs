@@ -6,6 +6,7 @@ public class Order : MonoBehaviour
 {
     private Countdown _countdown;
     private Recipe _recipe;
+    public Recipe recipe => _recipe;
     
     // Start is called before the first frame update
     void Start()

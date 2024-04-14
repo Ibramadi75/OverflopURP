@@ -8,4 +8,7 @@ public class RecipeData : ScriptableObject
     public string title;
     public List<IngredientData> ingredients;
     [Tooltip("In seconds")] public float baseExpiration;
+    [SerializeField] float _price;
+
+    public float price => _price;
 }
