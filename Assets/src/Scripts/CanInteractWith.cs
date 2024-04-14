@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CanInteractWith : MonoBehaviour
 {
+    public bool isInteracting = false;
     void Start()
     {
         
@@ -11,6 +12,6 @@ public class CanInteractWith : MonoBehaviour
 
     void Update()
     {
-        
+        isInteracting = false ;
     }
 }
