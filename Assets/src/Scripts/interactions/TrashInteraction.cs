@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TrashInteraction : AbstractInteraction
 {
+    public AnimationManager trashAnimationManager;
     public override void MainInteraction(GameObject author)
     {
         Slots authorSlot = author.GetComponent<Slots>();
@@ -11,6 +12,7 @@ public class TrashInteraction : AbstractInteraction
         if (!authorSlot.IsEmpty())
         {
             authorSlot.ClearSlots();
+            trashAnimationManager.playAnimation = true;
         }
     }
 
