@@ -80,9 +80,10 @@ public class PlayerController : MonoBehaviour
 
             if (lastHitObject != hit.transform.gameObject)
             {
-                bool canInteractWith = hit.transform.gameObject.GetComponent<CanInteractWith>() != null;
-                if (canInteractWith)
+                var canInteractWith = hit.transform.gameObject.GetComponent<CanInteractWith>();
+                if (canInteractWith is not null)
                 {
+                    canInteractWith.isInteracting = true;
                     if (lastHitObject != null)
                         RestoreOriginalColor(lastHitObject);
 
