@@ -38734,6 +38734,10 @@ MonoBehaviour:
   - {fileID: 7550305658891837776, guid: 98ef27582eca744f9ba8d20138215e98, type: 3}
   maxCapacity: 1
   isInfinite: 1
+  showUp: 0
+  showUpPosition: {fileID: 0}
+  showUpObject: {fileID: 0}
+  noGravity: 0
 --- !u!114 &1090224741704736236
 MonoBehaviour:
   m_ObjectHideFlags: 0
