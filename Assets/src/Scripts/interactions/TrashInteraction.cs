@@ -5,19 +5,17 @@ using UnityEngine;
 public class TrashInteraction : AbstractInteraction
 {
     public AnimationManager trashAnimationManager;
+    
     public override void MainInteraction(GameObject author)
     {
-        Slots authorSlot = author.GetComponent<Slots>();
+        Slot authorSlot = author.GetComponent<Slot>();
 
         if (!authorSlot.IsEmpty())
         {
-            authorSlot.ClearSlots();
+            authorSlot.Clear();
             trashAnimationManager.playAnimation = true;
         }
     }
 
-    public override void SecondaryInteraction(GameObject author)
-    {
-        MainInteraction(author);
-    }
+    public override void SecondaryInteraction(GameObject author) { }
 }

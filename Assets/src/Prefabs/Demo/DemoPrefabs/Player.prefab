@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 8193124172891935145}
   - component: {fileID: 4949196665742002733}
   - component: {fileID: 6623557013056632465}
-  - component: {fileID: 4002178570184919175}
   - component: {fileID: 2859517016323301698}
   - component: {fileID: 4334237841237364512}
   - component: {fileID: 9169965541676786594}
+  - component: {fileID: 7724602616380795321}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 3136667057483282080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1.3154, z: 1}
+  m_LocalScale: {x: 0.6, y: 1, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8221451634328938592}
@@ -128,26 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 0
   speed: 3
-  sensitivity: 6
---- !u!114 &4002178570184919175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3136667057483282080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5dc541b8ac8f4a2e98eea0c90f0c61b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slots: []
-  maxCapacity: 1
-  isInfinite: 0
-  showUp: 1
-  showUpPosition: {fileID: 8221451634328938592}
-  showUpObject: {fileID: 0}
-  noGravity: 1
+  sensitivity: 1
 --- !u!54 &2859517016323301698
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -194,7 +175,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3136667057483282080}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 00497f38520fa9c4e95231deefd9d043, type: 3}
@@ -207,7 +188,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 3.4598064
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -283,6 +264,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7724602616380795321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3136667057483282080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5808bf1f9bf4d2f8e16788a0b28f3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slot: {fileID: 0}
+  amount: 0
+  maxCapacity: 1
+  isInfinite: 0
+  showUp: 1
+  noGravity: 1
+  showUpPosition: {fileID: 8221451634328938592}
+  showUpObject: {fileID: 0}
 --- !u!1 &3293331094449007380
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +351,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

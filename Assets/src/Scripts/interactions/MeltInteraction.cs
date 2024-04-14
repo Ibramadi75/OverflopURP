@@ -3,44 +3,23 @@ using UnityEngine;
 
 public class MeltInteraction : AbstractInteraction
 {
-    private Countdown _countdown;
-    public void Start()
-    {
-        GetComponent<Slots>().ClearSlots();
-        _countdown = GetComponent<Countdown>();
-
-        if (_countdown is null)
-            _countdown = GetComponentInChildren<Countdown>();
-
-        if (_countdown is null)
-            Debug.Log("no countdown for this cooking ?");
-    }
-
     public override void MainInteraction(GameObject author)
     {
-        Slots authorSlot = author.GetComponent<Slots>();
-        Slots slots = GetComponent<Slots>();
-
-        if (slots.IsEmpty() && !authorSlot.IsEmpty())
+        Slot authorSlot = author.GetComponent<Slot>();
+        if (slot.IsEmpty() && !authorSlot.IsEmpty())
         {
-            slots.Store(authorSlot.Retrieve());
-            Ingredient ingredient = slots.slots[0].GetComponentInChildren<Ingredient>();
-            if (ingredient is not null && ingredient.ingredientData.isMeltable)
-            {
-                if (_countdown is null)
-                    StartCoroutine(Cook(ingredient));
-            }
-                
+            slot.Put(authorSlot.Get());
+            Ingredient ingredient = slot.GetObjectInSlot().GetComponent<Ingredient>();
             
-        }else if (!slots.IsEmpty() && authorSlot.IsEmpty() && _countdown is null)
-        {
-            authorSlot.Store(slots.Retrieve());
+            if (ingredient is not null && ingredient.ingredientData.isMeltable)
+                StartCoroutine(Cook(ingredient));
         }
+        
+        else if (!slot.IsEmpty() && authorSlot.IsEmpty())
+            authorSlot.Put(slot.Get());
     }
 
-    public override void SecondaryInteraction(GameObject author) {
-        MainInteraction(author);
-    }
+    public override void SecondaryInteraction(GameObject author) { }
 
     IEnumerator Cook(Ingredient ingredient)
     {
@@ -51,15 +30,8 @@ public class MeltInteraction : AbstractInteraction
             time -= Time.deltaTime;
             Debug.Log(time);
         }
-        Replace(ingredient.gameObject, ingredient.ingredientData.meltedPrefab);
-    }
-
-    void Replace(GameObject objectToMelt, GameObject newObject)
-    {
-        GetComponent<Slots>().ClearSlots();
-        GetComponent<Slots>().Store(newObject);
-        // GameObject instantiatedObject = Instantiate(newObject, GetTopPosition(newObject, gameObject), Quaternion.identity);
-        // instantiatedObject.transform.parent = transform;
-        Destroy(objectToMelt.gameObject);
+        
+        slot.Clear();
+        slot.Put(ingredient.ingredientData.meltedPrefab);
     }
 }
