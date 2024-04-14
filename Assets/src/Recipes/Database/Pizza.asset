@@ -16,3 +16,4 @@ MonoBehaviour:
   ingredients:
   - {fileID: 11400000, guid: c4a548ed1a8694a96a98c027a351ab66, type: 2}
   baseExpiration: 20
+  _price: 5

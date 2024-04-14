@@ -38,7 +38,9 @@ public class MeltInteraction : AbstractInteraction
         }
     }
 
-    public override void SecondaryInteraction(GameObject author) {}
+    public override void SecondaryInteraction(GameObject author) {
+        MainInteraction(author);
+    }
 
     IEnumerator Cook(Ingredient ingredient)
     {

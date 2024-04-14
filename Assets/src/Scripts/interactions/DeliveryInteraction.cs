@@ -25,6 +25,13 @@ public class DeliveryInteraction : AbstractInteraction
             }
         }
     }
+
+    void Update()
+    {
+        GameObject objectToDeliver = slots.slots[0];
+        if (objectToDeliver is not null && Deliver(objectToDeliver))
+            slots.ClearSlots();
+    }
  
     public override void SecondaryInteraction(GameObject author)
     {
@@ -40,7 +47,7 @@ public class DeliveryInteraction : AbstractInteraction
             if (_orderManager.LoseOrderOfRecipe(recipe.title))
             {
                 Destroy(ingredient.gameObject);
-                _gameManager.AddTime();
+                _gameManager.IncreaseScore(recipe.price);
                 return true;
             }
         }

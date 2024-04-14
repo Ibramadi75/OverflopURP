@@ -13,7 +13,14 @@ public class Slots : MonoBehaviour
     public Transform showUpPosition;
     public GameObject showUpObject;
     public bool noGravity = false;
-
+    
+    void Update()
+    {
+        if (showUp && showUpObject != null && showUpPosition != null && noGravity)
+        {
+            showUpObject.transform.position = showUpPosition.transform.position;
+        }
+    }
     void Start()
     {
         if (maxCapacity <= 0 || isInfinite)
@@ -96,17 +103,12 @@ public class Slots : MonoBehaviour
                 instantiateObject.GetComponent<Rigidbody>().useGravity = true;
                 instantiateObject.GetComponentInChildren<Collider>().isTrigger = false;
             }
-                
 
             showUpObject = instantiateObject;
             showUpObject.SetActive(true);
             instantiateObject.transform.SetParent(transform);
             slots[0] = instantiateObject;
         }
-    }
-
-    private void NoGravity(){
-
     }
 
     public void ClearSlots()

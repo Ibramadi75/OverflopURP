@@ -5,69 +5,61 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private float _timer;
-    [SerializeField] private TMP_Text _timerText;
-    [SerializeField] private TMP_Text _timeLostText;
-    [SerializeField] private TMP_Text _timeWinText;
+    [SerializeField] private float _score;
+    [SerializeField] private TMP_Text _scoreText;
+    [SerializeField] private TMP_Text _scoreLostText;
+    [SerializeField] private TMP_Text _scoreWinText;
     [SerializeField] private float _expiredTime; // time you lose in seconds if an order is lost
 
     private bool _isBlinking;
 
-    void UpdateTimerText() => _timerText.text = $"Temps restant: {_timer:F2}";
+    void UpdateScoreText() => _scoreText.text = $"{_score:F2}";
     
     void Update()
     {
-        _timer -= Time.deltaTime;
-        UpdateTimerText();
-        
-        if (_timer <= 0)
+        UpdateScoreText();
+        if (_score <= 0)
         {
             Debug.Log("Loser tu es nul");
-            Time.timeScale = 0;
-            _timerText.gameObject.SetActive(false);
-            _timeLostText.gameObject.SetActive(false);
-            _timeWinText.gameObject.SetActive(false);
+            _scoreText.gameObject.SetActive(false);
+            _scoreLostText.gameObject.SetActive(false);
+            _scoreWinText.gameObject.SetActive(false);
         }
-        
-        else if (!_isBlinking && _timer <= 20)
-            StartCoroutine(BlinkTimerText());
-        
     }
 
-    public void RemoveTime()
+    public void DecreaseScore(float val)
     {
-        _timer -= _expiredTime;
-        UpdateTimerText();
-        StartCoroutine(PopTimeLost());
+        _score -= val;
+        UpdateScoreText();
+        StartCoroutine(PopMoneyLost());
     }
 
-    public void AddTime()
+    public void IncreaseScore(float val)
     {
-        _timer += _expiredTime;
-        UpdateTimerText();
-        StartCoroutine(PopTimeWin());
+        _score += val;
+        UpdateScoreText();
+        StartCoroutine(PopMoneyWin());
     }
-
-    IEnumerator PopTimeLost()
+    IEnumerator PopMoneyLost()
     {
-        _timeLostText.text = $"- {_expiredTime}";
-        _timeLostText.gameObject.SetActive(true);
-        _timeLostText.transform.DOScale(1.5f, 0.5f);
+        _scoreLostText.text = $"- {_expiredTime}";
+        _scoreLostText.gameObject.SetActive(true);
+        _scoreLostText.transform.DOScale(1.5f, 0.5f);
         yield return new WaitForSeconds(0.5f);
-        _timeLostText.transform.DOScale(1f, 0.5f);
+        _scoreLostText.transform.DOScale(1f, 0.5f);
         yield return new WaitForSeconds(0.5f);
-        _timeLostText.gameObject.SetActive(false);
+        _scoreLostText.gameObject.SetActive(false);
     }
     
-    IEnumerator PopTimeWin()
+    IEnumerator PopMoneyWin()
     {
-        _timeWinText.text = $"+ {_expiredTime}";
-        _timeWinText.gameObject.SetActive(true);
-        _timeWinText.transform.DOScale(1.5f, 0.5f);
+        _scoreWinText.text = $"+ {_expiredTime}";
+        _scoreWinText.gameObject.SetActive(true);
+        _scoreWinText.transform.DOScale(1.5f, 0.5f);
         yield return new WaitForSeconds(0.5f);
-        _timeWinText.transform.DOScale(1f, 0.5f);
+        _scoreWinText.transform.DOScale(1f, 0.5f);
         yield return new WaitForSeconds(0.5f);
-        _timeWinText.gameObject.SetActive(false);
+        _scoreWinText.gameObject.SetActive(false);
     }
     
     IEnumerator BlinkTimerText()
@@ -75,18 +67,18 @@ public class GameManager : MonoBehaviour
         _isBlinking = true;
         while (true)
         {
-            Vector3 originalScale = _timerText.transform.localScale;
+            Vector3 originalScale = _scoreText.transform.localScale;
             Vector3 largeScale = originalScale * 1.25f;
-            Vector3 originalPosition = _timerText.rectTransform.anchoredPosition;
-            float offset = (_timerText.rectTransform.sizeDelta.x / 2) * (largeScale.x - originalScale.x);
+            Vector3 originalPosition = _scoreText.rectTransform.anchoredPosition;
+            float offset = (_scoreText.rectTransform.sizeDelta.x / 2) * (largeScale.x - originalScale.x);
 
-            _timerText.color = Color.red;
-            _timerText.transform.DOScale(largeScale, 0.5f).SetLoops(2, LoopType.Yoyo);
-            _timerText.rectTransform.DOAnchorPosX(originalPosition.x + offset, 0.5f).SetLoops(2, LoopType.Yoyo);
+            _scoreText.color = Color.red;
+            _scoreText.transform.DOScale(largeScale, 0.5f).SetLoops(2, LoopType.Yoyo);
+            _scoreText.rectTransform.DOAnchorPosX(originalPosition.x + offset, 0.5f).SetLoops(2, LoopType.Yoyo);
             yield return new WaitForSeconds(1f);
-            _timerText.color = Color.white;
-            _timerText.transform.DOScale(originalScale, 0.5f);
-            _timerText.rectTransform.DOAnchorPosX(originalPosition.x, 0.5f);
+            _scoreText.color = Color.white;
+            _scoreText.transform.DOScale(originalScale, 0.5f);
+            _scoreText.rectTransform.DOAnchorPosX(originalPosition.x, 0.5f);
         }
     }
 }
