@@ -105,7 +105,12 @@ PrefabInstance:
     - target: {fileID: 654003386363880077, guid: d9b1bcb8d43a84d1c921743d4ba006be,
         type: 3}
       propertyPath: m_Name
-      value: AssembleTable Variant
+      value: AssembleTableWithPosition
+      objectReference: {fileID: 0}
+    - target: {fileID: 654003386363880077, guid: d9b1bcb8d43a84d1c921743d4ba006be,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 654003386363880077, guid: d9b1bcb8d43a84d1c921743d4ba006be,
         type: 3}

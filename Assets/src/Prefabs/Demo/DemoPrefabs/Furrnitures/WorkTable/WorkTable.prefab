@@ -134,3 +134,7 @@ MonoBehaviour:
   slots: []
   maxCapacity: 1
   isInfinite: 0
+  showUp: 0
+  showUpPosition: {fileID: 0}
+  showUpObject: {fileID: 0}
+  noGravity: 0
