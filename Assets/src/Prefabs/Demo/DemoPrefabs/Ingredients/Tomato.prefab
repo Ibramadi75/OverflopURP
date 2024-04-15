@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 807970594422220514}
   - component: {fileID: 4991407843020780955}
   - component: {fileID: 1025387075132858424}
+  - component: {fileID: 5553187823327930535}
   m_Layer: 0
   m_Name: Tomato
   m_TagString: Ingredient
@@ -118,6 +119,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5553187823327930535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678602287220236222}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee848d038d6564e0ba3181eb7dba492a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToInstantiate: {fileID: 1055210376593303921, guid: 14b99ef788eae4d248a95e403fa4e04c,
+    type: 3}
+  autoOffset: 0
+  offset: 0
+  position: 0
 --- !u!1 &1855613152006797656
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,14 +162,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1855613152006797656}
-  m_LocalRotation: {x: -0.82370186, y: -0, z: -0, w: 0.5670232}
+  m_LocalRotation: {x: -0.71272415, y: 0, z: 0, w: 0.70144445}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 126244580318741046}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -110.914, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90.914, y: 0, z: 0}
 --- !u!23 &919036396533012483
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -237,6 +255,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: byInteraction
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055210376593303921, guid: 14b99ef788eae4d248a95e403fa4e04c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1347557466201375791, guid: 14b99ef788eae4d248a95e403fa4e04c,
         type: 3}

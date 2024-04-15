@@ -67,7 +67,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5281761778699031760
 Transform:
   m_ObjectHideFlags: 0
@@ -272,3 +272,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7033b2610e71b4f3090dff4ddef5a71d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _countdownScript: {fileID: 2532460138204705491}

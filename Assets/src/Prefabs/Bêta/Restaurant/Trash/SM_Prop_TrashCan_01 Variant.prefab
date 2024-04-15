@@ -63,7 +63,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 143328, guid: 34805116d018a9f4899f8ec1bb2948b3,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1671034691942915057}
+      addedObject: {fileID: 2353456233208214864}
   m_SourcePrefab: {fileID: 100100000, guid: 34805116d018a9f4899f8ec1bb2948b3, type: 3}
 --- !u!4 &3590808164743984360 stripped
 Transform:
@@ -77,21 +77,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3590808164744135628}
   m_PrefabAsset: {fileID: 0}
---- !u!111 &1671034691942915057
-Animation:
+--- !u!114 &2353456233208214864
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3590808164744277036}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: e53855ae70f95fe4cb9a41262837811f, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdda720373d49b64d8b07fd122b830e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playAnimation: 0
 --- !u!1001 &7870691183704659354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,19 +104,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 368214160a364a141a3101d85f12c8f9, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 368214160a364a141a3101d85f12c8f9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.5
+      value: 16.017935
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 368214160a364a141a3101d85f12c8f9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.23
+      value: 0.40570983
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 368214160a364a141a3101d85f12c8f9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18.977917
+      value: 15.72607
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 368214160a364a141a3101d85f12c8f9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -171,7 +169,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 368214160a364a141a3101d85f12c8f9,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1637316146594572209}
+      addedObject: {fileID: 340745516169820205}
   m_SourcePrefab: {fileID: 100100000, guid: 368214160a364a141a3101d85f12c8f9, type: 3}
 --- !u!1 &7870691183704560442 stripped
 GameObject:
@@ -191,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e7b967834f5984a9678e54d683edd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trashAnimationManager: {fileID: 0}
+  trashAnimationManager: {fileID: 2353456233208214864}
 --- !u!114 &6942824793894764901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +224,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7315254, y: 0.86741996, z: 0.7315359}
   m_Center: {x: -0.0000038146973, y: 0.000000014901161, z: -0.0000038146973}
---- !u!95 &1637316146594572209
+--- !u!95 &340745516169820205
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -236,7 +234,7 @@ Animator:
   m_GameObject: {fileID: 7870691183704560442}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 83429c583a63fe642a6f5c74b889c8b7, type: 2}
+  m_Controller: {fileID: 9100000, guid: 82ede0db922f5eb49ac3e02687218a5d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -21,7 +21,7 @@ PrefabInstance:
     - target: {fileID: 654003386363880077, guid: d9b1bcb8d43a84d1c921743d4ba006be,
         type: 3}
       propertyPath: m_Name
-      value: CuttingBoard (1) Variant
+      value: CuttingBoardWithPosition
       objectReference: {fileID: 0}
     - target: {fileID: 654003386363880077, guid: d9b1bcb8d43a84d1c921743d4ba006be,
         type: 3}
@@ -36,17 +36,17 @@ PrefabInstance:
     - target: {fileID: 2607802357572784117, guid: d9b1bcb8d43a84d1c921743d4ba006be,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.13000011
+      value: 15.649
       objectReference: {fileID: 0}
     - target: {fileID: 2607802357572784117, guid: d9b1bcb8d43a84d1c921743d4ba006be,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.383
+      value: 0.742
       objectReference: {fileID: 0}
     - target: {fileID: 2607802357572784117, guid: d9b1bcb8d43a84d1c921743d4ba006be,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.01700008
+      value: 23.167187
       objectReference: {fileID: 0}
     - target: {fileID: 2607802357572784117, guid: d9b1bcb8d43a84d1c921743d4ba006be,
         type: 3}
@@ -103,7 +103,8 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 640019203640280753, guid: d9b1bcb8d43a84d1c921743d4ba006be, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2607802357572784117, guid: d9b1bcb8d43a84d1c921743d4ba006be,
@@ -119,6 +120,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7952769227164396012}
+    - targetCorrespondingSourceObject: {fileID: 58789321303202750, guid: d9b1bcb8d43a84d1c921743d4ba006be,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5126910219096346419}
   m_SourcePrefab: {fileID: 100100000, guid: d9b1bcb8d43a84d1c921743d4ba006be, type: 3}
 --- !u!4 &6040265380636843206 stripped
 Transform:
@@ -249,6 +254,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &5126910219096346419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8589296473720653965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5808bf1f9bf4d2f8e16788a0b28f3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slot: {fileID: 0}
+  amount: 0
+  maxCapacity: 1
+  isInfinite: 0
+  showUp: 1
+  noGravity: 0
+  showUpPosition: {fileID: 7564955118806611129}
+  showUpObject: {fileID: 0}
 --- !u!1001 &8655741125250090881
 PrefabInstance:
   m_ObjectHideFlags: 0

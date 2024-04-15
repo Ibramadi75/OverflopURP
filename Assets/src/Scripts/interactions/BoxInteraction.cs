@@ -1,22 +1,13 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoxInteraction : AbstractInteraction
 {
     public override void MainInteraction(GameObject author)
     {
-        Slots authorSlot = author.GetComponent<Slots>();
-        Slots slots = GetComponent<Slots>();
-
-        if (!slots.IsEmpty() && authorSlot.IsEmpty())
-        {
-            authorSlot.Store(slots.Retrieve());
-        }
+        Slot authorSlot = author.GetComponent<Slot>();
+        if (!slot.IsEmpty() && authorSlot.IsEmpty())
+            authorSlot.Put(slot.Get());
     }
 
-    public override void SecondaryInteraction(GameObject author)
-    {
-        MainInteraction(author);
-    }
+    public override void SecondaryInteraction(GameObject author) { }
 }

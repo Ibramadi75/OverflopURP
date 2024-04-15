@@ -6,49 +6,42 @@ public class WorkTableInteraction : AbstractInteraction
     private AudioSource _audioSource;
 
     void Awake() => _audioSource = GetComponent<AudioSource>();
-    
+
     public override void MainInteraction(GameObject author)
     {
-        Slots authorSlot = author.GetComponent<Slots>();
-        Slots slots = GetComponent<Slots>();
-
-        if (slots.IsEmpty() && !authorSlot.IsEmpty())
-        {
-            slots.Store(authorSlot.Retrieve());
-        }else if (!slots.IsEmpty() && authorSlot.IsEmpty())
-        {
-            authorSlot.Store(slots.Retrieve());
-        }
+        Slot authorSlot = author.GetComponent<Slot>();
+        if (slot.IsEmpty() && !authorSlot.IsEmpty())
+            slot.Put(authorSlot.Get());
+        
+        else if (!slot.IsEmpty() && authorSlot.IsEmpty())
+            authorSlot.Put(slot.Get());
     }
 
     public override void SecondaryInteraction(GameObject author)
     {
-        if (slots.GetCapacity() == 1 && !slots.IsEmpty())
+        if (slot.GetMaxCapacity() == 1 && !slot.IsEmpty())
         {
-            GameObject objectToCut = slots.slots[0];
-            Ingredient ingredient = objectToCut.GetComponent<Ingredient>();
-            
-            Countdown countdown = objectToCut.GetComponentInChildren<Countdown>();
-            Slots authorSlot = author.GetComponent<Slots>();
+            GameObject objectToCut = slot.GetObjectInSlot();
+            Ingredient ingredientToCut = objectToCut.GetComponent<Ingredient>();
 
-            if (objectToCut.CompareTag("Ingredient") 
-            && ingredient is not null 
-            && ingredient.ingredientData.isCuttable)
+            Countdown countdown = objectToCut.GetComponentInChildren<Countdown>();
+            if (objectToCut.CompareTag("Ingredient") && ingredientToCut is not null &&
+                ingredientToCut.ingredientData.isCuttable)
             {
-                if (countdown is not null)
-                {
+                if (countdown is not null) {
                     countdown.InteractOn();
                     _audioSource.enabled = true;
                 }
+                
                 else
                 {
-                    GameObject cutObject = ingredient.ingredientData.cutPrefab;
-                    slots.ClearSlots();
-                    slots.Store(cutObject);
-                    _audioSource.enabled = false;
+                    GameObject cutObject = ingredientToCut.ingredientData.cutPrefab;
+                    slot.Clear();
+                    slot.Put(cutObject);
                 }
             }
         }
-    }
 
+        _audioSource.enabled = false;
+    }
 }
