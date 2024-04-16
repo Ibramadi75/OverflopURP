@@ -19,6 +19,12 @@ public class Slot : MonoBehaviour
             maxCapacity = 1;
         }
     }
+    
+    void Update()
+    {
+        if (showUp && showUpObject != null && showUpPosition != null && noGravity)
+            showUpObject.transform.position = showUpPosition.transform.position;
+    }
 
     public bool IsEmpty() => slot is null || slot.Equals(null);
     public GameObject GetObjectInSlot() => slot;
