@@ -22,7 +22,7 @@ public class Countdown : MonoBehaviour
             _time = GetComponent<Ingredient>().ingredientData.time;
             
         } else if (GetComponent<Recipe>() is not null)
-            _time = GetComponent<Recipe>().recipeData.baseExpiration;
+            _time = GetComponent<Recipe>().GetBaseExpiration();
 
         _timeLeft = _time;
 
