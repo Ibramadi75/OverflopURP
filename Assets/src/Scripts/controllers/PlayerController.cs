@@ -6,9 +6,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float sensitivity = 10.0f;
 
     private Camera _playerCam;
-    private float _rotationX = 0.0f;
+    private float _rotationX;
+    private bool _isInUi;
 
     public Camera PlayerCam => _playerCam;
+    public void SetIsInUi(bool isInUi) => _isInUi = isInUi;
 
     void Start()
     {
@@ -18,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (_isInUi) return;
+        
         float mouseX = Input.GetAxis("Mouse X") * sensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
 
