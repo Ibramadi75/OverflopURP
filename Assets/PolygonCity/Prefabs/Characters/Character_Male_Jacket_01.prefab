@@ -2275,6 +2275,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f33a517c3524c1388ca0cea6e01924f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopUi: {fileID: 0}
+  playerController: {fileID: 0}
+  gameManager: {fileID: 0}
+  instantiatedShopItems: []
+  shopItemTemplate: {fileID: 0}
+  shopItems:
+    _serializedList:
+    - Key: {fileID: 807970594422220514, guid: afda028e10f7446aeab751bbc08274fc, type: 3}
+      Value:
+        Key: {fileID: 0}
+        Value: 7
+    - Key: {fileID: 807970594422220514, guid: 7175667dcf62d41b0a474436a02dcf90, type: 3}
+      Value:
+        Key: {fileID: 0}
+        Value: 3
 --- !u!1 &187746
 GameObject:
   m_ObjectHideFlags: 0

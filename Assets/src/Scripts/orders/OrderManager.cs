@@ -90,7 +90,7 @@ public class OrderManager : MonoBehaviour
     {
         keys.ForEach(key => _activeOrders[key] = null);
         values.ForEach(order => Destroy(order.gameObject));
-        gameManager.DecreaseScore(_activeOrders[0].recipe.GetPrice());
+        gameManager.RemoveMoney(_activeOrders[0].recipe.GetPrice());
     }
 
     void RearrangeOrders()

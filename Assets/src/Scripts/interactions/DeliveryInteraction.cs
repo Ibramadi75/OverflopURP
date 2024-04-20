@@ -31,7 +31,7 @@ public class DeliveryInteraction : AbstractInteraction
         {
             if (_orderManager.LoseOrderOfRecipe(recipe.title))
             {
-                _gameManager.IncreaseScore(recipe.price);
+                _gameManager.AddMoney(recipe.price);
                 return true;
             }
         }
