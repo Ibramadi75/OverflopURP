@@ -2187,6 +2187,8 @@ GameObject:
   m_Component:
   - component: {fileID: 440500}
   - component: {fileID: 9557904}
+  - component: {fileID: 9150859673116325252}
+  - component: {fileID: 2096182659363045971}
   m_Layer: 0
   m_Name: Character_Male_Jacket_01
   m_TagString: Untagged
@@ -2203,7 +2205,7 @@ Transform:
   m_GameObject: {fileID: 183828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 433944}
@@ -2217,7 +2219,7 @@ Transform:
   - {fileID: 459984}
   - {fileID: 428088}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &9557904
 Animator:
@@ -2240,6 +2242,54 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &9150859673116325252
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183828}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.7, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2096182659363045971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f33a517c3524c1388ca0cea6e01924f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopUi: {fileID: 0}
+  playerController: {fileID: 0}
+  gameManager: {fileID: 0}
+  instantiatedShopItems: []
+  shopItemTemplate: {fileID: 0}
+  shopItems:
+    _serializedList:
+    - Key: {fileID: 807970594422220514, guid: afda028e10f7446aeab751bbc08274fc, type: 3}
+      Value:
+        Key: {fileID: 0}
+        Value: 7
+    - Key: {fileID: 807970594422220514, guid: 7175667dcf62d41b0a474436a02dcf90, type: 3}
+      Value:
+        Key: {fileID: 0}
+        Value: 3
 --- !u!1 &187746
 GameObject:
   m_ObjectHideFlags: 0

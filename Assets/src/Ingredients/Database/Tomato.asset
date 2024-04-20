@@ -15,7 +15,9 @@ MonoBehaviour:
   title: Tomato
   recipes: []
   time: 0
+  isDeliverable: 0
   isBase: 0
+  price: 30
   isCuttable: 1
   cutPrefab: {fileID: 678602287220236222, guid: 35bb100cf917b4896aac82564ae8ff5e,
     type: 3}

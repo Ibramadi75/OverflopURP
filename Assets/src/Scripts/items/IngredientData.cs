@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 [CreateAssetMenu(fileName = "Ingredients", menuName = "OverflopURP/IngredientData")]
 public class IngredientData : ScriptableObject
@@ -12,6 +9,7 @@ public class IngredientData : ScriptableObject
     public float time;
     public bool isDeliverable;
     public bool isBase;
+    public float price;
 
     #region cut
     public bool isCuttable;

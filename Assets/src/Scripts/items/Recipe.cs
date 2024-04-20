@@ -1,17 +1,12 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Recipe : MonoBehaviour
 {
-    public RecipeData recipeData;
+    [SerializeField] private RecipeData recipeData;
 
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
+    public string GetTitle() => recipeData.title;
+    public List<IngredientData> GetIngredients() => recipeData.ingredients;
+    public float GetBaseExpiration() => recipeData.baseExpiration;
+    public float GetPrice() => recipeData.price;
 }

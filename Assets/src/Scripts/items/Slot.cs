@@ -19,12 +19,18 @@ public class Slot : MonoBehaviour
             maxCapacity = 1;
         }
     }
+    
+    void Update()
+    {
+        if (showUp && showUpObject != null && showUpPosition != null && noGravity)
+            showUpObject.transform.position = showUpPosition.transform.position;
+    }
 
-    public bool IsEmpty() => slot is null || slot.Equals(null);
+    public bool IsEmpty() => slot is null || slot.Equals(null) || amount == 0;
     public GameObject GetObjectInSlot() => slot;
     public uint GetMaxCapacity() => maxCapacity;
     
-    public void Put(GameObject obj)
+    public void Put(GameObject obj, uint amount = 1)
     {
         if (IsEmpty())
         {
@@ -32,16 +38,16 @@ public class Slot : MonoBehaviour
             if (showUp)
                 ShowUp();
             
-            amount++;
+            this.amount += amount;
             return;
         }
 
         if (obj.CompareTag(slot.tag))
         {
-            if (amount == maxCapacity)
+            if (this.amount == maxCapacity)
                 return;
             
-            amount++;
+            this.amount += amount;
         }
     }
 
@@ -76,7 +82,7 @@ public class Slot : MonoBehaviour
         Destroy(GetComponentInChildren<Ingredient>().gameObject);
     }
 
-    public void ShowUp()
+    private void ShowUp()
     {
         showUpObject = Instantiate(slot, showUpPosition.position, Quaternion.identity);
         showUpObject.transform.localScale = Vector3.one;
