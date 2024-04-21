@@ -9,8 +9,4 @@ public class DisapearInGame : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.enabled = false;
     }
-
-    private void Update()
-    {
-    }
 }

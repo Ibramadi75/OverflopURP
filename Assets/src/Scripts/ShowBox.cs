@@ -10,8 +10,4 @@ public class ShowBox : MonoBehaviour
 
         foreach (var filter in childFilters) filter.mesh = newMesh;
     }
-
-    private void Update()
-    {
-    }
 }
