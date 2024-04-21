@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor;
 
 public enum FloatingPosition
 {
@@ -11,14 +10,13 @@ public enum FloatingPosition
 
 public class FloatingPrefab : MonoBehaviour
 {
-    [SerializeField] GameObject prefabToInstantiate;
-    [SerializeField] bool autoOffset;
-    [SerializeField] float offset;
-    [SerializeField] FloatingPosition position;
+    [SerializeField] private GameObject prefabToInstantiate;
+    [SerializeField] private bool autoOffset;
+    [SerializeField] private float offset;
+    [SerializeField] private FloatingPosition position;
 
-    void Start()
+    private void Start()
     {
-
     }
 
 

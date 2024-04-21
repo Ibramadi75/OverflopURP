@@ -2,21 +2,26 @@ using UnityEngine;
 
 public class Order : MonoBehaviour
 {
-    [SerializeField] private BaseCountdown countdown;
-    
-    private Recipe _recipe;
-    public Recipe recipe => _recipe;
-    
+    [SerializeField] private Countdown countdown;
+
+    public Recipe recipe { get; private set; }
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        _recipe = GetComponent<Recipe>();
-        
-        countdown.SetTime(_recipe.GetBaseExpiration());
+        recipe = GetComponent<Recipe>();
+
+        countdown.SetTime(recipe.GetBaseExpiration());
         countdown.gameObject.SetActive(true);
     }
 
-    public bool HasExpired() => countdown.GetRemainingTime() <= 0;
+    public bool HasExpired()
+    {
+        return countdown.IsFinished();
+    }
 
-    public bool IsRecipeTitleIs(string title) => _recipe.GetTitle().Equals(title);
+    public bool IsRecipeTitleIs(string title)
+    {
+        return recipe.GetTitle().Equals(title);
+    }
 }

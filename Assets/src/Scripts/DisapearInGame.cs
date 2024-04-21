@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DisapearInGame : MonoBehaviour
 {
-    MeshRenderer meshRenderer;
-    void Start()
+    private MeshRenderer meshRenderer;
+
+    private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.enabled = false;
     }
 
-    void Update()
+    private void Update()
     {
-        
     }
 }

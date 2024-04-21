@@ -2,45 +2,51 @@ using UnityEngine;
 
 public class WorkTableInteraction : AbstractInteraction
 {
-    private AudioSource _audioSource;
+    [SerializeField] private Countdown countdown;
 
-    void Awake() => _audioSource = GetComponent<AudioSource>();
+    private AudioSource _audioSource;
+    private Ingredient _ingredient;
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+        countdown.onComplete += OnCountdownComplete;
+    }
 
     public override void MainInteraction(GameObject author)
     {
-        Slot authorSlot = author.GetComponent<Slot>();
+        var authorSlot = author.GetComponent<Slot>();
         if (slot.IsEmpty() && !authorSlot.IsEmpty())
             slot.Put(authorSlot.Get());
-        
+
         else if (!slot.IsEmpty() && authorSlot.IsEmpty())
             authorSlot.Put(slot.Get());
     }
 
-    public override void SecondaryInteraction(GameObject author)
+    public override void SecondaryInteraction()
     {
         if (slot.GetMaxCapacity() == 1 && !slot.IsEmpty())
         {
-            GameObject objectToCut = slot.GetObjectInSlot();
-            Ingredient ingredientToCut = objectToCut.GetComponent<Ingredient>();
+            var objectToCut = slot.GetObjectInSlot();
+            _ingredient = objectToCut.GetComponent<Ingredient>();
 
-            Countdown countdown = objectToCut.GetComponentInChildren<Countdown>();
-            if (objectToCut.CompareTag("Ingredient") && ingredientToCut is not null &&
-                ingredientToCut.ingredientData.isCuttable)
+            if (objectToCut.CompareTag("Ingredient") && _ingredient is not null &&
+                _ingredient.ingredientData.isCuttable)
             {
-                if (countdown is not null) {
-                    countdown.InteractOn();
-                    _audioSource.enabled = true;
-                }
-                
-                else
+                countdown.SetIsTriggering(true);
+                if (!countdown.gameObject.activeSelf)
                 {
-                    GameObject cutObject = ingredientToCut.ingredientData.cutPrefab;
-                    slot.Clear();
-                    slot.Put(cutObject);
+                    countdown.SetTime(_ingredient.ingredientData.time);
+                    countdown.gameObject.SetActive(true);
                 }
             }
         }
+    }
 
-        _audioSource.enabled = false;
+    protected override void OnCountdownComplete()
+    {
+        var cutObject = _ingredient.ingredientData.cutPrefab;
+        slot.Clear();
+        slot.Put(cutObject);
     }
 }

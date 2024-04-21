@@ -4,13 +4,13 @@ public class AssembleInteraction : AbstractInteraction
 {
     public override void MainInteraction(GameObject author)
     {
-        Slot authorSlot = author.GetComponent<Slot>();
+        var authorSlot = author.GetComponent<Slot>();
         if (slot.IsEmpty() && !authorSlot.IsEmpty())
         {
             if (authorSlot.GetObjectInSlot().GetComponent<Ingredient>().ingredientData.isBase)
                 slot.Put(authorSlot.Get());
-            
-        } else if (!slot.IsEmpty())
+        }
+        else if (!slot.IsEmpty())
         {
             if (authorSlot.IsEmpty())
                 authorSlot.Put(slot.Get());
@@ -23,26 +23,36 @@ public class AssembleInteraction : AbstractInteraction
     {
         if (slot.GetMaxCapacity() == 1 && !slot.IsEmpty())
         {
-            GameObject storedObject = slot.GetObjectInSlot();
-            GameObject playerObject = authorSlot.Get();
-        
-            Ingredient storedIngredient = storedObject.GetComponent<Ingredient>();
-            Ingredient toAssembleIngredient = playerObject.GetComponent<Ingredient>();
+            var storedObject = slot.GetObjectInSlot();
+            var playerObject = authorSlot.Get();
 
-            if (storedObject.CompareTag("Ingredient") && storedIngredient is not null && storedIngredient.ingredientData.isAssemblable)
+            var storedIngredient = storedObject.GetComponent<Ingredient>();
+            var toAssembleIngredient = playerObject.GetComponent<Ingredient>();
+
+            if (storedObject.CompareTag("Ingredient") && storedIngredient is not null &&
+                storedIngredient.ingredientData.isAssemblable)
             {
-                GameObject assembleResult =
+                var assembleResult =
                     storedIngredient.ingredientData.GetAssembledIngredient(toAssembleIngredient.ingredientData);
-            
+
                 if (assembleResult is not null)
                 {
                     slot.Clear();
                     slot.Put(assembleResult);
                 }
             }
-            else authorSlot.Put(playerObject);
+            else
+            {
+                authorSlot.Put(playerObject);
+            }
         }
     }
 
-    public override void SecondaryInteraction(GameObject author) { }
+    public override void SecondaryInteraction()
+    {
+    }
+
+    protected override void OnCountdownComplete()
+    {
+    }
 }

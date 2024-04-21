@@ -2,30 +2,32 @@
 
 public class InteractionController : MonoBehaviour
 {
-    private PlayerController _playerController;
     private GameObject _lastHitObject;
     private Color _originalColor;
+    private PlayerController _playerController;
 
-    void Start()
+    private void Start()
     {
         _playerController = GetComponent<PlayerController>();
     }
-    
-    void Update() {
-        if (Physics.Raycast(_playerController.PlayerCam.transform.position, _playerController.PlayerCam.transform.forward, out RaycastHit hit, 2, 1))
+
+    private void Update()
+    {
+        if (Physics.Raycast(_playerController.PlayerCam.transform.position,
+                _playerController.PlayerCam.transform.forward, out var hit, 2, 1))
         {
-            AbstractInteraction abstractInteraction = hit.transform.GetComponent<AbstractInteraction>();
-            
+            var abstractInteraction = hit.transform.GetComponent<AbstractInteraction>();
+
             if (abstractInteraction is null)
                 abstractInteraction = hit.transform.GetComponentInChildren<AbstractInteraction>();
-                
+
             if (abstractInteraction)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                     abstractInteraction.MainInteraction(gameObject);
-                    
+
                 if (Input.GetKey(KeyCode.F))
-                    abstractInteraction.SecondaryInteraction(gameObject);
+                    abstractInteraction.SecondaryInteraction();
             }
 
             if (_lastHitObject != hit.transform.gameObject)
@@ -55,38 +57,32 @@ public class InteractionController : MonoBehaviour
             }
         }
     }
-    
-    void ChangeColorToBlack(GameObject obj)
+
+    private void ChangeColorToBlack(GameObject obj)
     {
-        Renderer renderer = obj.GetComponent<Renderer>();
+        var renderer = obj.GetComponent<Renderer>();
 
         if (renderer is null)
             renderer = obj.GetComponentInChildren<Renderer>();
 
         if (renderer != null)
         {
-            Material[] materials = renderer.materials;
-            foreach (Material material in materials)
-            {
-                material.color = new Color (0f, 0f, 1f, .4f);
-            }
+            var materials = renderer.materials;
+            foreach (var material in materials) material.color = new Color(0f, 0f, 1f, .4f);
         }
     }
 
-    void RestoreOriginalColor(GameObject obj)
+    private void RestoreOriginalColor(GameObject obj)
     {
-        Renderer renderer = obj.GetComponent<Renderer>();
+        var renderer = obj.GetComponent<Renderer>();
 
         if (renderer is null)
             renderer = obj.GetComponentInChildren<Renderer>();
 
         if (renderer != null)
         {
-            Material[] materials = renderer.materials;
-            foreach (Material material in materials)
-            {
-                material.color = _originalColor;
-            }
+            var materials = renderer.materials;
+            foreach (var material in materials) material.color = _originalColor;
         }
     }
 }

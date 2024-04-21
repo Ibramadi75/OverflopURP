@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Tomato
   recipes: []
-  time: 0
+  time: 3
   isDeliverable: 0
   isBase: 0
   price: 30

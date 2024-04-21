@@ -1,41 +1,44 @@
-using System.Collections;
 using UnityEngine;
 
 public class MeltInteraction : AbstractInteraction
 {
-    [SerializeField] private BaseCountdown countdown;
-    
+    [SerializeField] private Countdown countdown;
+
+    private Ingredient _ingredient;
+
+    private void Awake()
+    {
+        countdown.onComplete += OnCountdownComplete;
+    }
+
     public override void MainInteraction(GameObject author)
     {
-        Slot authorSlot = author.GetComponent<Slot>();
+        var authorSlot = author.GetComponent<Slot>();
         if (slot.IsEmpty() && !authorSlot.IsEmpty())
         {
             slot.Put(authorSlot.Get());
-            
-            Ingredient ingredient = slot.GetObjectInSlot().GetComponent<Ingredient>();
-            if (ingredient is not null && ingredient.ingredientData.isMeltable)
-                StartCoroutine(Cook(ingredient));
+
+            _ingredient = slot.GetObjectInSlot().GetComponent<Ingredient>();
+            if (_ingredient is not null && _ingredient.ingredientData.isMeltable)
+            {
+                countdown.SetTime(_ingredient.ingredientData.time);
+                countdown.gameObject.SetActive(true);
+            }
         }
-        
+
         else if (!slot.IsEmpty() && authorSlot.IsEmpty())
+        {
             authorSlot.Put(slot.Get());
+        }
     }
 
-    public override void SecondaryInteraction(GameObject author) { }
-
-    IEnumerator Cook(Ingredient ingredient)
+    public override void SecondaryInteraction()
     {
-        float time = ingredient.ingredientData.time;
-        countdown.SetTime(time);
-        countdown.gameObject.SetActive(true);
-        
-        while (time > 0)
-        {
-            yield return null;
-            time -= Time.deltaTime;
-        }
-        
+    }
+
+    protected override void OnCountdownComplete()
+    {
         slot.Clear();
-        slot.Put(ingredient.ingredientData.meltedPrefab);
+        slot.Put(_ingredient.ingredientData.meltedPrefab);
     }
 }

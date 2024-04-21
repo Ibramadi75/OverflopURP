@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimationManager : MonoBehaviour
 {
-    public bool playAnimation = false;
+    public bool playAnimation;
     private Animator animator;
 
-    void Start()
+    private void Start()
     {
         animator = GetComponentInParent<Animator>();
     }
 
-    void Update()
+    private void Update()
     {
         if (playAnimation && animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {

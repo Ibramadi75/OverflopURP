@@ -4,11 +4,8 @@ public class LookAtTarget : MonoBehaviour
 {
     public Transform target;
 
-    void Update()
+    private void Update()
     {
-        if (target != null)
-        {
-            transform.LookAt(target);
-        }
+        if (target != null) transform.LookAt(target);
     }
 }
