@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MeltInteraction : AbstractInteraction
 {
-    [SerializeField] private AutoCountdown countdown;
+    [SerializeField] private BaseCountdown countdown;
     
     public override void MainInteraction(GameObject author)
     {

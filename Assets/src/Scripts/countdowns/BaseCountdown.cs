@@ -1,11 +1,11 @@
 using System.Collections;
-using DG.Tweening;
 using Redcode.Moroutines;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class BaseCountdown : MonoBehaviour
 {
+    [SerializeField] private bool isAuto;
+    
     private Vector3 _originalPosition;
     private Vector3 _originalScale;
     private Moroutine _countdownMoroutine;
@@ -23,17 +23,25 @@ public class BaseCountdown : MonoBehaviour
         _xDefaultLocalPosition = transform.localPosition.x;
     }
 
-    protected void CreateMoroutine()
+    void OnEnable()
+    {
+        CreateMoroutine();
+        if (isAuto) _countdownMoroutine.Run(false);
+    }
+
+    void OnDisable() => ResetSize();
+
+    private void CreateMoroutine()
     {
         _remainingTime = _baseTime;
-        _countdownMoroutine = Moroutine.Create(Countdown()).OnCompleted(c => gameObject.SetActive(false)).Run(false);
+        _countdownMoroutine = Moroutine.Create(Countdown()).OnCompleted(c => gameObject.SetActive(false));
     }
     
     protected void ResumeMoroutine() => _countdownMoroutine.Run(false);
 
     protected void StopMoroutine() => _countdownMoroutine.Stop();
 
-    protected void ResetSize()
+    private void ResetSize()
     {
         transform.localPosition =
             new Vector3(_xDefaultLocalPosition, transform.localPosition.y, transform.localPosition.z);

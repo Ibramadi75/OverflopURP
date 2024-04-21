@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Order : MonoBehaviour
 {
-    [SerializeField] private AutoCountdown countdown;
+    [SerializeField] private BaseCountdown countdown;
     
     private Recipe _recipe;
     public Recipe recipe => _recipe;
