@@ -40,10 +40,7 @@ public class OrderManager : MonoBehaviour
         _screenUi = transform.GetChild(0);
         _activeOrders = new Dictionary<int, Order>
         {
-            [0] = null,
-            [1] = null,
-            [2] = null,
-            [3] = null
+            [0] = null
         };
 
         StartCoroutine(SpawnOrderPeriodically());
@@ -78,7 +75,7 @@ public class OrderManager : MonoBehaviour
             int position = FindFirstAvailablePosition();
             if (position != -1)
                 CreateOrder(FindFirstAvailablePosition());
-            yield return new WaitForSeconds(Random.Range(15f, 44f));
+            yield return new WaitForSeconds(Random.Range(6f, 12f));
         }
     }
     
@@ -93,7 +90,7 @@ public class OrderManager : MonoBehaviour
     {
         keys.ForEach(key => _activeOrders[key] = null);
         values.ForEach(order => Destroy(order.gameObject));
-        gameManager.RemoveTime();
+        gameManager.RemoveMoney(_activeOrders[0].recipe.GetPrice());
     }
 
     void RearrangeOrders()

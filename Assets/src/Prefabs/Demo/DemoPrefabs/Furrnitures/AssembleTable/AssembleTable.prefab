@@ -106,6 +106,7 @@ MonoBehaviour:
   showUp: 0
   showUpPosition: {fileID: 0}
   showUpObject: {fileID: 0}
+  noGravity: 0
 --- !u!114 &3564700942108175646
 MonoBehaviour:
   m_ObjectHideFlags: 0

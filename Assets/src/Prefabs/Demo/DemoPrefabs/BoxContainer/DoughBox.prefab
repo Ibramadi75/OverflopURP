@@ -6471,7 +6471,7 @@ Transform:
   - {fileID: 8523082506930028039}
   - {fileID: 2449103805622065897}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &762122858100117333
 GameObject:
@@ -63858,9 +63858,9 @@ GameObject:
   - component: {fileID: 8746190792019620371}
   - component: {fileID: 6616062253204809127}
   - component: {fileID: 6871017005103377126}
-  - component: {fileID: 7058665523644194798}
   - component: {fileID: 2343002117412156030}
   - component: {fileID: 3840493991894921745}
+  - component: {fileID: 1569467926763329282}
   m_Layer: 0
   m_Name: BoxContainer 1
   m_TagString: Box
@@ -63955,26 +63955,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7058665523644194798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8354520022460838161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5dc541b8ac8f4a2e98eea0c90f0c61b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slots:
-  - {fileID: 678602287220236222, guid: 7175667dcf62d41b0a474436a02dcf90, type: 3}
-  maxCapacity: 1
-  isInfinite: 1
-  showUp: 0
-  showUpPosition: {fileID: 0}
-  showUpObject: {fileID: 0}
-  noGravity: 0
 --- !u!114 &2343002117412156030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63999,6 +63979,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5021786f5fce462382d474935f82da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInteracting: 0
+--- !u!114 &1569467926763329282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354520022460838161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5808bf1f9bf4d2f8e16788a0b28f3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slot: {fileID: 678602287220236222, guid: 7175667dcf62d41b0a474436a02dcf90, type: 3}
+  amount: 0
+  maxCapacity: 100
+  isInfinite: 0
+  showUp: 0
+  noGravity: 0
+  showUpPosition: {fileID: 0}
+  showUpObject: {fileID: 0}
 --- !u!1 &8410847026901107069
 GameObject:
   m_ObjectHideFlags: 0

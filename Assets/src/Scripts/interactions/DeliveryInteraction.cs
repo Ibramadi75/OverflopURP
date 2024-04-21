@@ -6,30 +6,22 @@ public class DeliveryInteraction : AbstractInteraction
 {
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private OrderManager _orderManager;
-    
+
     public override void MainInteraction(GameObject author)
     {
-        Slots authorSlot = author.GetComponent<Slots>();
-        Slots slots = GetComponent<Slots>();
-        
-        if (slots.IsEmpty() && !authorSlot.IsEmpty())
+        Slot authorSlot = author.GetComponent<Slot>();
+        if (slot.IsEmpty() && !authorSlot.IsEmpty())
         {
-            if (authorSlot.slots[0].GetComponent<Ingredient>().ingredientData.isDeliverable)
+            if (authorSlot.GetObjectInSlot().GetComponent<Ingredient>().ingredientData.isDeliverable)
             {
-                GameObject objectToDeliver = authorSlot.Retrieve();
-                slots.Store(objectToDeliver);
-                if (Deliver(objectToDeliver))
-                {
-                    slots.ClearSlots();
-                }
+                GameObject objectToDeliver = authorSlot.Get();
+                if (!Deliver(objectToDeliver))
+                    authorSlot.Put(objectToDeliver);
             }
         }
     }
- 
-    public override void SecondaryInteraction(GameObject author)
-    {
-        MainInteraction(author);
-    }
+    
+    public override void SecondaryInteraction(GameObject author) { }
 
     bool Deliver(GameObject objectToDeliver)
     {
@@ -39,8 +31,7 @@ public class DeliveryInteraction : AbstractInteraction
         {
             if (_orderManager.LoseOrderOfRecipe(recipe.title))
             {
-                Destroy(ingredient.gameObject);
-                _gameManager.AddTime();
+                _gameManager.AddMoney(recipe.price);
                 return true;
             }
         }

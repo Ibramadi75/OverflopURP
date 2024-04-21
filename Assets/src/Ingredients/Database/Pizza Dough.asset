@@ -17,6 +17,7 @@ MonoBehaviour:
   time: 0
   isDeliverable: 0
   isBase: 1
+  price: 15
   isCuttable: 0
   cutPrefab: {fileID: 0}
   isAssemblable: 1

@@ -15,6 +15,7 @@ MonoBehaviour:
   title: Tomato Sauce
   recipes: []
   time: 0
+  isDeliverable: 0
   isBase: 0
   isCuttable: 0
   cutPrefab: {fileID: 0}
