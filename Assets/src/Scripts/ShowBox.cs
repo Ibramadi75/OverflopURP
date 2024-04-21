@@ -1,23 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShowBox : MonoBehaviour
 {
     public Mesh newMesh;
 
-    void Start()
+    private void Start()
     {
-        MeshFilter[] childFilters = GetComponentsInChildren<MeshFilter>();
+        var childFilters = GetComponentsInChildren<MeshFilter>();
 
-        foreach (MeshFilter filter in childFilters)
-        {
-            filter.mesh = newMesh;
-        }
-    }
-
-    void Update()
-    {
-        
+        foreach (var filter in childFilters) filter.mesh = newMesh;
     }
 }

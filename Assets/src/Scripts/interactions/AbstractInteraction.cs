@@ -4,8 +4,12 @@ public abstract class AbstractInteraction : MonoBehaviour
 {
     protected Slot slot;
 
-    void Start() => slot = GetComponent<Slot>();
+    private void Start()
+    {
+        slot = GetComponent<Slot>();
+    }
 
     public abstract void MainInteraction(GameObject author);
-    public abstract void SecondaryInteraction(GameObject author);
+    public abstract void SecondaryInteraction();
+    protected abstract void OnCountdownComplete();
 }

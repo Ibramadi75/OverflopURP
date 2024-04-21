@@ -11,21 +11,6 @@ public class IngredientData : ScriptableObject
     public bool isBase;
     public float price;
 
-    #region cut
-    public bool isCuttable;
-    public GameObject cutPrefab;
-    #endregion
-    #region assemble
-    public bool isAssemblable;
-    public IngredientData canAssembleWith;
-    public GameObject assembledPrefab;
-    
-    #endregion
-    #region melt
-    public bool isMeltable;
-    public GameObject meltedPrefab;
-    #endregion
-    
     private bool CanAssembleWith(IngredientData ingredientData)
     {
         return isAssemblable && ingredientData == canAssembleWith;
@@ -36,7 +21,30 @@ public class IngredientData : ScriptableObject
         if (ingredientData is not null && CanAssembleWith(ingredientData))
             return assembledPrefab;
 
-        Debug.Log(ingredientData.title + " cannot be assembled with " + title);;
+        Debug.Log(ingredientData.title + " cannot be assembled with " + title);
+        ;
         return null;
     }
+
+    #region cut
+
+    public bool isCuttable;
+    public GameObject cutPrefab;
+
+    #endregion
+
+    #region assemble
+
+    public bool isAssemblable;
+    public IngredientData canAssembleWith;
+    public GameObject assembledPrefab;
+
+    #endregion
+
+    #region melt
+
+    public bool isMeltable;
+    public GameObject meltedPrefab;
+
+    #endregion
 }

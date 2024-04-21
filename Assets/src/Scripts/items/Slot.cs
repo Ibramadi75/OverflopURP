@@ -11,7 +11,7 @@ public class Slot : MonoBehaviour
     [SerializeField] private Transform showUpPosition;
     [SerializeField] private GameObject showUpObject;
 
-    void Start()
+    private void Start()
     {
         if (isInfinite)
         {
@@ -19,17 +19,28 @@ public class Slot : MonoBehaviour
             maxCapacity = 1;
         }
     }
-    
-    void Update()
+
+    private void Update()
     {
         if (showUp && showUpObject != null && showUpPosition != null && noGravity)
             showUpObject.transform.position = showUpPosition.transform.position;
     }
 
-    public bool IsEmpty() => slot is null || slot.Equals(null) || amount == 0;
-    public GameObject GetObjectInSlot() => slot;
-    public uint GetMaxCapacity() => maxCapacity;
-    
+    public bool IsEmpty()
+    {
+        return slot is null || slot.Equals(null) || amount == 0;
+    }
+
+    public GameObject GetObjectInSlot()
+    {
+        return slot;
+    }
+
+    public uint GetMaxCapacity()
+    {
+        return maxCapacity;
+    }
+
     public void Put(GameObject obj, uint amount = 1)
     {
         if (IsEmpty())
@@ -37,7 +48,7 @@ public class Slot : MonoBehaviour
             slot = obj;
             if (showUp)
                 ShowUp();
-            
+
             this.amount += amount;
             return;
         }
@@ -46,7 +57,7 @@ public class Slot : MonoBehaviour
         {
             if (this.amount == maxCapacity)
                 return;
-            
+
             this.amount += amount;
         }
     }
@@ -60,18 +71,20 @@ public class Slot : MonoBehaviour
             {
                 amount--;
                 get = slot;
-                
+
                 if (amount == 0)
                     slot = null;
-                
+
                 if (showUp)
                     Destroy(showUpObject);
             }
-            
+
             else
+            {
                 get = slot;
+            }
         }
-        
+
         return get;
     }
 
@@ -87,17 +100,18 @@ public class Slot : MonoBehaviour
         showUpObject = Instantiate(slot, showUpPosition.position, Quaternion.identity);
         showUpObject.transform.localScale = Vector3.one;
         showUpObject.transform.parent = transform;
-        
+
         if (noGravity)
         {
             showUpObject.GetComponent<Rigidbody>().useGravity = false;
             showUpObject.GetComponentInChildren<Collider>().isTrigger = true;
-            
-        } else {
+        }
+        else
+        {
             showUpObject.GetComponent<Rigidbody>().useGravity = true;
             showUpObject.GetComponentInChildren<Collider>().isTrigger = false;
         }
-        
+
         showUpObject.SetActive(true);
     }
 }

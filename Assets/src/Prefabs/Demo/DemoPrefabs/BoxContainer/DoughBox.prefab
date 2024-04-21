@@ -63994,8 +63994,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slot: {fileID: 678602287220236222, guid: 7175667dcf62d41b0a474436a02dcf90, type: 3}
   amount: 0
-  maxCapacity: 100
-  isInfinite: 0
+  maxCapacity: 0
+  isInfinite: 1
   showUp: 0
   noGravity: 0
   showUpPosition: {fileID: 0}

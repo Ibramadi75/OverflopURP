@@ -6,19 +6,25 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float money;
     [SerializeField] private TMP_Text moneyText;
 
-    void Update() => UpdateMoneyText();
+    private void Update()
+    {
+        UpdateMoneyText();
+    }
 
-    void UpdateMoneyText() => moneyText.text = $"{money:F2}";
-    
+    private void UpdateMoneyText()
+    {
+        moneyText.text = $"{money:F2}";
+    }
+
     public void AddMoney(float amount)
     {
         money += amount;
         UpdateMoneyText();
     }
-    
+
     public bool RemoveMoney(float amount)
     {
-        float newMoney = money - amount;
+        var newMoney = money - amount;
         if (newMoney < 0) return false;
         money = newMoney;
         UpdateMoneyText();

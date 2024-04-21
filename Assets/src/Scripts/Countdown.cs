@@ -1,76 +1,113 @@
 using System.Collections;
+using Redcode.Moroutines;
 using UnityEngine;
 
 public class Countdown : MonoBehaviour
 {
-    public float _time = 10f;
-    private float _timeLeft;
-    private Coroutine _countdownCoroutine;
-    [SerializeField] bool byInteraction = false;
-    [SerializeField] bool _launchCoroutine = false;
-    bool _primaryInteraction = false;
+    public delegate void OnComplete();
 
-    public void InteractOn() => _primaryInteraction = true;
-    public void SetTime(float time) => _time = time;
-    public float GetTime() => _time;
-    public float TimeLeft => _timeLeft;
+    [SerializeField] private bool isAuto;
+    private float _baseTime;
+    private Moroutine _countdownMoroutine;
 
-    void Start()
+    private bool _isTriggering;
+    private Vector3 _originalPosition;
+    private Vector3 _originalScale;
+    private float _remainingTime;
+    private float _xDefaultLocalPosition;
+    private float _xDefaultLocalScale;
+    public OnComplete onComplete;
+
+    private void Awake()
     {
-        if (GetComponent<Ingredient>() is not null)
-        {
-            _time = GetComponent<Ingredient>().ingredientData.time;
-            
-        } else if (GetComponent<Recipe>() is not null)
-            _time = GetComponent<Recipe>().GetBaseExpiration();
-
-        _timeLeft = _time;
-
-        if (!byInteraction)
-            StartCoroutine(StartCountdown());
+        _xDefaultLocalScale = transform.localScale.x;
+        _xDefaultLocalPosition = transform.localPosition.x;
     }
 
-    void Update()
+    private void Update()
     {
-        _launchCoroutine = _primaryInteraction;
-
-        if (byInteraction)
-        {
-            if (_launchCoroutine)
-            {
-                if (_countdownCoroutine == null)
-                {
-                    _countdownCoroutine = StartCoroutine(StartCountdown());
-                }
-            }
-            else
-            {
-                if (_countdownCoroutine != null)
-                {
-                    StopCoroutine(_countdownCoroutine);
-                    _countdownCoroutine = null;
-                    _launchCoroutine = false;
-                    // _timeLeft = _time;
-                }
-            }
-        }
-
-        if (_timeLeft <= 0)
-        {
-            Destroy(gameObject);
-            return; // Exit the Update method early to avoid further processing
-        }
-
-        _launchCoroutine = false;
-        _primaryInteraction = false;
+        if (isAuto) return;
+        if (_isTriggering)
+            ResumeMoroutine();
+        _isTriggering = false;
+        StopMoroutine();
     }
 
-    IEnumerator StartCountdown()
+    private void OnEnable()
     {
-        while (_timeLeft > 0)
+        CreateMoroutine();
+        if (isAuto) ResumeMoroutine();
+    }
+
+    private void OnDisable()
+    {
+        ResetSize();
+    }
+
+    public void SetTime(float baseTime)
+    {
+        _baseTime = baseTime;
+    }
+
+    public void SetIsTriggering(bool isTriggering)
+    {
+        _isTriggering = isTriggering;
+    }
+
+    private void CreateMoroutine()
+    {
+        _remainingTime = _baseTime;
+        _countdownMoroutine = Moroutine.Create(CountdownRunner()).OnCompleted(c =>
+        {
+            onComplete?.Invoke();
+            gameObject.SetActive(false);
+        });
+    }
+
+    public bool IsFinished()
+    {
+        return _remainingTime <= 0;
+    }
+
+    private void ResumeMoroutine()
+    {
+        _countdownMoroutine.Run(false);
+    }
+
+    private void StopMoroutine()
+    {
+        _countdownMoroutine.Stop();
+    }
+
+    private void ResetSize()
+    {
+        transform.localPosition =
+            new Vector3(_xDefaultLocalPosition, transform.localPosition.y, transform.localPosition.z);
+        transform.localScale = new Vector3(_xDefaultLocalScale, transform.localScale.y, transform.localScale.z);
+    }
+
+    private IEnumerator CountdownRunner()
+    {
+        while (_remainingTime > 0)
         {
             yield return null;
-            _timeLeft -= Time.deltaTime;
+            _remainingTime -= Time.deltaTime;
+            ReduceSize();
         }
+    }
+
+    private void ReduceSize()
+    {
+        // Calculer le ratio de progression
+        var progressRatio = _remainingTime / _baseTime;
+
+        // Limiter le ratio de progression entre 0 et 1
+        progressRatio = Mathf.Clamp01(progressRatio);
+
+        // Appliquer le ratio de progression à la taille de l'échelle sur l'axe X
+        var newScaleX = Mathf.Lerp(0f, _xDefaultLocalScale, progressRatio);
+
+        // Appliquer la nouvelle taille de l'échelle
+        transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
     }
 }
