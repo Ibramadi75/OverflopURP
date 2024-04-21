@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class MeltInteraction : AbstractInteraction
 {
+    [SerializeField] private AutoCountdown countdown;
+    
     public override void MainInteraction(GameObject author)
     {
         Slot authorSlot = author.GetComponent<Slot>();
         if (slot.IsEmpty() && !authorSlot.IsEmpty())
         {
             slot.Put(authorSlot.Get());
-            Ingredient ingredient = slot.GetObjectInSlot().GetComponent<Ingredient>();
             
+            Ingredient ingredient = slot.GetObjectInSlot().GetComponent<Ingredient>();
             if (ingredient is not null && ingredient.ingredientData.isMeltable)
                 StartCoroutine(Cook(ingredient));
         }
@@ -24,11 +26,13 @@ public class MeltInteraction : AbstractInteraction
     IEnumerator Cook(Ingredient ingredient)
     {
         float time = ingredient.ingredientData.time;
+        countdown.SetTime(time);
+        countdown.gameObject.SetActive(true);
+        
         while (time > 0)
         {
             yield return null;
             time -= Time.deltaTime;
-            Debug.Log(time);
         }
         
         slot.Clear();

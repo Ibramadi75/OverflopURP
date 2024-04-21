@@ -8,14 +8,7 @@ public class LookAtTarget : MonoBehaviour
     {
         if (target != null)
         {
-            Vector3 direction = target.position - transform.position;
-
-            if (direction != Vector3.zero)
-            {
-                Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-
-                transform.rotation = rotation;
-            }
+            transform.LookAt(target);
         }
     }
 }
