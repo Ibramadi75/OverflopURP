@@ -2280,16 +2280,13 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   instantiatedShopItems: []
   shopItemTemplate: {fileID: 0}
+  containersManager: {fileID: 0}
   shopItems:
     _serializedList:
     - Key: {fileID: 807970594422220514, guid: afda028e10f7446aeab751bbc08274fc, type: 3}
-      Value:
-        Key: {fileID: 0}
-        Value: 7
+      Value: 7
     - Key: {fileID: 807970594422220514, guid: 7175667dcf62d41b0a474436a02dcf90, type: 3}
-      Value:
-        Key: {fileID: 0}
-        Value: 3
+      Value: 3
 --- !u!1 &187746
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,8 +3,10 @@ using UnityEngine;
 public abstract class AbstractInteraction : MonoBehaviour
 {
     protected Slot slot;
-
-    private void Start()
+    
+    private Outline _outline;
+        
+    void Start()
     {
         slot = GetComponent<Slot>();
     }

@@ -72,9 +72,6 @@ public class ShopInteraction : AbstractInteraction
         var totalPrice = price * amount;
         
         if (gameManager.RemoveMoney(totalPrice))
-        {
-            Debug.Log($"price: {price}, amount: {amount}");
             destinationSlot.Put(ingredientGameObject, amount);
-        }
     }
 }
