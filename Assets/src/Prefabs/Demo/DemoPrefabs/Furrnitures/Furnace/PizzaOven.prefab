@@ -87,10 +87,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4402036008675778903, guid: 0df15043362544c16a1100b6cce3c6a4,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6446445434595057727}
-    - targetCorrespondingSourceObject: {fileID: 4402036008675778903, guid: 0df15043362544c16a1100b6cce3c6a4,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4095406653722857087}
     - targetCorrespondingSourceObject: {fileID: -5348787626817675946, guid: 0df15043362544c16a1100b6cce3c6a4,
         type: 3}
@@ -165,6 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5021786f5fce462382d474935f82da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInteracting: 0
 --- !u!114 &2955371666391632096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,25 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222b6735559940fdbc0db42b5c7fe2a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6446445434595057727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4184992757400934491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5dc541b8ac8f4a2e98eea0c90f0c61b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slots:
-  - {fileID: 0}
-  maxCapacity: 1
-  isInfinite: 0
-  showUp: 0
-  showUpPosition: {fileID: 0}
-  showUpObject: {fileID: 0}
+  countdown: {fileID: 0}
 --- !u!65 &4095406653722857087
 BoxCollider:
   m_ObjectHideFlags: 0

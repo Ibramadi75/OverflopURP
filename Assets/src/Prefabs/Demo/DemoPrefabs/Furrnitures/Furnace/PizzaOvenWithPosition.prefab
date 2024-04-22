@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0df15043362544c16a1100b6cce3c6a4,
         type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0df15043362544c16a1100b6cce3c6a4,
         type: 3}
@@ -322,11 +322,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShowUpPosition
       objectReference: {fileID: 0}
-    - target: {fileID: 6139044387438820277, guid: 66d7f4a0d32b24178ace990b735c9ba1,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7005311d4db024965a286247070edb25, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

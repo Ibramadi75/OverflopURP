@@ -11,9 +11,10 @@ public class ShopInteraction : AbstractInteraction
     [SerializeField] private GameManager gameManager;
     [SerializeField] private List<GameObject> instantiatedShopItems;
     [SerializeField] private GameObject shopItemTemplate;
+    [SerializeField] private ContainersManager containersManager;
 
-    [SerializeField] [SerializedDictionary("Shop item", "Infos (key: container, value: amount)")]
-    private SerializedDictionary<Ingredient, SerializedKeyValuePair<Slot, uint>> shopItems;
+    [SerializeField] [SerializedDictionary("Shop item", "Amount)")]
+    private SerializedDictionary<Ingredient, uint> shopItems;
 
     private Transform _shopUiContent;
 
@@ -43,8 +44,7 @@ public class ShopInteraction : AbstractInteraction
         foreach (var shopItem in shopItems)
         {
             var ingredientData = shopItem.Key.ingredientData;
-            var destinationSlot = shopItem.Value.Key;
-            var amount = shopItem.Value.Value;
+            var amount = shopItem.Value;
 
             var itemText = shopItemTemplate.transform.Find("name").GetComponent<TMP_Text>();
             itemText.text = $"{ingredientData.title} (x{amount})";
@@ -58,19 +58,23 @@ public class ShopInteraction : AbstractInteraction
 
             var button = instantiatedShopItem.GetComponent<Button>();
             button.onClick.AddListener(() =>
-                OnClickOnShopItem(shopItem.Key.gameObject, ingredientData.price, amount, destinationSlot));
+                OnClickOnShopItem(shopItem.Key.gameObject, ingredientData.price, amount));
 
             instantiatedShopItems.Add(instantiatedShopItem);
         }
     }
 
-    private void OnClickOnShopItem(GameObject ingredient, float price, uint amount, Slot destinationSlot)
+    private void OnClickOnShopItem(GameObject ingredientGameObject, float price, uint amount)
     {
+
+        Slot destinationSlot =
+            containersManager.GetContainerWithIngredient(ingredientGameObject.GetComponent<Ingredient>());
         var totalPrice = price * amount;
+        
         if (gameManager.RemoveMoney(totalPrice))
         {
             Debug.Log($"price: {price}, amount: {amount}");
-            destinationSlot.Put(ingredient, amount);
+            destinationSlot.Put(ingredientGameObject, amount);
         }
     }
 }
