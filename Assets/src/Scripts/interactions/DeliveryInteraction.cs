@@ -30,11 +30,10 @@ public class DeliveryInteraction : AbstractInteraction
         var ingredient = objectToDeliver.GetComponent<Ingredient>();
         var recipe = ingredient.ingredientData.recipes[0];
         if (recipe is not null)
-            if (_orderManager.LoseOrderOfRecipe(recipe.title))
-            {
-                _gameManager.AddMoney(recipe.price);
-                return true;
-            }
+        {
+            _orderManager.CompleteOrder(recipe);
+            return true;
+        }
 
         return false;
     }
