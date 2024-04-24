@@ -2,9 +2,21 @@ using UnityEngine;
 
 public class DeliveryInteraction : AbstractInteraction
 {
-    [SerializeField] private OrderManager _orderManager;
+    [SerializeField] private OrderManager orderManager;
     [SerializeField] private Transform showUpPosition;
 
+    private bool _isAvailable = true;
+
+    public bool IsAvailable()
+    {
+        return _isAvailable;
+    }
+
+    public void SetAvailable(bool isAvailable)
+    {
+        _isAvailable = isAvailable;
+    }
+    
     public Transform GetShowUpPosition()
     {
         return showUpPosition;
@@ -36,7 +48,7 @@ public class DeliveryInteraction : AbstractInteraction
         var recipe = ingredient.ingredientData.recipes[0];
         if (recipe is not null)
         {
-            _orderManager.CompleteOrder(recipe);
+            orderManager.CompleteOrder(recipe);
             return true;
         }
 

@@ -7,11 +7,27 @@ public class Order : MonoBehaviour
     
     [SerializeField] private Countdown countdown;
 
+    private DeliveryInteraction _deliveryInteraction;
     private Recipe _recipe;
 
     public Recipe GetRecipe()
     {
         return _recipe;
+    }
+
+    public void SetDeliveryInteraction(DeliveryInteraction deliveryInteraction)
+    {
+        _deliveryInteraction = deliveryInteraction;
+    }
+
+    public DeliveryInteraction GetDeliveryInteraction()
+    {
+        return _deliveryInteraction;
+    }
+
+    public void StopCountdown()
+    {
+        countdown.StopMoroutine();
     }
 
     void Start()

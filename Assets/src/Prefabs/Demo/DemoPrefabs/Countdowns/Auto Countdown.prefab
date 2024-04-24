@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7076290039093892750}
   - component: {fileID: 4668217794339025080}
   - component: {fileID: 3568826812953166961}
+  - component: {fileID: 7293804564503404366}
   m_Layer: 0
   m_Name: Auto Countdown
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7076290039093892750
 MeshFilter:
@@ -105,3 +106,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7293804564503404366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4901575030039323047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8e407081ed84059b86afc90bd6b45ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAuto: 1

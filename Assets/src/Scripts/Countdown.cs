@@ -64,17 +64,12 @@ public class Countdown : MonoBehaviour
         });
     }
 
-    public bool IsFinished()
-    {
-        return _remainingTime <= 0;
-    }
-
     private void ResumeMoroutine()
     {
         _countdownMoroutine.Run(false);
     }
 
-    private void StopMoroutine()
+    public void StopMoroutine()
     {
         _countdownMoroutine.Stop();
     }

@@ -2,17 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using Redcode.Moroutines;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class OrderManager : MonoBehaviour
 {
     [SerializeField] private float minSpawnTime;
     [SerializeField] private float maxSpawnTime;
     [SerializeField] private Order order;
-    [SerializeField] private DeliveryInteraction deliveryObject;
+    [SerializeField] private List<DeliveryInteraction> deliveryObjects;
+    [SerializeField] private PlayerController playerController;
     
     private Moroutine _orderSpawnerMoroutine;
     private List<Order> _activeOrders;
     private GameManager _gameManager;
+
+    void Awake()
+    {
+        _gameManager = GetComponent<GameManager>();
+        _activeOrders = new List<Order>();
+        _orderSpawnerMoroutine = Moroutine.Create(SpawnOrder()).Run();
+    }
+
+    void Update()
+    {
+        if (FindFirstAvailableDeliveryInteraction() != null)
+        {
+            _orderSpawnerMoroutine.Run();
+        }
+    }
 
     public void CompleteOrder(RecipeData recipeData)
     {
@@ -21,36 +38,55 @@ public class OrderManager : MonoBehaviour
             if (anOrder.GetRecipe().GetTitle().Equals(recipeData.title))
             {
                 _gameManager.AddMoney(recipeData.price);
-                _activeOrders.Remove(anOrder);
+                RemoveOrder(anOrder);
                 return;
             }
         }
-    }
-    
-    void Start()
-    {
-        _gameManager = GetComponent<GameManager>();
-        _activeOrders = new List<Order>();
-        _orderSpawnerMoroutine = Moroutine.Create(SpawnOrder()).Run();
     }
 
     private void OnAnOrderExpire(Order expiredOrder)
     {
         _activeOrders.Remove(expiredOrder);
         _gameManager.RemoveMoney(expiredOrder.GetRecipe().GetPrice());
-        Destroy(expiredOrder.gameObject);
-        _orderSpawnerMoroutine.Run();
+        RemoveOrder(expiredOrder);
+    }
+    
+    private void CreateOrder(DeliveryInteraction deliveryInteraction)
+    {
+        Vector3 showUpPosition = deliveryInteraction.GetShowUpPosition().position;
+        Order newOrder = Instantiate(order.gameObject, showUpPosition, Quaternion.identity).GetComponent<Order>();
+        newOrder.transform.parent = deliveryInteraction.transform;
+        newOrder.GetComponent<LookAtTarget>().target = playerController.transform;
+        _activeOrders.Add(newOrder);
+        newOrder.onExpire += OnAnOrderExpire;
+        deliveryInteraction.SetAvailable(false);
+        newOrder.SetDeliveryInteraction(deliveryInteraction);
+    }
+
+    private void RemoveOrder(Order anOrder)
+    {
+        _activeOrders.Remove(anOrder);
+        anOrder.StopCountdown();
+        anOrder.GetDeliveryInteraction().SetAvailable(true);
+        Destroy(anOrder.gameObject);
+    }
+
+    private DeliveryInteraction FindFirstAvailableDeliveryInteraction()
+    {
+        foreach (DeliveryInteraction deliveryInteraction in deliveryObjects)
+        {
+            if (deliveryInteraction.IsAvailable())
+                return deliveryInteraction;
+        }
+
+        return null;
     }
     
     private IEnumerable SpawnOrder()
     {
-        if (_activeOrders.Count == 1) _orderSpawnerMoroutine.Stop();
         float waitTime = Random.Range(minSpawnTime, maxSpawnTime);
+        DeliveryInteraction deliveryInteraction = FindFirstAvailableDeliveryInteraction();
         yield return new WaitForSeconds(waitTime);
-        Vector3 showUpPosition = deliveryObject.GetShowUpPosition().position;
-        Order newOrder = Instantiate(order.gameObject, showUpPosition, Quaternion.identity).GetComponent<Order>();
-        newOrder.transform.parent = deliveryObject.transform;
-        _activeOrders.Add(newOrder);
-        newOrder.onExpire += OnAnOrderExpire;
+        CreateOrder(deliveryInteraction);
     }
 }
