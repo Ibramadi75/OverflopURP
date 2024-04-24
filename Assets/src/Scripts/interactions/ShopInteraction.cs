@@ -17,7 +17,7 @@ public class ShopInteraction : AbstractInteraction
 
     private Transform _shopUiContent;
 
-    private void Start()
+    void Start()
     {
         _shopUiContent = shopUi.GetComponentInChildren<ContentSizeFitter>().transform;
         FillShop();

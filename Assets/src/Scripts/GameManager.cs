@@ -6,12 +6,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float money;
     [SerializeField] private TMP_Text moneyText;
 
-    private void Update()
+    void Update()
     {
         UpdateMoneyText();
     }
 
-    private void UpdateMoneyText()
+    void UpdateMoneyText()
     {
         moneyText.text = $"{money:F2}";
     }

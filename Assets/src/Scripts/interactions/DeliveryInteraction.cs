@@ -2,9 +2,26 @@ using UnityEngine;
 
 public class DeliveryInteraction : AbstractInteraction
 {
-    [SerializeField] private GameManager _gameManager;
-    [SerializeField] private OrderManager _orderManager;
+    [SerializeField] private OrderManager orderManager;
+    [SerializeField] private Transform showUpPosition;
 
+    private bool _isAvailable = true;
+
+    public bool IsAvailable()
+    {
+        return _isAvailable;
+    }
+
+    public void SetAvailable(bool isAvailable)
+    {
+        _isAvailable = isAvailable;
+    }
+    
+    public Transform GetShowUpPosition()
+    {
+        return showUpPosition;
+    }
+    
     public override void MainInteraction(GameObject author)
     {
         var authorSlot = author.GetComponent<Slot>();
@@ -30,11 +47,10 @@ public class DeliveryInteraction : AbstractInteraction
         var ingredient = objectToDeliver.GetComponent<Ingredient>();
         var recipe = ingredient.ingredientData.recipes[0];
         if (recipe is not null)
-            if (_orderManager.LoseOrderOfRecipe(recipe.title))
-            {
-                _gameManager.AddMoney(recipe.price);
-                return true;
-            }
+        {
+            orderManager.CompleteOrder(recipe);
+            return true;
+        }
 
         return false;
     }

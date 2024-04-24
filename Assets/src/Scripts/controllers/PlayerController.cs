@@ -10,13 +10,13 @@ public class PlayerController : MonoBehaviour
 
     public Camera PlayerCam { get; private set; }
 
-    private void Start()
+    void Start()
     {
         PlayerCam = GetComponentInChildren<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void Update()
+    void Update()
     {
         if (_isInUi) return;
 

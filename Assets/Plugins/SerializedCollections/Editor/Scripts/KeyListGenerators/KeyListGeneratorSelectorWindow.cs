@@ -106,7 +106,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
             _modificationType = modificationType;
         }
 
-        private void UpdateDetailsText()
+        void UpdateDetailsText()
         {
             var enumerable = _generator.GetKeys(_targetType);
             int count = 0;
@@ -154,7 +154,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
             UpdateGeneratorAndEditorIfNeeded();
         }
 
-        private void UpdateGeneratorAndEditorIfNeeded()
+        void UpdateGeneratorAndEditorIfNeeded()
         {
             var targetType = _generatorsData[_selectedIndex].GeneratorType;
             if (_generator != null && _generator.GetType() == targetType)

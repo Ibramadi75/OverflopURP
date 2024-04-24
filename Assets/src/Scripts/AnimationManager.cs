@@ -5,12 +5,12 @@ public class AnimationManager : MonoBehaviour
     public bool playAnimation;
     private Animator animator;
 
-    private void Start()
+    void Start()
     {
         animator = GetComponentInParent<Animator>();
     }
 
-    private void Update()
+    void Update()
     {
         if (playAnimation && animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {

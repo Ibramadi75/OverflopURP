@@ -11,7 +11,7 @@ public class Slot : MonoBehaviour
     [SerializeField] private Transform showUpPosition;
     [SerializeField] private GameObject showUpObject;
 
-    private void Start()
+    void Start()
     {
         if (isInfinite)
         {
@@ -20,7 +20,7 @@ public class Slot : MonoBehaviour
         }
     }
 
-    private void Update()
+    void Update()
     {
         if (showUp && showUpObject != null && showUpPosition != null && noGravity)
             showUpObject.transform.position = showUpPosition.transform.position;

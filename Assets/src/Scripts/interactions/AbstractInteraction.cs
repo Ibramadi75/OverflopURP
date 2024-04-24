@@ -4,7 +4,7 @@ public abstract class AbstractInteraction : MonoBehaviour
 {
     protected Slot slot;
 
-    private void Start()
+    void Start()
     {
         slot = GetComponent<Slot>();
     }

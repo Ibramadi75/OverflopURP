@@ -1,134 +1,92 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using Redcode.Moroutines;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class OrderManager : MonoBehaviour
 {
-    [SerializeField] private float yOffset = -0.18f;
-    [SerializeField] private GameObject anOrderPrefab;
-    [SerializeField] private GameManager gameManager;
+    [SerializeField] private float minSpawnTime;
+    [SerializeField] private float maxSpawnTime;
+    [SerializeField] private Order order;
+    [SerializeField] private List<DeliveryInteraction> deliveryObjects;
+    [SerializeField] private PlayerController playerController;
+    
+    private Moroutine _orderSpawnerMoroutine;
+    private List<Order> _activeOrders;
+    private GameManager _gameManager;
 
-    private Dictionary<int, Order> _activeOrders;
-    private int _counter;
-    private Transform _screenUi;
-
-    // Start is called before the first frame update
-    private void Start()
+    void Awake()
     {
-        _screenUi = transform.GetChild(0);
-        _activeOrders = new Dictionary<int, Order>
-        {
-            [0] = null
-        };
-
-        StartCoroutine(SpawnOrderPeriodically());
+        _gameManager = GetComponent<GameManager>();
+        _activeOrders = new List<Order>();
+        _orderSpawnerMoroutine = Moroutine.Create(SpawnOrder()).Run();
     }
 
-    // Update is called once per frame
-    private void Update()
+    void Update()
     {
-        if (AnyOrderExpired())
+        if (FindFirstAvailableDeliveryInteraction() != null)
         {
-            var expiredOrderKeys = new List<int>();
-            var expiredOrderObjects = new List<Order>();
-
-            foreach (var activeOrder in _activeOrders)
-                if (activeOrder.Value is not null && activeOrder.Value.HasExpired())
-                {
-                    expiredOrderObjects.Add(activeOrder.Value);
-                    expiredOrderKeys.Add(activeOrder.Key);
-                }
-
-            LoseOrders(expiredOrderKeys, expiredOrderObjects);
-            RearrangeOrders();
+            _orderSpawnerMoroutine.Run();
         }
     }
 
-    public bool LoseOrderOfRecipe(string recipeTitle)
+    public void CompleteOrder(RecipeData recipeData)
     {
-        if (AnyOrderOfRecipe(recipeTitle))
+        foreach (Order anOrder in _activeOrders)
         {
-            var active = IndexOfOrderRecipe(recipeTitle);
-            if (active != -1)
+            if (anOrder.GetRecipe().GetTitle().Equals(recipeData.title))
             {
-                var activeOrder = _activeOrders[active];
-                Destroy(activeOrder.gameObject);
-                _activeOrders[active] = null;
-                RearrangeOrders();
-                return true;
+                _gameManager.AddMoney(recipeData.price);
+                RemoveOrder(anOrder);
+                return;
             }
         }
-
-        return false;
     }
 
-    private IEnumerator SpawnOrderPeriodically()
+    private void OnAnOrderExpire(Order expiredOrder)
     {
-        while (true)
+        _activeOrders.Remove(expiredOrder);
+        _gameManager.RemoveMoney(expiredOrder.GetRecipe().GetPrice());
+        RemoveOrder(expiredOrder);
+    }
+    
+    private void CreateOrder(DeliveryInteraction deliveryInteraction)
+    {
+        Vector3 showUpPosition = deliveryInteraction.GetShowUpPosition().position;
+        Order newOrder = Instantiate(order.gameObject, showUpPosition, Quaternion.identity).GetComponent<Order>();
+        newOrder.transform.parent = deliveryInteraction.transform;
+        newOrder.GetComponent<LookAtTarget>().target = playerController.transform;
+        _activeOrders.Add(newOrder);
+        newOrder.onExpire += OnAnOrderExpire;
+        deliveryInteraction.SetAvailable(false);
+        newOrder.SetDeliveryInteraction(deliveryInteraction);
+    }
+
+    private void RemoveOrder(Order anOrder)
+    {
+        _activeOrders.Remove(anOrder);
+        anOrder.StopCountdown();
+        anOrder.GetDeliveryInteraction().SetAvailable(true);
+        Destroy(anOrder.gameObject);
+    }
+
+    private DeliveryInteraction FindFirstAvailableDeliveryInteraction()
+    {
+        foreach (DeliveryInteraction deliveryInteraction in deliveryObjects)
         {
-            var position = FindFirstAvailablePosition();
-            if (position != -1)
-                CreateOrder(FindFirstAvailablePosition());
-            yield return new WaitForSeconds(Random.Range(6f, 12f));
+            if (deliveryInteraction.IsAvailable())
+                return deliveryInteraction;
         }
+
+        return null;
     }
-
-    private void CreateOrder(int positionIndex)
+    
+    private IEnumerable SpawnOrder()
     {
-        var order = Instantiate(anOrderPrefab, _screenUi);
-        order.transform.localPosition -= Vector3.down * yOffset * positionIndex;
-        _activeOrders[positionIndex] = order.GetComponent<Order>();
-    }
-
-    private void LoseOrders(List<int> keys, List<Order> values)
-    {
-        keys.ForEach(key => _activeOrders[key] = null);
-        values.ForEach(order => Destroy(order.gameObject));
-        gameManager.RemoveMoney(_activeOrders[0].recipe.GetPrice());
-    }
-
-    private void RearrangeOrders()
-    {
-        for (var i = 0; i < _activeOrders.Count; i++)
-            if (_activeOrders[i] is not null)
-            {
-                var newPosition = i - 1;
-                if (newPosition >= 0)
-                {
-                    _activeOrders[newPosition] = _activeOrders[i];
-                    _activeOrders[newPosition].transform.localPosition -= Vector3.up * yOffset;
-                    _activeOrders[i] = null;
-                }
-            }
-    }
-
-    private bool AnyOrderExpired()
-    {
-        return _activeOrders.Any(activeOrder => activeOrder.Value is not null && activeOrder.Value.HasExpired());
-    }
-
-    private int FindFirstAvailablePosition()
-    {
-        foreach (var activeOrder in _activeOrders)
-            if (activeOrder.Value is null)
-                return activeOrder.Key;
-        return -1;
-    }
-
-    private int IndexOfOrderRecipe(string recipeTitle)
-    {
-        foreach (var activeOrder in _activeOrders)
-            if (activeOrder.Value is not null)
-                if (activeOrder.Value.IsRecipeTitleIs(recipeTitle))
-                    return activeOrder.Key;
-
-        return -1;
-    }
-
-    private bool AnyOrderOfRecipe(string recipeTitle)
-    {
-        return _activeOrders.Any(activeOrder =>
-            activeOrder.Value is not null && activeOrder.Value.IsRecipeTitleIs(recipeTitle));
+        float waitTime = Random.Range(minSpawnTime, maxSpawnTime);
+        DeliveryInteraction deliveryInteraction = FindFirstAvailableDeliveryInteraction();
+        yield return new WaitForSeconds(waitTime);
+        CreateOrder(deliveryInteraction);
     }
 }
