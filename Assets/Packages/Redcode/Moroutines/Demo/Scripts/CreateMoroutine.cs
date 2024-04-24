@@ -5,7 +5,7 @@ namespace Redcode.Moroutines.Demo
 {
     public class CreateMoroutine : MonoBehaviour
     {
-        private void Start() => Moroutine.Run(TickEnumerable());
+        void Start() => Moroutine.Run(TickEnumerable());
 
         private IEnumerable TickEnumerable()
         {

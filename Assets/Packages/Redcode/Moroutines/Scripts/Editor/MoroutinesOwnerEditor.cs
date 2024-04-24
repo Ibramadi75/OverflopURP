@@ -23,7 +23,7 @@ namespace Redcode.Moroutines.Editor
 
         private void OnDisable() => EditorApplication.update -= Update;
 
-        private void Update() => EditorUtility.SetDirty(serializedObject.targetObject);
+        void Update() => EditorUtility.SetDirty(serializedObject.targetObject);
         public override void OnInspectorGUI()
         {
             serializedObject.Update();

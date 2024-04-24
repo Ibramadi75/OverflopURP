@@ -63,7 +63,7 @@ namespace AYellowpaper.SerializedCollections.Editor.States
             return this;
         }
 
-        private void UpdateSearch()
+        void UpdateSearch()
         {
             if (_lastSearch != Drawer.SearchText)
             {

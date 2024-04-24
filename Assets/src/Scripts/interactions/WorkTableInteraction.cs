@@ -7,7 +7,7 @@ public class WorkTableInteraction : AbstractInteraction
     private AudioSource _audioSource;
     private Ingredient _ingredient;
 
-    private void Awake()
+    void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
         countdown.onComplete += OnCountdownComplete;

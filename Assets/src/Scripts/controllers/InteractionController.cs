@@ -6,12 +6,12 @@ public class InteractionController : MonoBehaviour
     private Color _originalColor;
     private PlayerController _playerController;
 
-    private void Start()
+    void Start()
     {
         _playerController = GetComponent<PlayerController>();
     }
 
-    private void Update()
+    void Update()
     {
         if (Physics.Raycast(_playerController.PlayerCam.transform.position,
                 _playerController.PlayerCam.transform.forward, out var hit, 2, 1))

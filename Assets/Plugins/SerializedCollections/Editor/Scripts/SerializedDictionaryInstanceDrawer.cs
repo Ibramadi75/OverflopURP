@@ -154,7 +154,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             return Mathf.Max(SCEditorUtility.CalculateHeight(keyProperty, drawKeyAsList), SCEditorUtility.CalculateHeight(valueProperty, drawValueAsList));
         }
 
-        private void UpdateAfterInput()
+        void UpdateAfterInput()
         {
             InitializeSettingsIfNeeded();
             ProcessState();
@@ -227,7 +227,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             SCEditorUtility.SavePropertyData(ListProperty, _propertyData);
         }
 
-        private void UpdateSingleEditing()
+        void UpdateSingleEditing()
         {
             if (ListProperty.serializedObject.isEditingMultipleObjects && _singleEditingData.IsValid)
                 _singleEditingData.Invalidate();
@@ -244,7 +244,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             return (IKeyable)propInfo.GetValue(dictionary);
         }
 
-        private void UpdatePaging()
+        void UpdatePaging()
         {
             var elementsPerPage = EditorUserSettings.Get().ElementsPerPage;
             _pagingElement.PageCount = Mathf.Max(1, Mathf.CeilToInt((float)_activeState.ListSize / elementsPerPage));

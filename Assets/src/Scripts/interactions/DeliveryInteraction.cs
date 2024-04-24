@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class DeliveryInteraction : AbstractInteraction
 {
-    [SerializeField] private GameManager _gameManager;
     [SerializeField] private OrderManager _orderManager;
+    [SerializeField] private Transform showUpPosition;
 
+    public Transform GetShowUpPosition()
+    {
+        return showUpPosition;
+    }
+    
     public override void MainInteraction(GameObject author)
     {
         var authorSlot = author.GetComponent<Slot>();

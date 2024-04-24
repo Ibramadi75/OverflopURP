@@ -6,7 +6,7 @@ public class MeltInteraction : AbstractInteraction
 
     private Ingredient _ingredient;
 
-    private void Awake()
+    void Awake()
     {
         countdown.onComplete += OnCountdownComplete;
     }

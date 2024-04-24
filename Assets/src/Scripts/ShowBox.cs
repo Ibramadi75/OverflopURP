@@ -4,7 +4,7 @@ public class ShowBox : MonoBehaviour
 {
     public Mesh newMesh;
 
-    private void Start()
+    void Start()
     {
         var childFilters = GetComponentsInChildren<MeshFilter>();
 

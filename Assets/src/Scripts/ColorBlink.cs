@@ -10,12 +10,12 @@ public class ColorBlink : MonoBehaviour
 
     private Renderer rend;
 
-    private void Start()
+    void Start()
     {
         rend = GetComponent<Renderer>();
     }
 
-    private void Update()
+    void Update()
     {
         if (!isBlinking) StartCoroutine(Blink());
     }

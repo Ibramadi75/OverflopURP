@@ -34,30 +34,20 @@ public class OrderManager : MonoBehaviour
         _orderSpawnerMoroutine = Moroutine.Create(SpawnOrder()).Run();
     }
 
-    private Transform FindShowUpPosition(DeliveryInteraction deliveryInteraction)
-    {
-        foreach (Transform child in deliveryInteraction.transform)
-        {
-            if (child.CompareTag("ShowUpPosition"))
-                return child;
-        }
-
-        return null;
-    }
-
     private void OnAnOrderExpire(Order expiredOrder)
     {
         _activeOrders.Remove(expiredOrder);
-        _gameManager.RemoveMoney(order.GetRecipe().GetPrice());
+        _gameManager.RemoveMoney(expiredOrder.GetRecipe().GetPrice());
+        Destroy(expiredOrder.gameObject);
         _orderSpawnerMoroutine.Run();
     }
     
-    private IEnumerator SpawnOrder()
+    private IEnumerable SpawnOrder()
     {
         if (_activeOrders.Count == 1) _orderSpawnerMoroutine.Stop();
         float waitTime = Random.Range(minSpawnTime, maxSpawnTime);
         yield return new WaitForSeconds(waitTime);
-        Vector3 showUpPosition = FindShowUpPosition(deliveryObject).position;
+        Vector3 showUpPosition = deliveryObject.GetShowUpPosition().position;
         Order newOrder = Instantiate(order.gameObject, showUpPosition, Quaternion.identity).GetComponent<Order>();
         newOrder.transform.parent = deliveryObject.transform;
         _activeOrders.Add(newOrder);

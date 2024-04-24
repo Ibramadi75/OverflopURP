@@ -18,13 +18,13 @@ public class Countdown : MonoBehaviour
     private float _xDefaultLocalScale;
     public OnComplete onComplete;
 
-    private void Awake()
+    void Awake()
     {
         _xDefaultLocalScale = transform.localScale.x;
         _xDefaultLocalPosition = transform.localPosition.x;
     }
 
-    private void Update()
+    void Update()
     {
         if (isAuto) return;
         if (_isTriggering)
