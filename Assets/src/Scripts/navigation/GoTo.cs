@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using DG.Tweening;
 using UnityEngine;
 
@@ -9,6 +10,11 @@ public class GoTo : MonoBehaviour
 
     private int _currentCheckpoint = -1;
     private bool _isMoving;
+
+    public void AddCheckpoint(Transform checkpoint)
+    {
+        checkpoints.Add(checkpoint);
+    }
     
     void Update()
     {
