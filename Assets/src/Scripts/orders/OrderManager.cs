@@ -9,13 +9,14 @@ public class OrderManager : MonoBehaviour
     [SerializeField] private float minSpawnTime;
     [SerializeField] private float maxSpawnTime;
     [SerializeField] private Order order;
+    [SerializeField] private GoTo npc;
     [SerializeField] private List<DeliveryInteraction> deliveryObjects;
     [SerializeField] private PlayerController playerController;
     
     private Moroutine _orderSpawnerMoroutine;
     private List<Order> _activeOrders;
     private GameManager _gameManager;
-
+    
     void Awake()
     {
         _gameManager = GetComponent<GameManager>();
@@ -46,6 +47,7 @@ public class OrderManager : MonoBehaviour
 
     private void OnAnOrderExpire(Order expiredOrder)
     {
+        expiredOrder.SetNpcToFirstPoint();
         _activeOrders.Remove(expiredOrder);
         _gameManager.RemoveMoney(expiredOrder.GetRecipe().GetPrice());
         RemoveOrder(expiredOrder);
@@ -55,20 +57,36 @@ public class OrderManager : MonoBehaviour
     {
         Vector3 showUpPosition = deliveryInteraction.GetShowUpPosition().position;
         Order newOrder = Instantiate(order.gameObject, showUpPosition, Quaternion.identity).GetComponent<Order>();
+        newOrder.gameObject.SetActive(false);
         newOrder.transform.parent = deliveryInteraction.transform;
         newOrder.GetComponent<LookAtTarget>().target = playerController.transform;
         _activeOrders.Add(newOrder);
         newOrder.onExpire += OnAnOrderExpire;
         deliveryInteraction.SetAvailable(false);
         newOrder.SetDeliveryInteraction(deliveryInteraction);
+        CreateGoToNPC(newOrder);
     }
 
     private void RemoveOrder(Order anOrder)
     {
-        _activeOrders.Remove(anOrder);
         anOrder.StopCountdown();
         anOrder.GetDeliveryInteraction().SetAvailable(true);
         Destroy(anOrder.gameObject);
+    }
+    
+    private void CreateGoToNPC(Order anOrder)
+    {
+        GoTo instantiatedNpc = Instantiate(npc, npc.GetSpawnPoint(), Quaternion.identity);
+        instantiatedNpc.AddCheckpoint(anOrder.GetDeliveryInteraction().GetSitPosition());
+        instantiatedNpc.SetOrder(anOrder);
+        instantiatedNpc.onLastCheckpointReached += OnNpcReachDelivery;
+        instantiatedNpc.gameObject.SetActive(true);
+        anOrder.SetGoToNpc(instantiatedNpc);
+    }
+
+    private void OnNpcReachDelivery(GoTo instantiatedNpc)
+    {
+        instantiatedNpc.GetOrder().gameObject.SetActive(true);
     }
 
     private DeliveryInteraction FindFirstAvailableDeliveryInteraction()

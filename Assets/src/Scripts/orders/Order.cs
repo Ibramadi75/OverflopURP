@@ -7,12 +7,24 @@ public class Order : MonoBehaviour
     
     [SerializeField] private Countdown countdown;
 
+    private GoTo _npc;
     private DeliveryInteraction _deliveryInteraction;
     private Recipe _recipe;
 
     public Recipe GetRecipe()
     {
         return _recipe;
+    }
+
+    public void SetGoToNpc(GoTo npc)
+    {
+        _npc = npc;
+    }
+
+    public void SetNpcToFirstPoint()
+    {
+        _npc.ReverseCheckpointsOrder();
+        _npc.onLastCheckpointReached = null;
     }
 
     public void SetDeliveryInteraction(DeliveryInteraction deliveryInteraction)
