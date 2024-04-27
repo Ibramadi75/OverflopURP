@@ -4,6 +4,7 @@ public class DeliveryInteraction : AbstractInteraction
 {
     [SerializeField] private OrderManager orderManager;
     [SerializeField] private Transform showUpPosition;
+    [SerializeField] private Transform sitPosition;
 
     private bool _isAvailable = true;
 
@@ -20,6 +21,11 @@ public class DeliveryInteraction : AbstractInteraction
     public Transform GetShowUpPosition()
     {
         return showUpPosition;
+    }
+
+    public Transform GetSitPosition()
+    {
+        return sitPosition;
     }
     
     public override void MainInteraction(GameObject author)
