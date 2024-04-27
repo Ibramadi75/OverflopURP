@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using DG.Tweening;
+using Redcode.Moroutines;
 using UnityEngine;
 
 public class GoTo : MonoBehaviour
 {
     [SerializeField] private List<Transform> checkpoints;
 
+    private Moroutine _reachCheckpointMoroutine;
     private int _currentCheckpoint = -1;
     private bool _isMoving;
 
@@ -28,7 +29,8 @@ public class GoTo : MonoBehaviour
     private void ReachNextCheckpoint()
     {
         _isMoving = true;
-        StartCoroutine(ReachCheckpoint(checkpoints[_currentCheckpoint]));
+        Transform checkpoint = checkpoints[_currentCheckpoint];
+        _reachCheckpointMoroutine = Moroutine.Create(ReachCheckpoint(checkpoint)).Run(false);
     }
 
     private IEnumerator ReachCheckpoint(Transform checkpoint)
