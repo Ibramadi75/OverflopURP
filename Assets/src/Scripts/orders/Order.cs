@@ -7,12 +7,34 @@ public class Order : MonoBehaviour
     
     [SerializeField] private Countdown countdown;
 
+    private GoTo _npc;
     private DeliveryInteraction _deliveryInteraction;
     private Recipe _recipe;
 
+    void Start()
+    {
+        _recipe = GetComponent<Recipe>();
+
+        countdown.onComplete += OnCountdownComplete;
+        countdown.SetTime(_recipe.GetBaseExpiration());
+        countdown.gameObject.SetActive(true);
+    }
+    
     public Recipe GetRecipe()
     {
         return _recipe;
+    }
+
+    public void SetGoToNpc(GoTo npc)
+    {
+        _npc = npc;
+    }
+
+    public void SetNpcToFirstPoint()
+    {
+        _npc.Stand();
+        _npc.ReverseCheckpointsOrder();
+        _npc.onLastCheckpointReached = null;
     }
 
     public void SetDeliveryInteraction(DeliveryInteraction deliveryInteraction)
@@ -28,15 +50,6 @@ public class Order : MonoBehaviour
     public void StopCountdown()
     {
         countdown.StopMoroutine();
-    }
-
-    void Start()
-    {
-        _recipe = GetComponent<Recipe>();
-
-        countdown.onComplete += OnCountdownComplete;
-        countdown.SetTime(_recipe.GetBaseExpiration());
-        countdown.gameObject.SetActive(true);
     }
 
     private void OnCountdownComplete()
