@@ -11,6 +11,15 @@ public class Order : MonoBehaviour
     private DeliveryInteraction _deliveryInteraction;
     private Recipe _recipe;
 
+    void Start()
+    {
+        _recipe = GetComponent<Recipe>();
+
+        countdown.onComplete += OnCountdownComplete;
+        countdown.SetTime(_recipe.GetBaseExpiration());
+        countdown.gameObject.SetActive(true);
+    }
+    
     public Recipe GetRecipe()
     {
         return _recipe;
@@ -23,6 +32,7 @@ public class Order : MonoBehaviour
 
     public void SetNpcToFirstPoint()
     {
+        _npc.Stand();
         _npc.ReverseCheckpointsOrder();
         _npc.onLastCheckpointReached = null;
     }
@@ -40,15 +50,6 @@ public class Order : MonoBehaviour
     public void StopCountdown()
     {
         countdown.StopMoroutine();
-    }
-
-    void Start()
-    {
-        _recipe = GetComponent<Recipe>();
-
-        countdown.onComplete += OnCountdownComplete;
-        countdown.SetTime(_recipe.GetBaseExpiration());
-        countdown.gameObject.SetActive(true);
     }
 
     private void OnCountdownComplete()

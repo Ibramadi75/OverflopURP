@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Redcode.Moroutines;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -86,6 +87,8 @@ public class OrderManager : MonoBehaviour
 
     private void OnNpcReachDelivery(GoTo instantiatedNpc)
     {
+        instantiatedNpc.transform.DOLookAt(instantiatedNpc.GetOrder().GetDeliveryInteraction().GetShowUpPosition().transform.position, 0f, AxisConstraint.Y);
+        instantiatedNpc.Sit();
         instantiatedNpc.GetOrder().gameObject.SetActive(true);
     }
 
