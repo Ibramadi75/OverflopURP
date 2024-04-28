@@ -40,6 +40,7 @@ public class OrderManager : MonoBehaviour
             if (anOrder.GetRecipe().GetTitle().Equals(recipeData.title))
             {
                 _gameManager.AddMoney(recipeData.price);
+                anOrder.SetNpcToFirstPoint();
                 RemoveOrder(anOrder);
                 return;
             }
