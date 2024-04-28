@@ -31,6 +31,7 @@ namespace PedestrianSystem{
 		void Start(){
 
 			Animator anim = this.GetComponent<Animator> ();
+			if (anim == null) return;
 
 			switch (movementType) {
 
