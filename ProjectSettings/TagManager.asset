@@ -11,6 +11,10 @@ TagManager:
   - Worktable
   - Baketable
   - ShowUpPosition
+  - Waypoint
+  - Pedestrian
+  - VehicleDirectionBlock
+  - Car
   layers:
   - Default
   - TransparentFX
