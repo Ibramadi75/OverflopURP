@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7004000486894010634}
   - component: {fileID: 8407107321549026391}
   - component: {fileID: 4567959586326267795}
+  - component: {fileID: 5508450128151338511}
   m_Layer: 0
   m_Name: VehicleDirectionChanger -- Right
   m_TagString: VehicleDirectionBlock
@@ -35,7 +36,7 @@ Transform:
   m_Children:
   - {fileID: 4789766245035513160}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1302876048775971890
 MeshFilter:
@@ -148,6 +149,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5508450128151338511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3571002718671736232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 514e281cdd76749b9bcefaef7b1291d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5231641758543026019
 GameObject:
   m_ObjectHideFlags: 0
