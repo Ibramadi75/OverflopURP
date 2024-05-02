@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using Redcode.Moroutines;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class GoTo : MonoBehaviour
