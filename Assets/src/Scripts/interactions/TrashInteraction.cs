@@ -22,4 +22,8 @@ public class TrashInteraction : AbstractInteraction
     protected override void OnCountdownComplete()
     {
     }
+
+    protected override void WhileCountdownRunning()
+    {
+    }
 }

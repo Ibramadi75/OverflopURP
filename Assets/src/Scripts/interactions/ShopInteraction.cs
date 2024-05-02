@@ -38,6 +38,10 @@ public class ShopInteraction : AbstractInteraction
     {
     }
 
+    protected override void WhileCountdownRunning()
+    {
+    }
+
     private void FillShop()
     {
         foreach (var shopItem in shopItems)

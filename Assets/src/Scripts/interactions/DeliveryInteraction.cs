@@ -48,6 +48,10 @@ public class DeliveryInteraction : AbstractInteraction
     {
     }
 
+    protected override void WhileCountdownRunning()
+    {
+    }
+
     private bool Deliver(GameObject objectToDeliver)
     {
         var ingredient = objectToDeliver.GetComponent<Ingredient>();

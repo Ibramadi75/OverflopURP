@@ -12,4 +12,5 @@ public abstract class AbstractInteraction : MonoBehaviour
     public abstract void MainInteraction(GameObject author);
     public abstract void SecondaryInteraction();
     protected abstract void OnCountdownComplete();
+    protected abstract void WhileCountdownRunning();
 }

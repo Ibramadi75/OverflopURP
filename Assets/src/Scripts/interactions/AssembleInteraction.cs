@@ -55,4 +55,8 @@ public class AssembleInteraction : AbstractInteraction
     protected override void OnCountdownComplete()
     {
     }
+
+    protected override void WhileCountdownRunning()
+    {
+    }
 }

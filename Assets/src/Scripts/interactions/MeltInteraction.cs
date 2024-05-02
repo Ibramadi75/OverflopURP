@@ -4,11 +4,14 @@ public class MeltInteraction : AbstractInteraction
 {
     [SerializeField] private Countdown countdown;
 
+    private AudioSource _audioSource;
     private Ingredient _ingredient;
 
     void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         countdown.onComplete += OnCountdownComplete;
+        countdown.whileRunning += WhileCountdownRunning;
     }
 
     public override void MainInteraction(GameObject author)
@@ -40,5 +43,13 @@ public class MeltInteraction : AbstractInteraction
     {
         slot.Clear();
         slot.Put(_ingredient.ingredientData.meltedPrefab);
+        if (!_audioSource.isPlaying) return;
+        _audioSource.Stop();
+    }
+
+    protected override void WhileCountdownRunning()
+    {
+        if (_audioSource.isPlaying) return;
+        _audioSource.Play();
     }
 }
