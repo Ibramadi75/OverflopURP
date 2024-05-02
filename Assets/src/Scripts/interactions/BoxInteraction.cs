@@ -16,4 +16,8 @@ public class BoxInteraction : AbstractInteraction
     protected override void OnCountdownComplete()
     {
     }
+
+    protected override void WhileCountdownRunning()
+    {
+    }
 }

@@ -6,6 +6,8 @@ public class Countdown : MonoBehaviour
 {
     public delegate void OnComplete();
 
+    public delegate void WhileRunning();
+
     [SerializeField] private bool isAuto;
     private float _baseTime;
     private Moroutine _countdownMoroutine;
@@ -16,7 +18,9 @@ public class Countdown : MonoBehaviour
     private float _remainingTime;
     private float _xDefaultLocalPosition;
     private float _xDefaultLocalScale;
+    
     public OnComplete onComplete;
+    public WhileRunning whileRunning;
 
     void Awake()
     {
@@ -57,7 +61,7 @@ public class Countdown : MonoBehaviour
     private void CreateMoroutine()
     {
         _remainingTime = _baseTime;
-        _countdownMoroutine = Moroutine.Create(CountdownRunner()).OnCompleted(c =>
+        _countdownMoroutine = Moroutine.Create(CountdownRunner()).OnRunning(c => whileRunning?.Invoke()).OnCompleted(c =>
         {
             onComplete?.Invoke();
             gameObject.SetActive(false);

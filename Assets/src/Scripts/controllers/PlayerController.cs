@@ -6,12 +6,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float sensitivity = 10.0f;
     private bool _isInUi;
 
+    private AudioSource _audioSource;
     private float _rotationX;
 
     public Camera PlayerCam { get; private set; }
 
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         PlayerCam = GetComponentInChildren<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -50,6 +52,12 @@ public class PlayerController : MonoBehaviour
                               PlayerCam.transform.eulerAngles.y;
             var moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             transform.position += moveDirection.normalized * speed * Time.deltaTime;
+
+            if (_audioSource.isPlaying) return;
+            _audioSource.Play();
+        }
+        else if (_audioSource.isPlaying) {
+            _audioSource.Stop();
         }
     }
 

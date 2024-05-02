@@ -11,6 +11,7 @@ public class WorkTableInteraction : AbstractInteraction
     {
         _audioSource = GetComponent<AudioSource>();
         countdown.onComplete += OnCountdownComplete;
+        countdown.whileRunning += WhileCountdownRunning;
     }
 
     public override void MainInteraction(GameObject author)
@@ -48,5 +49,11 @@ public class WorkTableInteraction : AbstractInteraction
         var cutObject = _ingredient.ingredientData.cutPrefab;
         slot.Clear();
         slot.Put(cutObject);
+    }
+
+    protected override void WhileCountdownRunning()
+    {
+        if (_audioSource.isPlaying) return;
+        _audioSource.Play();
     }
 }
