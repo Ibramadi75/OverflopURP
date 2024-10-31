@@ -13,6 +13,8 @@ public class OrderManager : MonoBehaviour
     [SerializeField] private GoTo npc;
     [SerializeField] private List<DeliveryInteraction> deliveryObjects;
     [SerializeField] private PlayerController playerController;
+
+    public int orderCount = 0;
     
     private Moroutine _orderSpawnerMoroutine;
     private List<Order> _activeOrders;
@@ -91,6 +93,12 @@ public class OrderManager : MonoBehaviour
         instantiatedNpc.transform.DOLookAt(instantiatedNpc.GetOrder().GetDeliveryInteraction().GetShowUpPosition().transform.position, 0f, AxisConstraint.Y);
         instantiatedNpc.Sit();
         instantiatedNpc.GetOrder().gameObject.SetActive(true);
+        orderCount++;
+        if (orderCount >= 6)
+        {
+            DayNightCycle dayNightCycle = GetComponent<DayNightCycle>();
+            dayNightCycle.ToggleDayNight();
+        }
     }
 
     private DeliveryInteraction FindFirstAvailableDeliveryInteraction()
