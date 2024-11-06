@@ -1,11 +1,17 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 10.0f;
     [SerializeField] private float sensitivity = 10.0f;
+    [SerializeField] private ParticleSystem rain;
+    [SerializeField] private float rainOffsetDistance = 1.5f;
+    [SerializeField] private float rainHeight = 25f;
+    [SerializeField] private bool allowRain;
+    
     private bool _isInUi;
-
+    private bool _isRaining;
     private AudioSource _audioSource;
     private float _rotationX;
 
@@ -53,12 +59,30 @@ public class PlayerController : MonoBehaviour
             var moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             transform.position += moveDirection.normalized * speed * Time.deltaTime;
 
+            if (allowRain)
+            {
+                SetRaining(!Physics.Raycast(transform.position, Vector3.up, out RaycastHit hit, 10f));
+                UpdateRainPosition(direction);
+            }
+            
             if (_audioSource.isPlaying) return;
             _audioSource.Play();
         }
         else if (_audioSource.isPlaying) {
             _audioSource.Stop();
         }
+    }
+
+    void SetRaining(bool isRaining)
+    {
+        _isRaining = isRaining;
+        rain.gameObject.SetActive(isRaining);
+    }
+    
+    void UpdateRainPosition(Vector3 direction)
+    {
+        Vector3 offsetPosition = transform.position + direction.normalized * rainOffsetDistance;
+        rain.transform.position = offsetPosition + Vector3.up * rainHeight;
     }
 
     public void SetIsInUi(bool isInUi)
