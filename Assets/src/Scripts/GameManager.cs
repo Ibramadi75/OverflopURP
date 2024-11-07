@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private float money;
+    [SerializeField] private float money = 0;
     [SerializeField] private TMP_Text moneyText;
+    public float Money => money;
 
     void Update()
     {

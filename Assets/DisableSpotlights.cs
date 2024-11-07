@@ -1,8 +1,11 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
-public class DisableSpotlights : MonoBehaviour
+public class DisableSpotlightsAndChangeScene : MonoBehaviour
 {
+    public string sceneName;  // Le nom de la scène à charger après l'extinction des lumières
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -25,6 +28,12 @@ public class DisableSpotlights : MonoBehaviour
             {
                 lightComponent.enabled = false;
             }
+        }
+
+        // Change de scène après l'extinction des lumières
+        if (!string.IsNullOrEmpty(sceneName))
+        {
+            SceneManager.LoadScene(sceneName);  // Charge la scène spécifiée
         }
     }
 }

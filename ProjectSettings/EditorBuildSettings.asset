@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/src/Scenes/Game Scenes/Beta/Open World.unity
     guid: 4e94ab8a5e3c2754491dfeea1fbf3049
+  - enabled: 1
+    path: Assets/src/Scenes/NarScenes/Restau.unity
+    guid: 78a1829fc3fbad94cb4e340a8429fb53
+  - enabled: 1
+    path: Assets/src/Scenes/NarScenes/InsideCasino.unity
+    guid: 1b81672cc89594710bd6c2841fc2ab2f
   m_configObjects: {}

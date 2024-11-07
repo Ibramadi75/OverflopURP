@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Redcode.Moroutines;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Import pour SceneManager
 using Random = UnityEngine.Random;
 
 public class OrderManager : MonoBehaviour
@@ -13,10 +14,12 @@ public class OrderManager : MonoBehaviour
     [SerializeField] private GoTo npc;
     [SerializeField] private List<DeliveryInteraction> deliveryObjects;
     [SerializeField] private PlayerController playerController;
-    
+    [SerializeField] private string nextSceneName;  // Nom de la scène à charger
+
     private Moroutine _orderSpawnerMoroutine;
     private List<Order> _activeOrders;
     private GameManager _gameManager;
+    private int _orderCount = 0;  // Compteur des commandes créées
     
     void Awake()
     {
@@ -51,7 +54,7 @@ public class OrderManager : MonoBehaviour
     {
         expiredOrder.SetNpcToFirstPoint();
         _activeOrders.Remove(expiredOrder);
-        _gameManager.RemoveMoney(expiredOrder.GetRecipe().GetPrice());
+        // _gameManager.RemoveMoney(expiredOrder.GetRecipe().GetPrice());
         RemoveOrder(expiredOrder);
     }
     
@@ -67,6 +70,13 @@ public class OrderManager : MonoBehaviour
         deliveryInteraction.SetAvailable(false);
         newOrder.SetDeliveryInteraction(deliveryInteraction);
         CreateGoToNPC(newOrder);
+        
+        _orderCount++; // Incrémentation du compteur d'ordres
+        
+        if (_orderCount >= 6 && _gameManager.Money > 0) // Si 6 ordres sont créés
+        {
+            LoadNextScene(); // Charger la scène suivante
+        }
     }
 
     private void RemoveOrder(Order anOrder)
@@ -110,5 +120,13 @@ public class OrderManager : MonoBehaviour
         DeliveryInteraction deliveryInteraction = FindFirstAvailableDeliveryInteraction();
         yield return new WaitForSeconds(waitTime);
         CreateOrder(deliveryInteraction);
+    }
+
+    private void LoadNextScene()
+    {
+        if (!string.IsNullOrEmpty(nextSceneName))
+        {
+            SceneManager.LoadScene(nextSceneName); // Charge la scène spécifiée
+        }
     }
 }
