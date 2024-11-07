@@ -7,12 +7,18 @@ public class RandomChildRotation : MonoBehaviour
     public float accelerationTime = 1f;
     public float decelerationTime = 1f;
 
-    void Start()
+    void Update()
     {
-        foreach (Transform child in transform)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            float peakSpeed = Random.Range(minPeakSpeed, maxPeakSpeed);
-            child.gameObject.AddComponent<RotateOnXAxis>().SetRotationSpeed(peakSpeed, accelerationTime, decelerationTime);
+            foreach (Transform child in transform)
+            {
+                if (child.GetComponent<RotateOnXAxis>() == null)
+                {
+                    float peakSpeed = Random.Range(minPeakSpeed, maxPeakSpeed);
+                    child.gameObject.AddComponent<RotateOnXAxis>().SetRotationSpeed(peakSpeed, accelerationTime, decelerationTime);
+                }
+            }
         }
     }
 }
