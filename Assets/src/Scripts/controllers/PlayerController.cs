@@ -6,12 +6,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 10.0f;
     [SerializeField] private float sensitivity = 10.0f;
     [SerializeField] private ParticleSystem rain;
+    [SerializeField] private ParticleSystem wind;
     [SerializeField] private float rainOffsetDistance = 1.5f;
     [SerializeField] private float rainHeight = 25f;
     [SerializeField] private bool allowRain;
+    [SerializeField] private bool allowWind;
+    [SerializeField] private float windHeight = 1f;
     
     private bool _isInUi;
     private bool _isRaining;
+    private bool _isWindy;
     private AudioSource _audioSource;
     private float _rotationX;
 
@@ -64,6 +68,12 @@ public class PlayerController : MonoBehaviour
                 SetRaining(!Physics.Raycast(transform.position, Vector3.up, out RaycastHit hit, 10f));
                 UpdateRainPosition(direction);
             }
+
+            if (allowWind)
+            {
+                SetWindy(!Physics.Raycast(transform.position, Vector3.up, out RaycastHit hit, 10f));
+                UpdateWindPosition(direction);
+            }
             
             if (_audioSource.isPlaying) return;
             _audioSource.Play();
@@ -78,11 +88,24 @@ public class PlayerController : MonoBehaviour
         _isRaining = isRaining;
         rain.gameObject.SetActive(isRaining);
     }
+
+    void SetWindy(bool isWindy)
+    {
+        _isWindy = isWindy;
+        wind.gameObject.SetActive(isWindy);
+    }
     
     void UpdateRainPosition(Vector3 direction)
     {
         Vector3 offsetPosition = transform.position + direction.normalized * rainOffsetDistance;
         rain.transform.position = offsetPosition + Vector3.up * rainHeight;
+    }
+
+    void UpdateWindPosition(Vector3 direction)
+    {
+        Vector3 offsetPosition = transform.position;
+        wind.transform.position = offsetPosition + Vector3.up * windHeight;
+        wind.transform.rotation = PlayerCam.transform.rotation;
     }
 
     public void SetIsInUi(bool isInUi)
