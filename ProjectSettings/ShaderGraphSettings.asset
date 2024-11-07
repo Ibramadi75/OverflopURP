@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: Unity.ShaderGraph.Editor:UnityEditor.ShaderGraph:ShaderGraphProjectSettings
+  m_EditorClassIdentifier: 
+  shaderVariantLimit: 2048
   customInterpolatorErrorThreshold: 32
   customInterpolatorWarningThreshold: 16
