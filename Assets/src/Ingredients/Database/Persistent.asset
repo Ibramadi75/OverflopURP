@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b17a39eb27a4d4b903062f2aa346bc, type: 3}
   m_Name: Persistent
   m_EditorClassIdentifier: 
+  day: 1
+  endDay: 3

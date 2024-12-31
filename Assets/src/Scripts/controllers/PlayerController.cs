@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool allowWind;
     [SerializeField] private float windHeight = 1f;
     [SerializeField] private Persistent persistent;
-    public int Day => persistent.UpdateDay();
     
     private bool _isInUi;
     private bool _isRaining;
@@ -22,11 +21,10 @@ public class PlayerController : MonoBehaviour
     private float _rotationX;
 
     public Camera PlayerCam { get; private set; }
+    public Persistent Persitent => persistent;
 
     void Start()
     {
-        persistent.UpdateDay();
-        Debug.Log(Day);
         _audioSource = GetComponent<AudioSource>();
         PlayerCam = GetComponentInChildren<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
