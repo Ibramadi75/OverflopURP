@@ -1,31 +1,27 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class DayController : MonoBehaviour
 {
-    private TMP_Text _dayText;
-    private int _day;
-    private Vignette _vignette;
-
-    public int Day => _day;
+    [SerializeField] private Volume postProcessVolume;
     
-    public void NextDay()
-    {
-        _day++;
-        _dayText.text = $"Jour {_day}";
-    }
+    private TMP_Text _dayText;
+    private Vignette _vignette;
+    private PlayerController _playerController;
     
     // Start is called before the first frame update
     void Start()
     {
-        _dayText = GetComponent<TMP_Text>();
-        _day = 1;
-    }
+        _playerController = FindObjectOfType<PlayerController>();
 
-    private void UpdateVignette()
-    {
-        _vignette.color = _day == 1 ? (ColorParameter)Color.black : (ColorParameter)Color.red;
-        _vignette.intensity = 0.15f * _day;
+        _dayText = GetComponent<TMP_Text>();
+
+        postProcessVolume.profile.TryGet(out _vignette);
+
+        _dayText.text = $"Jour {_playerController.Persitent.day}";
+        _vignette.color.value = _playerController.Persitent.day == 1 ? Color.black : Color.red;
+        _vignette.intensity.value = 0.15f * _playerController.Persitent.day;
     }
 }
