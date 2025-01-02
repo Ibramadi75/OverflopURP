@@ -1,3 +1,5 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -23,11 +25,70 @@ public class PlayerController : MonoBehaviour
     public Camera PlayerCam { get; private set; }
     public Persistent Persitent => persistent;
 
+
+    public string textObjectName = "AnothernightText"; // Nom du GameObject
+    public float fadeDuration = 2f;                   // Durée du fade-out
+    public float visibleDuration = 3f;
+
+    private IEnumerator FadeInOutText(TextMeshProUGUI textMeshPro)
+    {
+        // Fade-in
+        yield return StartCoroutine(FadeText(textMeshPro, 0, 1, fadeDuration));
+
+        // Temps visible
+        yield return new WaitForSeconds(visibleDuration);
+
+        // Fade-out
+        yield return StartCoroutine(FadeText(textMeshPro, 1, 0, fadeDuration));
+    }
+
+        private IEnumerator FadeText(TextMeshProUGUI textMeshPro, float startAlpha, float endAlpha, float duration)
+    {
+        // Obtenez la couleur actuelle du texte
+        Color textColor = textMeshPro.color;
+
+        // Réduisez ou augmentez l'opacité sur le temps
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            float normalizedTime = t / duration;
+            textColor.a = Mathf.Lerp(startAlpha, endAlpha, normalizedTime);
+            textMeshPro.color = textColor;
+
+            yield return null; // Attendez le prochain frame
+        }
+
+        // Assurez-vous que l'opacité finale est correcte
+        textColor.a = endAlpha;
+        textMeshPro.color = textColor;
+    }
+
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
         PlayerCam = GetComponentInChildren<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
+
+        GameObject textObject = GameObject.Find(textObjectName);
+
+        if (textObject != null)
+        {
+            // Récupérer le composant TextMeshPro
+            TextMeshProUGUI textMeshPro = textObject.GetComponent<TextMeshProUGUI>();
+
+            if (textMeshPro != null)
+            {
+                // Lancer le fade-out
+                StartCoroutine(FadeInOutText(textMeshPro));
+            }
+            else
+            {
+                Debug.LogError("Le GameObject trouvé n'a pas de composant TextMeshProUGUI.");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Aucun GameObject trouvé avec le nom '{textObjectName}'.");
+        }
     }
 
     void Update()

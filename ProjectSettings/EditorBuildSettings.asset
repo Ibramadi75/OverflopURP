@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/src/Scenes/Game Scenes/Beta/Open World.unity
+    path: Assets/src/Scenes/NarScenes/Open World.unity
     guid: 4e94ab8a5e3c2754491dfeea1fbf3049
   - enabled: 1
     path: Assets/src/Scenes/NarScenes/Restau.unity

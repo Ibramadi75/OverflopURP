@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro; // Import pour TextMeshPro
 using UnityEngine.SceneManagement;
+using System;
 
 public class ChangeSceneOnPressTMP : MonoBehaviour
 {
@@ -54,5 +55,7 @@ public class ChangeSceneOnPressTMP : MonoBehaviour
                 SceneManager.LoadScene(sceneName); // Change la scène
             }
         }
+
+        Debug.Log(isPlayerInRange ? "Player is in range" : "Player is not in range");
     }
 }
