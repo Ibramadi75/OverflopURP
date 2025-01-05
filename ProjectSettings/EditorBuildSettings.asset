@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/src/Scenes/NarScenes/InsideCasino.unity
     guid: 1b81672cc89594710bd6c2841fc2ab2f
+  - enabled: 1
+    path: Assets/src/Scenes/NarScenes/MusicPlay.unity
+    guid: 73fecb24491920842aaa5085303616cf
   m_configObjects: {}
