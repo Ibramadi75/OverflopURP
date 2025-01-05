@@ -24,6 +24,11 @@ public class PlayerController : MonoBehaviour
 
     public Camera PlayerCam { get; private set; }
     public Persistent Persitent => persistent;
+    public ParticleSystem Rain
+    {
+        get => rain;
+        set => rain = value;
+    }
 
 
     public string textObjectName = "AnothernightText"; // Nom du GameObject

@@ -18,10 +18,21 @@ public class DayController : MonoBehaviour
 
         _dayText = GetComponent<TMP_Text>();
 
+        var day = _playerController.Persitent.day;
+        
         postProcessVolume.profile.TryGet(out _vignette);
 
-        _dayText.text = $"Jour {_playerController.Persitent.day}";
-        _vignette.color.value = _playerController.Persitent.day == 1 ? Color.black : Color.red;
-        _vignette.intensity.value = 0.15f * _playerController.Persitent.day;
+        _dayText.text = $"Jour {day}";
+        _vignette.color.value = day == 1 ? Color.black : Color.red;
+        _vignette.intensity.value = 0.07f * day;
+
+        var main = _playerController.Rain.main;
+        main.startColor = new Color(1f, 1f, 1f, 0.33f * day);
+        
+        var emission = _playerController.Rain.emission;
+        emission.rateOverTime = 3000 * day;
+        
+        var velocity = _playerController.Rain.velocityOverLifetime;
+        velocity.speedModifier = 1 * day;
     }
 }
