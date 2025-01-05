@@ -10,10 +10,13 @@ public class DayController : MonoBehaviour
     private TMP_Text _dayText;
     private Vignette _vignette;
     private PlayerController _playerController;
+    private CloudsToy _cloudsToy;
     
     // Start is called before the first frame update
     void Start()
     {
+        _cloudsToy = FindObjectOfType<CloudsToy>();
+        
         _playerController = FindObjectOfType<PlayerController>();
 
         _dayText = GetComponent<TMP_Text>();
@@ -34,5 +37,11 @@ public class DayController : MonoBehaviour
         
         var velocity = _playerController.Rain.velocityOverLifetime;
         velocity.speedModifier = 1 * day;
+
+        if (_cloudsToy != null)
+        {
+            _cloudsToy.NumberClouds = 50 * day;
+            _cloudsToy.VelocityMultipier = 2 * day;
+        }
     }
 }
