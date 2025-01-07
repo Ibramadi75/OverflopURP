@@ -73,7 +73,7 @@ public class OrderManager : MonoBehaviour
         
         _orderCount++; // Incrémentation du compteur d'ordres
         
-        if (_orderCount >= 1 /*&& _gameManager.Money > 0*/) // Si 6 ordres sont créés
+        if (_orderCount >= 4 && _gameManager.Money > 0) // Si 6 ordres sont créés
         {
             LoadNextScene(); // Charger la scène suivante
         }
