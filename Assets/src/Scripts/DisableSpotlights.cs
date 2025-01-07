@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class DisableSpotlightsAndChangeScene : MonoBehaviour
 {
@@ -34,13 +35,15 @@ public class DisableSpotlightsAndChangeScene : MonoBehaviour
         // Change de scène après l'extinction des lumières
         if (!string.IsNullOrEmpty(sceneName))
         {
-            SceneManager.LoadScene(sceneName);  // Charge la scène spécifiée
             if (persistent.day == persistent.endDay)
             {
                 persistent.day = 1;
-                Time.timeScale = 0;
+                SceneManager.LoadScene(sceneName);
             } else
+            {
                 persistent.day++;
+                SceneManager.LoadScene(sceneName);
+            }
         }
     }
 }
