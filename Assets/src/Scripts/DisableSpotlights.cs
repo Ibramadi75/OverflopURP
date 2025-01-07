@@ -38,7 +38,7 @@ public class DisableSpotlightsAndChangeScene : MonoBehaviour
             if (persistent.day == persistent.endDay)
             {
                 persistent.day = 1;
-                SceneManager.LoadScene(sceneName);
+                SceneManager.LoadScene("EndGame");
             } else
             {
                 persistent.day++;
