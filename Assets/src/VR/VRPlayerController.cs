@@ -1,114 +1,73 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.XR;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class VRPlayerController : MonoBehaviour
 {
+    [Header("Déplacement & Contrôles")]
     [SerializeField] private float speed = 5.0f;
-    [SerializeField] private XRNode leftHandNode = XRNode.LeftHand;
-    [SerializeField] private XRNode rightHandNode = XRNode.RightHand;
+    [SerializeField] private Transform headTransform;
+
+    [Header("Effets météo")]
     [SerializeField] private ParticleSystem rain;
     [SerializeField] private ParticleSystem wind;
     [SerializeField] private float rainOffsetDistance = 1.5f;
     [SerializeField] private float rainHeight = 25f;
-    [SerializeField] private bool allowRain;
-    [SerializeField] private bool allowWind;
     [SerializeField] private float windHeight = 1f;
+    [SerializeField] private bool allowRain = true;
+    [SerializeField] private bool allowWind = true;
+
+    [Header("Références")]
     [SerializeField] private Persistent persistent;
-    [SerializeField] private Transform headTransform; // Référence au transform de la caméra VR
-    
+    [SerializeField] private AudioSource _audioSource;
+
+    [Header("UI Text")]
+    public string textObjectName = "AnothernightText";
+    public float fadeDuration = 2f;
+    public float visibleDuration = 3f;
+
+    [Header("Input Actions")]
+    [SerializeField] private InputActionReference moveAction;          // Vector2 - joystick gauche
+    [SerializeField] private InputActionReference rotateAction;        // Vector2 - joystick droit
+    [SerializeField] private InputActionReference triggerAction;       // float ou bouton - gâchette
+    [SerializeField] private InputActionReference primaryButtonAction; // bouton A ou X
+
     private bool _isInUi;
     private bool _isRaining;
     private bool _isWindy;
-    private AudioSource _audioSource;
-    
-    // Variables pour les contrôleurs VR
-    private Vector2 _leftThumbstickValue;
-    private Vector2 _rightThumbstickValue;
     private bool _isMoving;
 
     public Camera PlayerCam { get; private set; }
     public Persistent Persitent => persistent;
-    public ParticleSystem Rain
-    {
-        get => rain;
-        set => rain = value;
-    }
-
-    public string textObjectName = "AnothernightText"; // Nom du GameObject
-    public float fadeDuration = 2f;                   // Durée du fade-out
-    public float visibleDuration = 3f;
-
-    private IEnumerator FadeInOutText(TextMeshProUGUI textMeshPro)
-    {
-        // Fade-in
-        yield return StartCoroutine(FadeText(textMeshPro, 0, 1, fadeDuration));
-
-        // Temps visible
-        yield return new WaitForSeconds(visibleDuration);
-
-        // Fade-out
-        yield return StartCoroutine(FadeText(textMeshPro, 1, 0, fadeDuration));
-    }
-
-    private IEnumerator FadeText(TextMeshProUGUI textMeshPro, float startAlpha, float endAlpha, float duration)
-    {
-        // Obtenez la couleur actuelle du texte
-        Color textColor = textMeshPro.color;
-
-        // Réduisez ou augmentez l'opacité sur le temps
-        for (float t = 0; t < duration; t += Time.deltaTime)
-        {
-            float normalizedTime = t / duration;
-            textColor.a = Mathf.Lerp(startAlpha, endAlpha, normalizedTime);
-            textMeshPro.color = textColor;
-
-            yield return null; // Attendez le prochain frame
-        }
-
-        // Assurez-vous que l'opacité finale est correcte
-        textColor.a = endAlpha;
-        textMeshPro.color = textColor;
-    }
 
     void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
-        
-        // La caméra est maintenant gérée par le XR Rig, donc trouvez-la
-        PlayerCam = FindObjectOfType<Camera>();
-        
-        // En VR, ne pas verrouiller le curseur
-        Cursor.lockState = CursorLockMode.None;
+        PlayerCam = Camera.main;
 
+        if (headTransform == null && PlayerCam != null)
+            headTransform = PlayerCam.transform;
+
+        if (_audioSource == null)
+            _audioSource = GetComponent<AudioSource>();
+
+        // Enable input actions
+        moveAction?.action.Enable();
+        rotateAction?.action.Enable();
+        triggerAction?.action.Enable();
+        primaryButtonAction?.action.Enable();
+
+        triggerAction.action.performed += OnTriggerPressed;
+        primaryButtonAction.action.performed += OnPrimaryButtonPressed;
+
+        // UI fade text
         GameObject textObject = GameObject.Find(textObjectName);
-
         if (textObject != null)
         {
-            // Récupérer le composant TextMeshPro
             TextMeshProUGUI textMeshPro = textObject.GetComponent<TextMeshProUGUI>();
-
             if (textMeshPro != null)
-            {
-                // Lancer le fade-out
                 StartCoroutine(FadeInOutText(textMeshPro));
-            }
-            else
-            {
-                Debug.LogError("Le GameObject trouvé n'a pas de composant TextMeshProUGUI.");
-            }
-        }
-        else
-        {
-            Debug.LogError($"Aucun GameObject trouvé avec le nom '{textObjectName}'.");
-        }
-        
-        // Si headTransform n'est pas défini, utiliser le transform de la caméra
-        if (headTransform == null && PlayerCam != null)
-        {
-            headTransform = PlayerCam.transform;
         }
     }
 
@@ -116,28 +75,17 @@ public class VRPlayerController : MonoBehaviour
     {
         if (_isInUi) return;
 
-        // Obtenir les valeurs des joysticks
-        InputDevice leftHandDevice = InputDevices.GetDeviceAtXRNode(leftHandNode);
-        bool leftStickSuccess = leftHandDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out _leftThumbstickValue);
-        Debug.Log($"Left Controller: Device valid={leftHandDevice.isValid}, Name={leftHandDevice.name}, Joystick read success={leftStickSuccess}, Value=({_leftThumbstickValue.x}, {_leftThumbstickValue.y})");
-        
-        InputDevice rightHandDevice = InputDevices.GetDeviceAtXRNode(rightHandNode);
-        bool rightStickSuccess = rightHandDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out _rightThumbstickValue);
-        Debug.Log($"Right Controller: Device valid={rightHandDevice.isValid}, Name={rightHandDevice.name}, Joystick read success={rightStickSuccess}, Value=({_rightThumbstickValue.x}, {_rightThumbstickValue.y})");
-        
-        // Utiliser le joystick gauche pour le mouvement
-        Vector3 direction = new Vector3(_leftThumbstickValue.x, 0, _leftThumbstickValue.y);
-        _isMoving = direction.magnitude >= 0.1f;
-        
+        // Lecture du mouvement
+        Vector3 moveInput = moveAction.action.ReadValue<Vector3>();
+        Vector3 inputDirection = new Vector3(moveInput.x, 0, moveInput.y);
+        _isMoving = inputDirection.magnitude > 0.1f;
+
         if (_isMoving)
         {
-            // Obtenir la direction de mouvement basée sur l'orientation de la tête
             Quaternion headYaw = Quaternion.Euler(0, headTransform.eulerAngles.y, 0);
-            Vector3 moveDirection = headYaw * direction;
-            
-            // Déplacer le joueur
+            Vector3 moveDirection = headYaw * inputDirection;
             transform.position += moveDirection * speed * Time.deltaTime;
-            
+
             if (allowRain)
             {
                 SetRaining(!Physics.Raycast(transform.position, Vector3.up, out RaycastHit hit, 10f));
@@ -149,79 +97,95 @@ public class VRPlayerController : MonoBehaviour
                 SetWindy(!Physics.Raycast(transform.position, Vector3.up, out RaycastHit hit, 10f));
                 UpdateWindPosition(moveDirection);
             }
-            
-            if (_audioSource.isPlaying) return;
-            _audioSource.Play();
+
+            if (!_audioSource.isPlaying)
+                _audioSource.Play();
         }
-        else if (_audioSource.isPlaying) 
+        else if (_audioSource.isPlaying)
         {
             _audioSource.Stop();
         }
-        
-        // Exemple: utiliser le joystick droit pour tourner le joueur (rotation Y)
-        if (Mathf.Abs(_rightThumbstickValue.x) > 0.1f)
+
+        // Rotation avec joystick droit
+        Vector3 rotateInput = rotateAction.action.ReadValue<Vector3>();
+        if (Mathf.Abs(rotateInput.x) > 0.1f)
         {
-            float rotationAmount = _rightThumbstickValue.x * 60f * Time.deltaTime; // 60 degrés par seconde
+            float rotationAmount = rotateInput.x * 60f * Time.deltaTime;
             transform.Rotate(0, rotationAmount, 0);
-            Debug.Log($"Rotation appliquée: {rotationAmount} degrés");
+            Debug.Log($"Rotation appliquée : {rotationAmount}°");
         }
-        
-        // Exemple: détecter l'appui sur un bouton (comme le trigger)
-        bool triggerPressed = false;
-        bool triggerSuccess = rightHandDevice.TryGetFeatureValue(CommonUsages.triggerButton, out triggerPressed);
-        Debug.Log($"Trigger: Read success={triggerSuccess}, Pressed={triggerPressed}");
-        
-        if (triggerPressed)
-        {
-            Debug.Log("Trigger droit pressé - ACTION DÉCLENCHÉE");
-            // Ajouter votre action ici
-        }
-        
-        // Ajouter des logs pour les boutons principaux (A/B ou X/Y)
-        bool primaryButtonPressed = false;
-        bool primaryButtonSuccess = rightHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out primaryButtonPressed);
-        Debug.Log($"Bouton A/X: Read success={primaryButtonSuccess}, Pressed={primaryButtonPressed}");
-        
-        // Vérifier si nous sommes en mode simulateur/clavier
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
+
+        // Test clavier (optionnel pour debug)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
             Debug.Log("TOUCHE ESPACE DÉTECTÉE - Mode clavier actif");
-        }
-        
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || 
-            Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
-        {
+
+        if (Keyboard.current.wKey.isPressed || Keyboard.current.aKey.isPressed ||
+            Keyboard.current.sKey.isPressed || Keyboard.current.dKey.isPressed)
             Debug.Log("TOUCHES WASD DÉTECTÉES - Mode clavier actif");
-        }
+    }
+
+    private void OnTriggerPressed(InputAction.CallbackContext context)
+    {
+        Debug.Log("✅ Gâchette pressée (trigger) !");
+    }
+
+    private void OnPrimaryButtonPressed(InputAction.CallbackContext context)
+    {
+        Debug.Log("✅ Bouton principal (A ou X) pressé !");
+    }
+
+    void OnDestroy()
+    {
+        triggerAction.action.performed -= OnTriggerPressed;
+        primaryButtonAction.action.performed -= OnPrimaryButtonPressed;
     }
 
     void SetRaining(bool isRaining)
     {
         _isRaining = isRaining;
-        rain.gameObject.SetActive(isRaining);
+        rain?.gameObject.SetActive(isRaining);
     }
 
     void SetWindy(bool isWindy)
     {
         _isWindy = isWindy;
-        wind.gameObject.SetActive(isWindy);
+        wind?.gameObject.SetActive(isWindy);
     }
-    
+
     void UpdateRainPosition(Vector3 direction)
     {
-        Vector3 offsetPosition = transform.position + direction.normalized * rainOffsetDistance;
-        rain.transform.position = offsetPosition + Vector3.up * rainHeight;
+        Vector3 offset = transform.position + direction.normalized * rainOffsetDistance;
+        rain.transform.position = offset + Vector3.up * rainHeight;
     }
 
     void UpdateWindPosition(Vector3 direction)
     {
-        Vector3 offsetPosition = transform.position;
-        wind.transform.position = offsetPosition + Vector3.up * windHeight;
+        Vector3 offset = transform.position;
+        wind.transform.position = offset + Vector3.up * windHeight;
         wind.transform.rotation = headTransform.rotation;
     }
 
     public void SetIsInUi(bool isInUi)
     {
         _isInUi = isInUi;
+    }
+
+    private IEnumerator FadeInOutText(TextMeshProUGUI textMeshPro)
+    {
+        yield return StartCoroutine(FadeText(textMeshPro, 0, 1, fadeDuration));
+        yield return new WaitForSeconds(visibleDuration);
+        yield return StartCoroutine(FadeText(textMeshPro, 1, 0, fadeDuration));
+    }
+
+    private IEnumerator FadeText(TextMeshProUGUI textMeshPro, float startAlpha, float endAlpha, float duration)
+    {
+        Color color = textMeshPro.color;
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            float alpha = Mathf.Lerp(startAlpha, endAlpha, t / duration);
+            textMeshPro.color = new Color(color.r, color.g, color.b, alpha);
+            yield return null;
+        }
+        textMeshPro.color = new Color(color.r, color.g, color.b, endAlpha);
     }
 }
