@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/src/Scenes/NarScenes/MusicPlay.unity
     guid: 73fecb24491920842aaa5085303616cf
-  m_configObjects: {}
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 98c94610c8d27477ab52c6f8e443c341,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 242ce678499e1444b801dd30e3e7b2d2,
+      type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: bdfd01b6d3dabf54ea4beb39188c55e2,
+      type: 2}
