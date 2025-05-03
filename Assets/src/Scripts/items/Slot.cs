@@ -43,13 +43,18 @@ public class Slot : MonoBehaviour
 
     public void Put(GameObject obj, uint amount = 1)
     {
+        Debug.Log("Put in slot: " + obj.name);
+
         if (IsEmpty())
         {
+            Debug.Log("Slot is empty, putting object: " + obj.name);
+
             slot = obj;
             if (showUp)
                 ShowUp();
 
             this.amount += amount;
+            Destroy(obj); // Destroy the original object to avoid duplication
             return;
         }
 
@@ -59,6 +64,7 @@ public class Slot : MonoBehaviour
                 return;
 
             this.amount += amount;
+            Destroy(obj); // Destroy the original object to avoid duplication
         }
     }
 
