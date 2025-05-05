@@ -14,6 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Sliced tomato
   recipes: []
+  time: 0
+  isDeliverable: 0
   isBase: 0
-  isCuttable: 0
+  price: 0
+  isCuttable: 1
   cutPrefab: {fileID: 0}
+  isAssemblable: 0
+  canAssembleWith: {fileID: 0}
+  assembledPrefab: {fileID: 0}
+  isMeltable: 0
+  meltedPrefab: {fileID: 0}

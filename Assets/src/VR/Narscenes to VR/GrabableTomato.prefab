@@ -263,9 +263,10 @@ GameObject:
   - component: {fileID: 322173549748810056}
   - component: {fileID: 758699830320337722}
   - component: {fileID: 1541866267789048678}
+  - component: {fileID: -8764332387884727653}
   m_Layer: 0
   m_Name: GrabableTomato
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -539,6 +540,20 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.010386551
   m_Center: {x: -4.3960158e-10, y: 0.00000023705066, z: 0.00087923213}
+--- !u!114 &-8764332387884727653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8404257660229710219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c95bfdff285bad4da8840463e03e52d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextCuttableObject: {fileID: 8404257660229710219, guid: eb379eb59d7b0044991b29f5fee7e884,
+    type: 3}
 --- !u!1 &8549363777711555727
 GameObject:
   m_ObjectHideFlags: 0

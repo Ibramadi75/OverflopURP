@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2785495853371654749}
   - component: {fileID: 2269826848596443933}
   - component: {fileID: 4791746386848401803}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: SM_TomatoLeaf_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3438492527672079770}
   - component: {fileID: 5871042610674968887}
   - component: {fileID: 7351228500208885856}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Tomato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4739712351197765837}
   - component: {fileID: 5237590396637330580}
   - component: {fileID: 5267866847790908378}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: SM_TomatoLeaf_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3943603464068506114}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Leafs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 2244264340879223033}
   - component: {fileID: 2423727731805351574}
   - component: {fileID: 6972284445010854466}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: SM_TomatoLeaf_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 4935621920349158970}
   - component: {fileID: 1037069779605575517}
   - component: {fileID: 9128046634214464716}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: SM_TomatoLeaf_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,10 +463,12 @@ GameObject:
   - component: {fileID: 4333143117817118013}
   - component: {fileID: 7064745952108923226}
   - component: {fileID: 7533524743810641902}
-  - component: {fileID: 3453085941308342752}
-  m_Layer: 7
+  - component: {fileID: -4711577724670794072}
+  - component: {fileID: 3615293373692618354}
+  - component: {fileID: 5542996958641323021}
+  m_Layer: 0
   m_Name: GrabableTomato
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -731,7 +733,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.07758185
   m_Center: {x: 6.2959644e-11, y: 0.00000023841935, z: -0.006805703}
---- !u!114 &3453085941308342752
+--- !u!114 &-4711577724670794072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -740,17 +742,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 9179633409311158171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c95bfdff285bad4da8840463e03e52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PermittedDisplacementAxes: -1
-  m_ConstrainedAxisDisplacementMode: 1
-  m_TwoHandedRotationMode: 1
-  m_AllowOneHandedScaling: 1
-  m_AllowTwoHandedScaling: 0
-  m_OneHandedScaleSpeed: 0.5
-  m_ThresholdMoveRatioForScale: 0.05
-  m_ClampScaling: 1
-  m_MinimumScaleRatio: 0.25
-  m_MaximumScaleRatio: 2
-  m_ScaleMultiplier: 0.25
+  nextCuttableObject: {fileID: 1331181027805756, guid: fcb642c5802f2a04fbd7d00541da52a5,
+    type: 3}
+--- !u!114 &3615293373692618354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9179633409311158171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba3e180e37f9140979fab9c545885c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientData: {fileID: 11400000, guid: 26ed7b8e63876452ea0a5e0a7a6ef80a, type: 2}
+--- !u!65 &5542996958641323021
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9179633409311158171}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.33220235, y: 0.38421884, z: 0.27911964}
+  m_Center: {x: -0.0049201697, y: -0.016221032, z: 0.0040790066}

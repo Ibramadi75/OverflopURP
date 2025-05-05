@@ -43,28 +43,20 @@ public class Slot : MonoBehaviour
 
     public void Put(GameObject obj, uint amount = 1)
     {
-        Debug.Log("Put in slot: " + obj.name);
-
         if (IsEmpty())
         {
             Debug.Log("Slot is empty, putting object: " + obj.name);
 
-            slot = obj;
+            // Crée une copie "technique" à stocker
+            slot = Instantiate(obj);
+            slot.SetActive(false); // ou cache-la si inutile visuellement
+
             if (showUp)
-                ShowUp();
+                ShowUp(); // va instancier une copie visuelle de ce slot
 
             this.amount += amount;
-            Destroy(obj); // Destroy the original object to avoid duplication
-            return;
-        }
 
-        if (obj.CompareTag(slot.tag))
-        {
-            if (this.amount == maxCapacity)
-                return;
-
-            this.amount += amount;
-            Destroy(obj); // Destroy the original object to avoid duplication
+            Destroy(obj); // maintenant on peut supprimer l'objet "tenu" par la main
         }
     }
 
