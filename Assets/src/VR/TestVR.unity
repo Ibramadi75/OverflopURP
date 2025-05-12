@@ -577,6 +577,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Device Simulator
       objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -629,7 +634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1856911240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,6 +676,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XR Interaction Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452911401640988595, guid: 25d0020362eba6c49a6fbe70f407aa13,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5765080646260591541, guid: 25d0020362eba6c49a6fbe70f407aa13,
         type: 3}
@@ -727,6 +737,94 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25d0020362eba6c49a6fbe70f407aa13, type: 3}
+--- !u!1001 &2033771328
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5020070608553267517, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5020070608553267517, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5020070608553267517, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5020070608553267517, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612034806163955593, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.66906905
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612034806163955593, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612034806163955593, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.389158
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612034806163955593, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612034806163955593, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612034806163955593, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612034806163955593, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612034806163955593, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612034806163955593, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612034806163955593, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6418312637146220094, guid: f7ce5b1510cc23d4aa23b6293594b8c5,
+        type: 3}
+      propertyPath: m_Name
+      value: XR Rig
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f7ce5b1510cc23d4aa23b6293594b8c5, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -738,3 +836,4 @@ SceneRoots:
   - {fileID: 445881125}
   - {fileID: 1856911241}
   - {fileID: 1887927444}
+  - {fileID: 2033771328}
