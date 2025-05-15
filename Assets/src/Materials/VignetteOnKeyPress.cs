@@ -1,13 +1,22 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class VignetteOnKeyPress : MonoBehaviour
 {
     public Volume volume; // Référence au volume dans la scène
     private Vignette vignetteEffect;
     private float targetIntensity = 1f; // Intensité maximale du vignettage (noir total)
-    private float vignetteSpeed = .5f; // Vitesse d'augmentation de l'intensité
+    private float vignetteSpeed = 0.5f; // Vitesse d'augmentation de l'intensité
+    public bool trigger = false; // Déclencheur pour activer
+
+    private bool hasStarted = false; // Pour éviter de lancer la coroutine plusieurs fois
+
+    public void ActivateTrigger()
+    {
+        trigger = true;
+    }
 
     void Start()
     {
@@ -20,19 +29,22 @@ public class VignetteOnKeyPress : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && vignetteEffect != null)
+        if (trigger && vignetteEffect != null && !hasStarted)
         {
-            // Commence à augmenter l'intensité du vignettage quand E est pressé
+            hasStarted = true;
             StartCoroutine(IncreaseVignetteIntensity());
         }
     }
 
     private System.Collections.IEnumerator IncreaseVignetteIntensity()
     {
-        while (vignetteEffect.intensity.value < targetIntensity)
+        while (vignetteEffect.intensity.value < targetIntensity )
         {
             vignetteEffect.intensity.value += vignetteSpeed * Time.deltaTime;
             yield return null;
         }
+
+        // Une fois l'effet terminé, charger la scène suivante
+        SceneManager.LoadScene("Open World VR");
     }
 }
