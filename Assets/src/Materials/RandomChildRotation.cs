@@ -7,9 +7,14 @@ public class RandomChildRotation : MonoBehaviour
     public float accelerationTime = 1f;
     public float decelerationTime = 1f;
 
+    public bool trigger = false;
+    public void ActivateTrigger()
+    {
+        trigger = true;
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (trigger)
         {
             foreach (Transform child in transform)
             {

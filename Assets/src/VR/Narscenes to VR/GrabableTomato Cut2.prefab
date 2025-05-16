@@ -230,6 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextCuttableObject: {fileID: 8404257660229710219, guid: 7c9bf30049aef9042b3272dcbc42cb4d,
     type: 3}
+  nextBlendableObject: {fileID: 0}
 --- !u!65 &-7405661082787400691
 BoxCollider:
   m_ObjectHideFlags: 0
