@@ -40,7 +40,7 @@ public class ChangeSceneOnPressTMP : MonoBehaviour
             isPlayerInRange = false;
             if (pressEText != null)
             {
-                pressEText.gameObject.SetActive(false); // Cache le texte "Press E"
+                SceneManager.LoadScene(sceneName); // Change la scène
             }
         }
     }
