@@ -481,7 +481,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9179633409311158171}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.70723164, y: -0.04479173, z: 0.04459485, w: 0.7041509}
+  m_LocalRotation: {x: -0.70723164, y: -0.044791725, z: 0.04459485, w: 0.70415086}
   m_LocalPosition: {x: 0.017999649, y: 0.5487716, z: -0.25800037}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -745,8 +745,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c95bfdff285bad4da8840463e03e52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextCuttableObject: {fileID: 1331181027805756, guid: fcb642c5802f2a04fbd7d00541da52a5,
+  nextCuttableObject: {fileID: 1469301371846062133, guid: 494edfc2d5d2ddf429a4663003fa9a27,
     type: 3}
+  nextBlendableObject: {fileID: 0}
 --- !u!114 &3615293373692618354
 MonoBehaviour:
   m_ObjectHideFlags: 0
