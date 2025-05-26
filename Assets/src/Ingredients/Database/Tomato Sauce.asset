@@ -22,7 +22,7 @@ MonoBehaviour:
   cutPrefab: {fileID: 0}
   isAssemblable: 1
   canAssembleWith: {fileID: 11400000, guid: c4a548ed1a8694a96a98c027a351ab66, type: 2}
-  assembledPrefab: {fileID: 1287776881573593110, guid: 1938dbcde481d450bbc5ac4fdc06799b,
+  assembledPrefab: {fileID: 3810561472341635642, guid: 77d16a82208a340bf9a9cffbf6b076fc,
     type: 3}
   isMeltable: 0
   meltedPrefab: {fileID: 0}
