@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5312716161581699477}
   - component: {fileID: 2074469149965343209}
   - component: {fileID: 3275244748857875959}
+  - component: {fileID: 8430706433260375119}
   m_Layer: 0
   m_Name: GrabableDough
   m_TagString: Ingredient
@@ -103,12 +104,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.04675061, y: 0.032506134, z: 0.019541891}
-  m_Center: {x: -0.002009997, y: 0.0017809351, z: 0.010417666}
+  m_Size: {x: 0.04675061, y: 0.032506134, z: 0.027752774}
+  m_Center: {x: -0.0020099962, y: 0.0017809356, z: 0.0063122436}
 --- !u!54 &4747892762636268882
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -150,7 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
   m_Colliders:
-  - {fileID: 244564229130748619}
+  - {fileID: 8430706433260375119}
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -314,3 +315,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: c4a548ed1a8694a96a98c027a351ab66, type: 2}
+--- !u!65 &8430706433260375119
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3947190322006951499}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0194117, y: 0.019189764, z: 0.009221256}
+  m_Center: {x: 0.0000068107624, y: 0.000014344239, z: 0.005257368}
