@@ -16,6 +16,7 @@ TagManager:
   - VehicleDirectionBlock
   - Car
   - Knife
+  - food
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+
 
 public class DeliveryInteraction : AbstractInteraction
 {
@@ -17,7 +19,7 @@ public class DeliveryInteraction : AbstractInteraction
     {
         _isAvailable = isAvailable;
     }
-    
+
     public Transform GetShowUpPosition()
     {
         return showUpPosition;
@@ -27,41 +29,66 @@ public class DeliveryInteraction : AbstractInteraction
     {
         return sitPosition;
     }
-    
+
     public override void MainInteraction(GameObject author)
     {
-        var authorSlot = author.GetComponent<Slot>();
-        if (slot.IsEmpty() && !authorSlot.IsEmpty())
-            if (authorSlot.GetObjectInSlot().GetComponent<Ingredient>().ingredientData.isDeliverable)
-            {
-                var objectToDeliver = authorSlot.Get();
-                if (!Deliver(objectToDeliver))
-                    authorSlot.Put(objectToDeliver);
-            }
+        // Obsolète pour VR si OnTriggerEnter prend le relai
     }
 
-    public override void SecondaryInteraction()
+    public void OnTriggerEnter(Collider other)
     {
+        if (other.tag != "food")
+        {
+            Debug.Log("DeliveryInteraction: OnTriggerEnter with non-ingredient: " + other.name);
+            return;
+        }
+
+        if (!slot.IsEmpty())
+        {
+            Debug.Log("DeliveryInteraction: Slot is occupied, cannot deliver.");
+            return;
+        }
+
+        Debug.Log("DeliveryInteraction: OnTriggerEnter with " + other.name);
+
+        var ingredient = other.GetComponent<Ingredient>();
+        if (ingredient == null) return;
+
+        Debug.Log("DeliveryInteraction: Ingredient found: " + ingredient.ingredientData.title);
+
+        if (!ingredient.ingredientData.isDeliverable) return;
+        Debug.Log("DeliveryInteraction: Ingredient is deliverable: " + ingredient.ingredientData.title);
+
+        // On tente de livrer
+        if (Deliver(other.gameObject))
+        {
+            var grab = other.GetComponent<XRGrabInteractable>();
+            if (grab != null)
+                grab.enabled = false;
+
+            Debug.Log("DeliveryInteraction: Delivered " + ingredient.ingredientData.title);
+            slot.Put(other.gameObject); // Optionnel si on veut afficher l’objet livré sur la table
+            _isAvailable = false;
+        }
     }
 
-    protected override void OnCountdownComplete()
-    {
-    }
+    public override void SecondaryInteraction() { }
 
-    protected override void WhileCountdownRunning()
-    {
-    }
+    protected override void OnCountdownComplete() { }
+
+    protected override void WhileCountdownRunning() { }
 
     private bool Deliver(GameObject objectToDeliver)
     {
         var ingredient = objectToDeliver.GetComponent<Ingredient>();
-        var recipe = ingredient.ingredientData.recipes[0];
-        if (recipe is not null)
-        {
-            orderManager.CompleteOrder(recipe);
-            return true;
-        }
+        if (ingredient == null || ingredient.ingredientData.recipes == null || ingredient.ingredientData.recipes.Count == 0)
+            return false;
 
-        return false;
+        var recipe = ingredient.ingredientData.recipes[0];
+        if (recipe == null)
+            return false;
+
+        orderManager.CompleteOrder(recipe);
+        return true;
     }
 }
