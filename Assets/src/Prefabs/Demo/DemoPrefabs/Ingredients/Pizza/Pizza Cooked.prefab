@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 992634532729222432}
   - component: {fileID: 2710482618295951651}
   - component: {fileID: 8927256101655129350}
-  - component: {fileID: 6506048000193185550}
   - component: {fileID: 8526823551382334435}
+  - component: {fileID: 6506048000193185550}
   m_Layer: 0
   m_Name: Pizza Cooked
   m_TagString: food
@@ -120,27 +120,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6506048000193185550
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8097338208968038210}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.64459515, y: 0.20197225, z: 0.66142464}
-  m_Center: {x: 0.0024018288, y: 0.051402926, z: -0.011799812}
 --- !u!114 &8526823551382334435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +273,27 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!65 &6506048000193185550
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097338208968038210}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.64459515, y: 0.20197225, z: 0.66142464}
+  m_Center: {x: 0.0024018288, y: 0.051402926, z: -0.011799812}
 --- !u!1001 &139988102352618567
 PrefabInstance:
   m_ObjectHideFlags: 0

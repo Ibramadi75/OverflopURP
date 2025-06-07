@@ -15,12 +15,14 @@ MonoBehaviour:
   title: Pizza
   recipes: []
   time: 5
+  isDeliverable: 0
   isBase: 0
+  price: 0
   isCuttable: 0
   cutPrefab: {fileID: 0}
   isAssemblable: 0
   canAssembleWith: {fileID: 0}
   assembledPrefab: {fileID: 0}
   isMeltable: 1
-  meltedPrefab: {fileID: 8097338208968038210, guid: 930542ab7bf6f415688324685b655c6a,
+  meltedPrefab: {fileID: 1834453833366302014, guid: 929188bdde3876041aae294009555db5,
     type: 3}
