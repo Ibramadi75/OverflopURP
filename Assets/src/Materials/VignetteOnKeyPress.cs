@@ -44,7 +44,7 @@ public class VignetteOnKeyPress : MonoBehaviour
             yield return null;
         }
 
-        // Une fois l'effet terminé, charger la scène suivante
+        FindObjectOfType<VRPlayer>().Persistent.day += 1;
         SceneManager.LoadScene("Open World VR");
     }
 }

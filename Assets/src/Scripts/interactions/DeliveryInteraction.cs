@@ -37,19 +37,7 @@ public class DeliveryInteraction : AbstractInteraction
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "food")
-        {
-            Debug.Log("DeliveryInteraction: OnTriggerEnter with non-ingredient: " + other.name);
-            return;
-        }
-
-        if (!slot.IsEmpty())
-        {
-            Debug.Log("DeliveryInteraction: Slot is occupied, cannot deliver.");
-            return;
-        }
-
-        Debug.Log("DeliveryInteraction: OnTriggerEnter with " + other.name);
+        if (!other.CompareTag("food")) return;
 
         var ingredient = other.GetComponent<Ingredient>();
         if (ingredient == null) return;
@@ -67,8 +55,6 @@ public class DeliveryInteraction : AbstractInteraction
                 grab.enabled = false;
 
             Debug.Log("DeliveryInteraction: Delivered " + ingredient.ingredientData.title);
-            slot.Put(other.gameObject); // Optionnel si on veut afficher l’objet livré sur la table
-            _isAvailable = false;
         }
     }
 

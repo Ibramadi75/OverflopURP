@@ -15,17 +15,20 @@ EditorBuildSettings:
     path: Assets/src/Scenes/NarScenes/InsideCasino.unity
     guid: 1b81672cc89594710bd6c2841fc2ab2f
   - enabled: 1
+    path: Assets/src/VR/Narscenes to VR/Open World VR.unity
+    guid: 1521e8df97142354d8f7de841294fdfe
+  - enabled: 1
+    path: Assets/src/VR/Narscenes to VR/Restau VR.unity
+    guid: 18d2e18699829478e89d73f08ad4540b
+  - enabled: 1
     path: Assets/src/Scenes/NarScenes/MusicPlay.unity
     guid: 73fecb24491920842aaa5085303616cf
   - enabled: 1
     path: Assets/src/VR/Narscenes to VR/InsideCasinoVR.unity
     guid: 7a7169480153c4e9abeef8b023b5b6d5
   - enabled: 1
-    path: Assets/src/VR/Narscenes to VR/Open World VR.unity
-    guid: 1521e8df97142354d8f7de841294fdfe
-  - enabled: 1
-    path: Assets/src/VR/Narscenes to VR/Restau VR.unity
-    guid: 18d2e18699829478e89d73f08ad4540b
+    path: Assets/src/VR/Narscenes to VR/TransitionScene comics.unity
+    guid: 99413602c65ae0e46803117394a8ede6
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 98c94610c8d27477ab52c6f8e443c341,
       type: 2}

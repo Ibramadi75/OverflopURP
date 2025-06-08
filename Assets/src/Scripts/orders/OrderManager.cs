@@ -13,13 +13,13 @@ public class OrderManager : MonoBehaviour
     [SerializeField] private Order order;
     [SerializeField] private GoTo npc;
     [SerializeField] private List<DeliveryInteraction> deliveryObjects;
-    [SerializeField] private PlayerController playerController;
-    [SerializeField] private string nextSceneName;  // Nom de la scène à charger
+    [SerializeField] private VRPlayer playerController;
+    [SerializeField] private string nextSceneName;
 
     private Moroutine _orderSpawnerMoroutine;
     private List<Order> _activeOrders;
     private GameManager _gameManager;
-    private int _orderCount = 0;  // Compteur des commandes créées
+    private int _orderCount;
     
     void Awake()
     {
@@ -31,52 +31,45 @@ public class OrderManager : MonoBehaviour
     void Update()
     {
         if (FindFirstAvailableDeliveryInteraction() != null)
-        {
             _orderSpawnerMoroutine.Run();
-        }
     }
 
     public void CompleteOrder(RecipeData recipeData)
     {
         foreach (Order anOrder in _activeOrders)
-        {
             if (anOrder.GetRecipe().GetTitle().Equals(recipeData.title))
             {
                 _gameManager.AddMoney(recipeData.price);
                 anOrder.SetNpcToFirstPoint();
                 RemoveOrder(anOrder);
+                
+                if (_gameManager.Money >= 0)
+                    LoadNextScene();
                 return;
             }
-        }
     }
 
     private void OnAnOrderExpire(Order expiredOrder)
     {
         expiredOrder.SetNpcToFirstPoint();
         _activeOrders.Remove(expiredOrder);
-        // _gameManager.RemoveMoney(expiredOrder.GetRecipe().GetPrice());
         RemoveOrder(expiredOrder);
     }
-    
+
     private void CreateOrder(DeliveryInteraction deliveryInteraction)
     {
         Vector3 showUpPosition = deliveryInteraction.GetShowUpPosition().position;
         Order newOrder = Instantiate(order.gameObject, showUpPosition, Quaternion.identity).GetComponent<Order>();
         newOrder.gameObject.SetActive(false);
         newOrder.transform.parent = deliveryInteraction.transform;
-        newOrder.GetComponent<LookAtTarget>().target = playerController.transform;
+        //newOrder.GetComponent<LookAtTarget>().target = playerController.transform;
         _activeOrders.Add(newOrder);
         newOrder.onExpire += OnAnOrderExpire;
         deliveryInteraction.SetAvailable(false);
         newOrder.SetDeliveryInteraction(deliveryInteraction);
         CreateGoToNPC(newOrder);
-        
-        _orderCount++; // Incrémentation du compteur d'ordres
-        
-        if (_orderCount >= 4 && _gameManager.Money > 0) // Si 6 ordres sont créés
-        {
-            LoadNextScene(); // Charger la scène suivante
-        }
+
+        _orderCount++;
     }
 
     private void RemoveOrder(Order anOrder)
@@ -106,10 +99,8 @@ public class OrderManager : MonoBehaviour
     private DeliveryInteraction FindFirstAvailableDeliveryInteraction()
     {
         foreach (DeliveryInteraction deliveryInteraction in deliveryObjects)
-        {
             if (deliveryInteraction.IsAvailable())
                 return deliveryInteraction;
-        }
 
         return null;
     }
@@ -125,8 +116,6 @@ public class OrderManager : MonoBehaviour
     private void LoadNextScene()
     {
         if (!string.IsNullOrEmpty(nextSceneName))
-        {
-            SceneManager.LoadScene(nextSceneName); // Charge la scène spécifiée
-        }
+            SceneManager.LoadScene(nextSceneName);
     }
 }

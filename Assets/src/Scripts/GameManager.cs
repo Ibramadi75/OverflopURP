@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     public void AddMoney(float amount)
     {
+        Debug.Log($"Adding money: {amount}");
         money += amount;
         UpdateMoneyText();
     }

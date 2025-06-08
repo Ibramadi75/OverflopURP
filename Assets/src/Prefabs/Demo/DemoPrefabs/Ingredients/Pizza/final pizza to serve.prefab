@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2424478872842231141}
   - component: {fileID: 5392349539820074316}
   - component: {fileID: 2579993248922751833}
-  - component: {fileID: 2669681683485397408}
   - component: {fileID: 8922722791454477730}
   m_Layer: 0
   m_Name: final pizza to serve
@@ -296,27 +295,6 @@ MonoBehaviour:
   m_MinimumScaleRatio: 0.25
   m_MaximumScaleRatio: 2
   m_ScaleMultiplier: 0.25
---- !u!65 &2669681683485397408
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834453833366302014}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &8922722791454477730
 BoxCollider:
   m_ObjectHideFlags: 0
